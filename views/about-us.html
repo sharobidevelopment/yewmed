@@ -1,0 +1,675 @@
+<!-- <p style="margin-top:100px"> <b>  Aniket Daw </b> </p> -->
+
+<div ng-controller="ReamingpageController as ctrl" class="mobile_view_opacity" onclick="off_opacity()">
+    <!-- <div class="wrapper body-bg"> -->
+        <!-- <div ng-class="{true: 'breadcrumb-area', false: 'breadcrumb-area1'}[statusCookie == 'Active']">
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/yewmed/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="aboutus">About Us</a></li>
+                </ol>
+            </div>
+        </div> -->
+
+
+        <style>
+            .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+             @font-face {
+  font-family: "Flaticon";
+  src: url("font/Flaticon.eot");
+  src: url("font/Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("font/Flaticon.woff2") format("woff2"),
+       url("font/Flaticon.woff") format("woff"),
+       url("font/Flaticon.ttf") format("truetype"),
+       url("font/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("font/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-truck:before { content: "\f100"; }
+.flaticon-blood-donation:before { content: "\f101"; }
+.flaticon-pills:before { content: "\f102"; }
+.flaticon-hand:before { content: "\f103"; }
+    
+    $font-Flaticon-truck: "\f100";
+    $font-Flaticon-blood-donation: "\f101";
+    $font-Flaticon-pills: "\f102";
+    $font-Flaticon-hand: "\f103";
+
+
+
+.our-services-wrapper{
+    position: relative;
+    border: 1px solid #dadada;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.our-services-wrapper:after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+        bottom: -17px;
+    left: -110px;
+    background: #c2c2c2;
+    /* Rotate */
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+/* Rotate Origin */
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    margin: 60px 0 10px 310px;
+    
+}
+
+.Our-Services-area{
+    padding: 50px 100px;
+}
+
+.our-services-icon span {
+    background: #eff2f7 none repeat scroll 0 0;
+    border: 10px solid #ffffff;
+    border-radius: 100%;
+    box-shadow: 0 0 0 2px #eff2f7;
+    height: 112px;
+    line-height: 93px;
+    margin: auto auto 25px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    width: 112px;
+    font-family: "Flaticon";
+    display: block;
+}
+
+
+.our-services-icon span:before {
+    font-size: 45px;
+    color: #000;
+    margin-left: 0px;
+}
+
+
+.our-services-wrapper:hover .our-services-icon span {
+    background: #ff6600;
+    box-shadow: 0 0 0 2px #ff6600;
+}
+
+.our-services-wrapper:hover .our-services-icon span:before {
+    color: #fff;
+}
+
+
+.our-services-wrapper:hover{
+     border: 1px solid #f47a20;
+}
+
+.our-services-wrapper:hover:after{
+    background-color: #f47a20;
+}
+
+.about_us{
+    padding: 50px 0px;
+}
+
+
+/*.about_us .about_us-description{
+    padding: 0px 220px;
+}*/
+
+.about_us .about_us-description .about_us_left_cont h4{
+    font-size: 15px;
+    color: #f47a20;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.about_us_left_cont {
+    max-width: 700px;
+    width:100%;
+    padding-top: 30px;
+}
+
+.about_us .about_us_left_cont h2 {
+    font-size: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+}
+.about_us .about_us_left_cont p{
+    font-size: 16px;
+    /*color: #929292;*/
+    margin-top: 25px;
+    line-height: 23px;
+}
+
+.our_service{
+    padding: 50px 0px;
+    background-color: #f4f4f4;
+}
+
+.our_service_details{
+    text-align: center;
+}
+
+.our_service_details h4{
+    color: #f47a20;
+    font-size: 15px;
+}
+
+.our_service_details h2{
+    font-size: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.our_service_details h4::before {
+    content: ' ';
+    width: 20px;
+    position: absolute;
+    height: 1px;
+    background: #f47a20;
+    margin-top: 7px;
+    margin-left: -30px;
+}
+
+.our_service_details h4::after {
+    content: ' ';
+    width: 20px;
+    position: absolute;
+    height: 1px;
+    background: #f47a20;
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+
+.our_service_details p{
+    font-size: 16px;
+    /*color: #929292;*/
+    margin-top: 25px;
+    line-height: 23px;
+    max-width: 900px;
+    width:100%;
+    margin: 0 auto;
+}
+
+.our_service .our_service_description{
+    /*padding: 0px 220px;*/
+    margin: 70px 0px;
+}
+
+.post_item_wrap{
+    text-align: center;
+    margin: 0 auto 30px;
+}
+
+.post_item_wrap .post_item_icon{
+    position: relative;
+    z-index: 1;
+}
+
+.post_item_wrap .flaticon-blood-donation::before{
+    font-size: 56px;
+    margin-left: 0px;
+    margin-top: 14px;
+}
+
+.post_item_wrap .flaticon-pills::before{
+    font-size: 56px;
+    margin-left: 0px;
+    margin-top: 14px;
+}
+
+.post_item_wrap .flaticon-truck::before{
+    font-size: 56px;
+    margin-left: 0px;
+    margin-top: 14px;
+}
+
+.post_item_wrap .flaticon-hand::before{
+    font-size: 56px;
+    margin-left: 0px;
+    margin-top: 14px;
+}
+
+
+.post_head_title{
+    text-align: center;
+}
+
+.post_head_title h3 a{
+   font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+}
+
+
+.post_head_title p{
+    font-size: 16px;
+    /*color: #929292;*/
+    line-height: 23px;
+}
+
+.hovicon {
+    display: inline-block;
+    font-size: 45px;
+    line-height: 120px;
+    cursor: pointer;
+    margin: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    z-index: 1;
+    
+}
+.hovicon.small {
+    font-size: 20px;
+    line-height:45px;
+    width:45px;
+    height:45px;
+    margin:7px;
+}
+.hovicon.mini {
+    font-size: 15px;
+    line-height:32px;
+    width:30px;
+    height:30px;
+    margin:7px;
+}
+.hovicon.auto-width {
+    width: auto;
+    height: auto;
+    padding: 15px;
+}
+.hovicon:after {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    content:'';
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.hovicon:before {
+    speak: none;
+    font-size: 48px;
+    line-height: 90px;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    display: block;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Effect 2 */
+ .hovicon.effect-2 {
+    color: #fff;
+    box-shadow: 0 0 0 3px #f47a20;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+}
+.hovicon.effect-2:after {
+    top: -2px;
+    left: -2px;
+    padding: 2px;
+    z-index: -1;
+    background: #f47a20;
+    -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.2s, opacity 0.2s;
+    transition: transform 0.2s, opacity 0.2s;
+    margin-left: 0px;
+}
+/* Effect 2a */
+ .hovicon.effect-2.sub-a:hover, .hovicon.effect-2.sub-a:hover i {
+    color: #fff;
+}
+.hovicon.effect-2.sub-a:hover:after {
+    -webkit-transform: scale(0.85);
+    -moz-transform: scale(0.85);
+    -ms-transform: scale(0.85);
+    transform: scale(0.85);
+}
+.padding_right{
+    padding-right:0px
+}
+.padding_left{
+    padding-left:0px
+}
+
+@media only screen and (max-width: 1366px){
+    .about_us .about_us_left_cont h2, .our_service_details h2{
+        font-size:30px
+    }
+}
+
+@media only screen and (max-width: 991px){
+    .about_us .about_us_left_cont h2, .our_service_details h2 {
+        font-size:25px
+    }
+    .about_us .about_us-description .about_us_left_cont h4, .about_us .about_us_left_cont p, .our_service_details p,
+     .post_head_title p{
+        font-size:14px 
+    }
+    .post_head_title h3 a{
+        font-size:17px
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px){
+    .post_item_wrap .flaticon-blood-donation::before, .post_item_wrap .flaticon-pills::before, .post_item_wrap .flaticon-truck::before, .post_item_wrap .flaticon-hand::before {
+        font-size:45px
+    }
+    .hovicon{
+        line-height:100px;height:100px;width:100px
+    }
+    .hovicon:before {
+        line-height:75px
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .padding_right, .padding_left{
+        padding-right:0px;padding-left:0px
+    }
+    .about_us{
+        padding:0px 0px 50px 0px;
+    }
+    .our_service .our_service_description{
+        margin:35px 0px
+    }
+    .about_us_left_cont{
+        padding-top:0px
+    }
+}
+
+@media only screen and (max-width: 639px){
+    .post_item_wrap .flaticon-blood-donation::before, .post_item_wrap .flaticon-pills::before, .post_item_wrap .flaticon-truck::before, .post_item_wrap .flaticon-hand::before {
+        font-size:45px
+    }
+    .hovicon{
+        line-height:100px;height:100px;width:100px
+    }
+    .hovicon:before {
+        line-height:75px
+    }
+    .about_us .about_us_left_cont h2, .our_service_details h2 {
+        font-size:20px
+    }
+    .post_item_wrap{
+        margin:0px;
+    }
+    .our_service{
+        padding:25px 0px 25px 0px
+    }
+}
+
+@media only screen and (max-width: 479px){
+    .about_us .about_us-description .about_us_left_cont h4, .about_us .about_us_left_cont p, .our_service_details p,
+     .post_head_title p{
+        font-size:12px 
+    }
+}
+
+        </style>
+
+
+
+       <div style="padding:10px 15px"> 
+            <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <li class="breadcrumb-item active" style="cursor:default">About Us</li>
+                </ol>
+            </div>
+        </div>
+
+        
+        <!-- ........................................................ -->
+
+        
+
+        <!--  ........................................................... -->
+
+        <div>
+            <div class="all_page_middle_div">
+            	
+
+                <section class="about_us">
+        <div class="container-fluid">
+            <div class="about_us-description">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 padding_left">
+                        <div class="about_us_left_cont">
+                            <h4>Welcome To Yewmed Mart</h4>
+                            <h2>Your health our concern</h2>
+                            <p><b>YewMedMart</b> is now more innovative and also modern face based web platform which has been your trusted source of all your health needs. The inception of <b>YewMedMart</b>, it has been synonymusly offering you with quality pharma and healthcare product and services. </p>
+                            <p>We are acting like a bridge of users and the independed Licensed Chemists. <b>YewMedMart</b> stays open 24x7 for its valuable customers. Collect Allopathic, Ayurvedic, and other health related products delivered at home.</p>
+                            <p>Rest assured that you get greater peace of mind when you choose <b>YewMedMart</b> for all your healthcare needs.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 padding_right">
+                        <div class="about_us_right_cont">
+                            <img src="/yewmed/themes/img/yewmed_new_pics/about_us_img.png" style="width:100%" alt=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+      </section>
+  </div>
+
+      
+      <section class="our_service">
+        <div class="container-fluid all_page_middle_div">
+            <div class="our_service_details">
+                <h4>Our Commitment</h4>
+                <h2>Reason why you should choose us</h2>
+                <p>We make efforts to change the way that healthcare services are offered in order to meet the changing needs of our patients, both for the present and future.</p>
+            </div>
+            <div class="our_service_description">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="postr_item animate">
+                            <div class="post_item_wrap">
+                            <div class="post_item_icon">
+                                <i class="flaticon-blood-donation hovicon effect-2 sub-a"></i>
+                            </div>
+                        </div>
+                        <div class="post_head_title">
+                            <h3><a href="#">Daily Home Care</a></h3>
+                            <p>We established cooperation with plenty of famous partners.</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="postr_item animate">
+                            <div class="post_item_wrap">
+                            <div class="post_item_icon">
+                                <i class="flaticon-pills hovicon effect-2 sub-a"></i>
+                            </div>
+                        </div>
+                        <div class="post_head_title">
+                            <h3><a href="#">Specialized Care</a></h3>
+                            <p>Bring best quality health services to ones who are in need worldwide.</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="postr_item animate">
+                            <div class="post_item_wrap">
+                            <div class="post_item_icon">
+                                <i class="flaticon-truck hovicon effect-2 sub-a"></i>
+                            </div>
+                        </div>
+                        <div class="post_head_title">
+                            <h3><a href="#">On-time Delivery</a></h3>
+                            <p>We set accurate schedules and follow closely to achieve efficiency.</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="postr_item animate">
+                            <div class="post_item_wrap">
+                            <div class="post_item_icon">
+                                <i class="flaticon-hand hovicon effect-2 sub-a"></i>
+                            </div>
+                        </div>
+                        <div class="post_head_title">
+                            <h3><a href="#">Experienced Experts</a></h3>
+                            <p>Get the best services from experienced experts in caregiving industry.</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+
+
+
+      <div class="container-fluid testimonial_div" style="background:url(/yewmed/themes/img/yewmed_new_pics/testimonial_backgrnd.jpg)">
+        <p class="third_div_fluid_p moving_div_p">  Why Choose Us  </p>
+            <h4 class="third_div_fluid_h4 moving_div_h4"> WHAT OUR CLIENTS SAYS </h4>
+             
+              <div class="owl-carousel featured-pro-active1">
+                  <!-- Single Product Start -->
+                   <!--  <div class="owl-item single-aboss-product"> -->
+                               <div class="item col_md_3 col_md_3_1">
+                                          <div class="testimonial_1stcontent">
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_coma.png" style="width:auto;display:inline-block"> </p>
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_back_img.png" style="width:auto;display:inline-block"> </p>
+                                             <p class="testimonial_client_review"> It's too much user friendly. People who are not too much technosavvy they can also easily get benefits from this website. Very good one for one click users.  </p>
+                                             <div class="testimonial_rounddiv_outer">
+                                              <div class="testimonial_rounddiv_inner">
+                                                  <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_user.png">
+                                              </div>
+                                          </div>  
+                                          </div>
+
+                                          <div class="testimonial_2nddiv"> 
+                                              <p class="testimonial_client_name"> Arunava Bambha </p>
+                                              <!-- <p class="testimonial_client_designation"> Company Owner </p> -->
+                                          </div>
+                                    </div> 
+
+                                    
+                    
+                    <div class="item col_md_3 col_md_3_1">
+                           <div class="testimonial_1stcontent">
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_coma.png" style="width:auto;display:inline-block"> </p>
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_back_img.png" style="width:auto;display:inline-block"> </p>
+                                             <p class="testimonial_client_review"> Rainy day or heavy day YEWMED MART is always there. Make yourself smart just upload your prescription and get delivary medicines at home within 30 minutes.  </p>
+                                             <div class="testimonial_rounddiv_outer">
+                                              <div class="testimonial_rounddiv_inner">
+                                                  <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_user.png">
+                                              </div>
+                                          </div>  
+                                          </div>
+
+                                          <div class="testimonial_2nddiv"> 
+                                              <p class="testimonial_client_name"> Md Mubarak Hussain </p>
+                                              <!-- <p class="testimonial_client_designation"> Seller </p> -->
+                                          </div>
+                        </div> 
+
+                        <div class="item col_md_3 col_md_3_1">
+                           <div class="testimonial_1stcontent">
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_coma.png" style="width:auto;display:inline-block"> </p>
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_back_img.png" style="width:auto;display:inline-block"> </p>
+                                             <p class="testimonial_client_review"> Time saving site in our busy schedule, Go to the website for any kind of medicines and book it for quick relief.  This is an awsome experience with 'YEWMED MART'.  </p>
+                                             <div class="testimonial_rounddiv_outer">
+                                              <div class="testimonial_rounddiv_inner">
+                                                  <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_user.png">
+                                              </div>
+                                          </div>  
+                                          </div>
+
+                                          <div class="testimonial_2nddiv"> 
+                                              <p class="testimonial_client_name"> Manish Paramanik </p>
+                                              <!-- <p class="testimonial_client_designation"> Book Keeper </p> -->
+                                          </div>
+                        </div> 
+
+                        <div class="item col_md_3 col_md_3_1">
+                           <div class="testimonial_1stcontent">
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_coma.png" style="width:auto;display:inline-block"> </p>
+                                            <p style="text-align:center"> <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_back_img.png" style="width:auto;display:inline-block"> </p>
+                                             <p class="testimonial_client_review"> 'YEWMED MART' one of best platform wher all medines are available. You can upload your prescription in this site that your medicine will reach on time.  </p>
+                                             <div class="testimonial_rounddiv_outer">
+                                              <div class="testimonial_rounddiv_inner">
+                                                  <img src="/yewmed/themes/img/yewmed_new_pics/testimonial_user.png">
+                                              </div>
+                                          </div>  
+                                          </div>
+
+                                          <div class="testimonial_2nddiv"> 
+                                              <p class="testimonial_client_name"> Rakesh Paswan </p>
+                                              <!-- <p class="testimonial_client_designation"> Company Owner </p> -->
+                                          </div>
+                        </div> 
+                    <!-- Single Product End -->
+
+                   </div>
+                                   <!--   <div class="" style=""><div class="owl-prev"><i class="fa fa-chevron-left"></i></div><div class="next"><i class="fa fa-chevron-right"></i></div></div> -->
+
+                   <!-- </div> -->
+                   <p class="testimonial_next_prev_p">
+                      <i class="fa fa-angle-left my_prev_button1" aria-hidden="true" id="home_testisli_prev" style="float:initial;margin-right:7px"></i>
+                      <i class="fa fa-angle-right my_next_button1" aria-hidden="true" id="home_testisli_next" style="float:initial;margin-left:7px"></i>
+                   </p>
+
+         
+    
+</div>
+
+
+
+               <!--  ............................................................. -->
+
+        </div>
+        

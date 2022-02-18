@@ -1,0 +1,226 @@
+<!-- Footer Area Start Here --> 
+        <div ng-controller="LoginController as logctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+           <div class="footer_above">
+                <div class="container footer_above_container">
+                  <div class="row">  
+                    <div class="col-lg-6 col-md-12 col-sm-12 footer_above_1stdiv"> 
+                        <p class="footer_above_1stdiv_p"> <span> <img src="/yewmed/themes/img/yewmed_new_pics/footer_bgk_mchimp1.png"> </span></p>
+                        <form><p class="footer_above_1stdiv_2ndp"> <b> Subscribe to our Newsletter </b> <br> 
+                            <input type="text" class="footer_enter_email" id="subscribe_us_email" placeholder="Enter Your Email"> <span> 
+                            <button ng-click="subscribe_us()"> Submit <i class="fa fa-send-o footer_above_1stdiv_2ndp_i"></i> </button>  </span> </p> 
+                            <P id="subscribe_mail_msg" style="color:{{subscribe_mail_msg_clr}}"> </P></form> 
+                    </div>
+                    <div class="col-lg-2"> 
+                        <p class="footer_above_image"> <img src="/yewmed/themes/img/yewmed_new_pics/Dr.jpg">       
+                        </p>
+                    </div>
+                    <div class=" col-lg-4 col-md-12 col-sm-12"> 
+                                <p class="footer_above_support_p"> CALL FOR SUPPORT </p> 
+                                <p class="footer_above_phno_p"> </b>1800 833 1233 </p>
+                    </div>
+                    <!-- <div class=" col-lg-4 col-md-12 footer_last_div_for_mb"> 
+                                <p > <span class="footer_above_support_p"> CALL FOR SUPPORT </span>  
+                                <span class="footer_above_phno_p"> 1800 833 1233 </span> </p>
+                    </div> -->
+                </div>
+                </div>
+           </div>
+
+
+        <!-- <footer class="footer-area dark-blue-bg ptb-80 mtm-80"> -->
+            <footer class="footer-area footer_main_div mtm-80" style="background:#363636">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row mt-80" >
+                        <!-- Single Footer Start Here -->
+                        <div class="col-lg-5 col-md-12 col-sm-12">
+                            <div class="single-footer mb-all-40">
+                                <div class="footer-logo mb-30">
+                                    <!-- <a href="index.html"><img src="themes/img/logo/logo.png" alt="logo-image"></a> -->
+                                    <h3><a href="{{contextpath1}}"><img src="/yewmed/themes/img/yewmed_new_pics/footer_logo.png" alt="brand-image" style="width:auto;max-width:100%">
+                                    </a> </h3>
+                                </div>
+                                <div class="footer-content">
+                                    <p><b>YewMedMart</b> makes you smart. <b>YewMedMart</b> stays open 24x7 for its valuable customers. Easy to choose and get faster delivery.</p>
+                                  <!--   <ul class="footer-link">
+                                        <li><a href="ordersDetails">Orders</a></li>
+                                        <li><a href="useprivacy">Useprivacy</a></li>
+                                        <li><a href="policy">Policy</a></li>
+                                        <li><a href="#">Personal info</a></li>
+                                    </ul> -->
+                                <!-- <ul class="footer_social_icon"> 
+                                    <li><a class="footer_icons_a"> <i class="fa fa-facebook" aria-hidden="true"></i> </a> </li> 
+                                   <li> <a class="footer_icons_a"> <i class="fa fa-twitter" aria-hidden="true"></i> </a></li>
+                                   <li> <a class="footer_icons_a"> <i class="fa fa-linkedin" aria-hidden="true"></i> </a></li>
+                                   <li> <a class="footer_icons_a"> <i class="fa fa-google-plus" aria-hidden="true"></i> </a></li>
+                                    <li><a class="footer_icons_a"> <i class="fa fa-instagram" aria-hidden="true"></i> </a> </li>
+                                </ul> -->
+
+                                <div class="footer_social_icon">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa_footer fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa_footer fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa_footer fa-linkedin" aria-hidden="true"></i></a></li>
+                                        <li> <a href="#"> <i class="fa fa_footer fa-google-plus" aria-hidden="true"></i> </a></li>
+                                        <li><a href="#"><i class="fa fa_footer fa-instagram" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer End Here -->
+                        <!-- Single Footer Start Here -->
+                        <div class="col-lg-2 col-md-4 col-sm-4">
+                            <div class="single-footer mb-sm-40">
+                                <div class="footer-content">
+                                    <h3 style="font-family:'BebasNeue-Regular';color:white">Products</h3>
+                                    <ul class="footer-list">
+                                        <!-- <li><a href="pricesdrop">Prices drop</a></li> -->
+                                        <!-- <li> <a href="new-product"> <i class="fa fa-angle-right"></i> Our New Product</a></li> -->
+                                        <!-- <li> <a href="best-sales"> <i class="fa fa-angle-right"></i> Best Sales</a></li> -->
+                                        <!-- <li> <a href="#"> <i class="fa fa-angle-right"></i> stroes</a></li> -->
+                                        <!-- <li> <a href="ordersDetails"> <i class="fa fa-angle-right"></i> Orders</a></li> -->
+                                        <li>  <a href="{{contextpath1}}delivery"> <i class="fa fa-angle-right"></i> delivery</a></li>
+                                        <li> <a href="{{contextpath1}}aboutus"> <i class="fa fa-angle-right"></i> about us</a></li>
+                                        <li> <a href="{{contextpath1}}contactus"> <i class="fa fa-angle-right"></i> contact us</a></li>
+                                        <li><a href="{{contextpath1}}policy"> <i class="fa fa-angle-right"></i> Privacy Policy</a></li>
+                                        <li><a href="{{contextpath1}}retun_cancellation_policy"> <i class="fa fa-angle-right"></i> Return, Cancellation & Refund Policy </a></li>
+
+                                        <!-- <li ng-if="statusCookie != 'Active'"><a id="openlogin" ng-click="openLoginWindow()" href="">Login</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer End Here -->
+                        <!-- Single Footer Start Here -->
+                        <div class="col-lg-2 col-md-4 col-sm-4 padding_0 padding_grid_mb">
+                            <div class="single-footer">
+                                <div class="footer-content">
+                                    <h3 style="font-family:'BebasNeue-Regular';color:white">Our Company</h3>
+                                    <ul class="footer-list">
+                                       <!--  <li>  <a href="delivery"> <i class="fa fa-angle-right"></i> delivery</a></li> -->
+                                        <li>  <a href="{{contextpath1}}legal-notice"> <i class="fa fa-angle-right"></i> legal notice</a></li>
+                                        <li> <a href="{{contextpath1}}terms-conditions"> <i class="fa fa-angle-right"></i> terms & conditions</a></li>
+                                        
+                                        <!-- <li><a href="#">security payment</a></li> -->
+                                        <li> <a href="{{contextpath1}}sitemap"> <i class="fa fa-angle-right"></i> sitemap</a></li>
+                                        <li><a href="{{contextpath1}}userprivacy"> <i class="fa fa-angle-right"></i> User privacy</a></li>
+                                        <!-- <li><a href="#">my account</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer End Here -->
+                        <!-- Single Footer Start Here -->
+                        <div class="col-lg-3 col-md-4 col-sm-4">
+                            <div class="single-footer footer1_content">
+                                <div class="footer-content">
+                                    <h3 style="font-family:'BebasNeue-Regular';color:white">Information</h3>
+                             <!--        <ul class="social-footer d-flex justify-content-lg-end mb-40">
+                                        <li><a href="#"><img class="img footer_img" src="themes/img/footer/facebook.png" alt="Facebook"></a></li>
+                                        <li><a href="#"><img class="img footer_img" src="themes/img/footer/twitter.png" alt="Twitter"></a></li>
+                                        <li><a href="#"><img class="img footer_img" src="themes/img/footer/youtube.png" alt="Youtube"></a></li>
+                                        <li><a href="#"><img class="img footer_img" src="themes/img/footer/google_plus.png" alt="Google Plus"></a></li>
+                                        <li><a href="#"><img class="img footer_img" src="themes/img/footer/instragram.png" alt="Instragram"></a></li>
+                                    </ul> -->
+                                    <div style="width:100%;display:flex"> <div class="footer_information_div1"> <img src="/yewmed/themes/img/yewmed_new_pics/footer_address_icon.png"> </div>  
+                                        <div class="footer_information_div2">  375/1, Dr. B. C. Roy Sarani, New Barrackpore, Kolkata, West Bengal 700064 </div>
+                                    </div>
+                                     <div style="width:100%;display:flex;margin-top:10px"> <div class="footer_information_div1"> <img src="/yewmed/themes/img/yewmed_new_pics/footer_call_icon.png"> </div>  
+                                        <div class="footer_information_div2"> +1800 833 1233 </div>
+                                    </div>
+                                     <div style="width:100%;display:flex;margin-top:10px"> <div class="footer_information_div1"> <img src="/yewmed/themes/img/yewmed_new_pics/footer_mail_icon.png"> </div>  
+                                        <div class="footer_information_div2"> sales@yewpos.com </div>
+                                    </div>
+
+                                    <!-- <h4 style="font-size:14px;color:#F37D22;font-family:Arial, Helvetica, sans-serif;">Payment Methods</h4>
+                                    <a href="#"><img class="img" src="themes/img/footer/payment10.png" alt="payment-image"></a> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Footer End Here -->
+                    </div>
+                    <!-- Row End -->
+                    <!-- <p> Aniket Daw aaaaaaaaaaaaaa </p> --> <br>
+                   <!--  <hr style="border-top:2px solid white"> -->
+                </div>
+
+            </div>
+
+             <!-- <p> Aniket Daw </p> -->
+           
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="alert-modal" style="margin-top:100px;">
+          <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="padding:50px 20px">
+                 <!--  <div class="modal-header" style="background:#6c757d4f"> -->
+                     <h4 class="alertify-message" id="myModalLabel" style="padding-bottom:0px;width:auto;color:#5b5b5b;font-size:20px;text-align:center;font-family: 'Poppins', sans-serif;">Alert</h4>
+                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:-17px;margin-top:-17px">
+                         <span aria-hidden="true">&times;</span></button> -->
+                        
+                   <!-- </div> -->
+                   <div class="modal-body"  style="text-align:center;margin-top:20px">
+                       <span id="alertMsgText"></span>
+                  </div>
+                  <div style="margin-top:20px">
+                  <!--   <button type="button" class="btn btn-success btn-sm" id="modal-btn-no" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="alertify-button  alertify-button-cancel" id="modal-btn-no" data-dismiss="modal" style="font-weight:400;font-size:16px">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <!-- ....................................success modal start................................. -->
+
+
+      <!--       <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="success-modal" style="margin-top:100px;">
+          <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="padding:50px 20px">
+                     <h4 class="alertify-message" id="myModalLabel" style="padding-bottom:0px;width:auto;color:#5b5b5b;font-size:20px;text-align:center;font-family: 'Poppins', sans-serif;">Alert</h4>
+                        
+                   <div class="modal-body"  style="text-align:center;margin-top:20px">
+                       <span id="successMsgText"></span>
+                  </div>
+                  <div style="margin-top:20px">
+                    <button type="button" class="alertify-button  alertify-button-cancel" id="modal-btn-no" data-dismiss="modal" style="font-weight:400;font-size:16px">Go To Order Page</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+
+              <!-- ....................................success modal end................................. -->
+
+
+
+
+
+           <!-- <div id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" class="modal fade alertify alertify-confirm ">
+            <div class="alertify-dialog">
+                <h4 class="modal-title" id="myModalLabel" style="padding-bottom:0px;margin-top:-7px;width:auto;color:black;font-size:20px">Alert</h4>
+                <div class="modal-body"  style="text-align:center;margin-top:40px">
+                       <span id="alertMsgText"></span>
+                  </div>
+                  <div class="modal-footer" style="margin-top:-15px">
+                    <button type="button" class="btn btn-success btn-sm" id="modal-btn-no" data-dismiss="modal">Close</button>
+                  </div>
+                </div> -->
+
+
+        </footer> 
+    </div>
+        <!-- Footer Area End Here -->
+
+         <!-- Footer Top End -->
+            <div class="footer-bottom mobile_view_opacity" onclick="off_opacity()" style="padding:15px 0px;background:#333333">
+                <div class="container">
+                    <div class="copyright row text-center text-md-left">
+                        <div class="copyright-text col-lg-8 col-md-12"> <span style="color:#d7d7d7;font-size:14px"> Copyright ©  <a href="http://www.sharobitech.com/" target="_blank" style="color:#9f9f9f;text-decoration:none">Sharobi Technologies (India) Pvt. Ltd.</a> All Rights Reserved </span>  </div>
+                         <div class="col-lg-4 col-md-12 footer_paymentgateway"> <span> <img src="/yewmed/themes/img/yewmed_new_pics/payment_gateway.png"> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom End -->

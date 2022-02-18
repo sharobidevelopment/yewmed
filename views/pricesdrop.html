@@ -1,0 +1,58 @@
+<!-- <p style="margin-top:100px"> <b>  Aniket Daw </b> </p> -->
+
+<div ng-controller="HomeController as ctrl">
+    <div class="wrapper body-bg">
+        <div class="breadcrumb-area">
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="pricesdrop">Prices Drop</a></li>
+                </ol>
+            </div>
+        </div>
+        
+       <!--  ................................................................. -->
+
+        <div class="login white-bg ptb-80">
+            <div class="container"> 
+              <!-- Section Title Start -->
+                <div class="section-title text-center mb-50">
+                    <h2>Prices Drop Product</h2>
+                    <p>Typi non habent claritatem insitam est usus legentis in iis qui facit eorum claritatem</p>
+                </div>
+        <br> <br>
+        
+        <div class="row">
+	        <div class="col-md-3 single-aboss-product best_sales_div" ng-repeat="i in ctrl.itemTabSlide" style="padding:0px"> 
+                <div class="pro-img">
+                            <a ng-click="ctrl.viewItems(i.id)" style="cursor:pointer"><img src="/yewmed/themes/img/groups/{{i.groupId}}.png" alt="product-view" style="width:100%"></a>
+                            <span class="sticker-new"> Offer </span>
+                            
+                            <div class="pro-actions">
+                            <button class="btn quick-view" type="button"
+                              ng-click="ctrl.addItemsInWishList(i.id)">
+                              <i ng-if="ctrl.checkWishlist(i.id)" class="fas fa-heart"></i>
+                              <i ng-if="!ctrl.checkWishlist(i.id)" class="far fa-heart"></i>
+                            </button>
+                            </div>
+                            
+                        </div>
+                        <div class="pro-content" style="padding:0px">
+                            <a ng-click="ctrl.viewItems(i.id)" style="cursor:pointer"> <h4 style="padding:10px 0px 5px 0px;margin-bottom:0px"> {{i.name}} </h4> </a>
+
+                           <a ng-click="ctrl.viewItems(i.id)" style="cursor:pointer">  <p style="padding:5px 0px 5px 0px"> <strike> 2000 </strike> </p>
+                           </a>
+                            
+                            <a ng-click="ctrl.viewItems(i.id)" style="cursor:pointer"> <p style="padding:5px 0px 10px 0px">
+                                <span class="price" style="color:#dd2c00b5"> Rs.{{i.price}} </span> </p> </a>
+                        </div>
+	        </div>
+        </div>
+
+            </div>
+        </div>
+
+        <!-- .......................................................................... -->
+
+            </div>
+        </div> 

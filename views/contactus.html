@@ -1,0 +1,294 @@
+<!-- <p style="margin-top:100px"> <b>  Aniket Daw </b> </p> -->
+
+<div ng-controller="ContactController as contactctrl" class="mobile_view_opacity" onclick="off_opacity()">
+ 
+      <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+    <div class="wrapper body-bg" style="background:white">
+        <!-- <div class="breadcrumb-area"> -->
+        	<!-- <div ng-if="statusCookie == 'Active'"> -->
+        		<!-- <div ng-class="{true: 'breadcrumb-area', false: 'breadcrumb-area1'}[statusCookie == 'Active']"> </div>
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/yewmed/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="contactus">Contact Us</a></li>
+                </ol>
+            </div> -->
+
+            <!-- <div class="page_deatil_main_div">
+	            <div>
+	               <h3>  contact us  </h3>
+	               <p> <a href="/yewmed/"> Home </a> / Contact Us </p>   
+	            </div>
+            </div> -->
+            
+            <div style="padding:10px 15px"> 
+            <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Contact Us</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="login white-bg container-fluid all_page_middle_div_above">
+            <div class="all_page_middle_div">
+                <!-- <h2 style="color:#F37D22;font-weight:400;text-align:center"> <u> Contact us </u> </h2> <br> <br> -->
+
+                <h3 class="register-header" style="margin-bottom:10px"> GET IN TOUCH WITH US </h3>
+                <p class="page_header_content_p"> If you require advice or help with your order, one of our friendly customer service team will be happy to help your enquiry. During office hours, you can call or email. If you need help outside of our office hours, please <a href="mailto:sharobi.test@gmail.com">email</a> and we will endeavour get back to you within 24 hours. </p>
+
+               <!--  <div>
+                	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8053208893607!2d88.39688391541856!3d22.586383438155675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275f0222cfdb7%3A0x99b24e05e822d26e!2sSharobi+Technologies+(India)+Pvt.+Ltd.!5e0!3m2!1sen!2sin!4v1560318006706!5m2!1sen!2sin" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                	 <div id="googleMap" style="width:100%;height:400px;"></div> 
+                </div> -->
+                
+
+                <!-- .......................................2nd.............................................. -->
+
+                <h3 style="font-size:20px;font-family: 'Poppins', sans-serif;;padding:45px 15px 10px 15px"> Send Us a Message </h3>
+
+               <div class ="row">
+               <div class="col-lg-6 col-md-6">
+                <div>  
+                <form class="form-horizontal" ng-submit="contactctrl.contactSubmit()" name="contactForm">      
+                   <p class="contactform_field_p"> Name <b style="font-size:20px;color:red">*</b> </p> 
+                   <input type="text" class="contactform_field_input form-control" name="fname" id="fname" ng-model="contactctrl.contact.name" placeholder="Your name" ng-pattern-restrict="^$|^[A-Za-z]+" required />
+			       <div class="has-error" ng-show="contactForm.fname.$invalid">
+				        <!-- <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">fgdg</span> -->
+				        <span style="color:#cc4749" ng-show="contactForm.fname.$error.required && contactForm.fname.$touched"> Name is required</span>
+			       </div> 
+
+			       <p class="contactform_field_p"> Email <b style="font-size:20px;color:red">*</b> </p>
+			       <input type="email" class="contactform_field_input form-control" name="email" id="email" ng-model="contactctrl.contact.email" placeholder="Your email" required /> 
+			       <div class="has-error" ng-show="contactForm.email.$invalid">
+		                <!-- <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">fgdg</span> -->
+		                <span style="color:#cc4749" ng-show="contactForm.email.$error.required && contactForm.email.$touched">Emaild is required</span>
+		                <span style="color:#cc4749" ng-show="contactForm.email.$invalid && contactForm.email.$touched && !contactForm.email.$error.required">Email is not valid </span> 
+		                <!-- <span class="red-text" ng-show="inquiryForm.email.$error.pattern">Invalid Email</span> -->
+		           </div>
+
+		           <p class="contactform_field_p"> Contact <b style="font-size:20px;color:red">*</b> </p>
+		           <input type="text" class="contactform_field_input form-control" name="phone" id="phone" ng-model="contactctrl.contact.phone" ng-minlength="10" ng-maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" placeholder="Your phone" required /> 
+                   <!-- <input type="text" class="contactus_input form-control" name="phoneno" id="phoneno" ng-model="contactctrl.contact.phoneno" ng-minlength="10" ng-maxlength="11" ng-pattern="/^[0-9]{1,7}$/" maxlength="11" placeholder="Phone No" required />  -->
+			       <div class="has-error" ng-show="contactForm.phone.$invalid">
+			           <span style="color:#cc4749" ng-show="contactForm.phone.$error.required && contactForm.phone.$touched">Phone No is required</span>
+			           <span style="color:#cc4749" ng-show="((contactForm.phone.$error.minlength || contactForm.phone.$error.maxlength) && contactForm.phone.$dirty) "> Phone number is invalid </span>
+		           </div>
+
+		           <p class="contactform_field_p"> Message <b style="font-size:20px;color:red">*</b> </p>
+		           <textarea class="contactform_field_input form-control" style="height:170px" name="yourmsg" id="yourmsg" placeholder="Please enter your message here" ng-model="contactctrl.contact.yourmsg" required> 
+		           </textarea>
+		           <div class="has-error" ng-show="contactForm.yourmsg.$invalid">
+		                <!-- <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">fgdg</span> -->
+		                <span style="color:#cc4749" ng-show="contactForm.yourmsg.$error.required && contactForm.yourmsg.$touched">Message is required</span>
+		           </div>
+
+		           <p style="margin-top:52px"> <button type="submit"  ng-disabled="contactForm.$invalid" disabled="disabled" class="btn btn-large contactus_button"> SUBMIT </button>
+		           </p>
+	                  <p style="font-size:17px;color:green;text-align:center" id="usercreated">  </p>
+	                  <p style="font-size:17px;color:#cc4749;text-align:center" id="usernotcreated">  </p>
+			       </form>   
+                </div>
+               </div> 
+
+
+                  <!-- <br> <br> <br> <br> -->
+                <div class="col-lg-6 col-md-6 padding_zero">
+
+                	<div class="contactus_2ndcoldiv_div">
+                		 <p class="contactus_2ndcoldiv_1stp"> YewMed Mart </p>
+                		 <h3 style="margin-top:34px"> email: </h3>
+                		 <p class="contactus_2ndcoldiv_2ndp_s"> <a href="" style="text-decoration:underline"> yewpos.support@sharobitech.com </a> </p>
+
+                		 <h3> telephone: </h3>
+                		 <p class="contactus_2ndcoldiv_2ndp_s"> <a href=""> +  1800-833-1233 </a> </p>
+
+                		 <h3> address: </h3>
+                		 <p class="contactus_2ndcoldiv_2ndp_s">  375/1, Dr. B. C. Roy Sarani, <br>
+                		 	New Barrackpore, Kolkata, <br>  West Bengal 700131 <br>
+						 <!-- H/P: +65 8569 2171, <br> -->
+						 Office: 91 76040 12563 </p>
+
+						 <h3> india contact: </h3>
+                		 <p class="contactus_2ndcoldiv_2ndp_s">  Kolkata: +91 76040 12563 <br>
+							Bangalore: +91 98448 01333 <br>
+							Mumbai: +91 99201 87595 <br>
+							Nagpur: +91 81495 02408 <br>
+							Pune: +91 98506 29422 <br>
+							Bhubaneswar: +91 94380 38386 </p>
+
+                	</div>
+                	
+                	<!-- <form class="form-horizontal" ng-submit="contactctrl.contactSubmit()" name="contactForm"> 
+	                  <div class="row">
+		                   <div class="col-md-4 col-sm-4">
+		                  		<p class="contactus_input_content"> First Name : <b style="color: red">*</b> </p>
+		                   </div>
+		                   <div class="col-md-7 col-sm-8">
+				                  <input type="text" class="contactus_input form-control" name="fname" id="fname" ng-model="contactctrl.contact.fname" placeholder="First Name" ng-pattern-restrict="^$|^[A-Za-z]+" required />
+			                       <div class="has-error" ng-show="contactForm.fname.$invalid">
+			                           <span style="color:red" ng-show="contactForm.fname.$error.required && contactForm.fname.$touched">First name is required</span>
+			                       </div>
+			               </div>       
+                      </div>
+	                   					<br> 
+	                   <div class="row">
+		                   <div class="col-md-4 col-sm-4">					
+		                  		<p class="contactus_input_content"> Last Name : <b style="color: red">*</b> </p>
+		                   </div>
+		                   <div class="col-md-7 col-sm-8">
+				                  <input type="text" class="contactus_input form-control" name="lname" id="lname" ng-model="contactctrl.contact.lname" placeholder="Last Name" ng-pattern-restrict="^$|^[A-Za-z]+" required /> 
+				                  <div class="has-error" ng-show="contactForm.lname.$invalid">
+			                            <span style="color:red" ng-show="contactForm.lname.$error.required && contactForm.lname.$touched">Last name is required</span>
+			                      </div>
+		                   </div>
+		               </div>       
+	                  					<br> 
+	                  <div class="row">
+		                  <div class="col-md-4 col-sm-4">					
+		                     <p class="contactus_input_content"> Email Id : <b style="color: red">*</b> </p>
+		                  </div>
+			              <div class="col-md-7 col-sm-8">    
+			                  <input type="email" class="contactus_input form-control" name="email" id="email" ng-model="contactctrl.contact.email" placeholder="Email Id" required /> 
+			                  <div class="has-error" ng-show="contactForm.email.$invalid">
+		                            <span style="color:red" ng-show="contactForm.email.$error.required && contactForm.email.$touched">Emaild is required</span>
+		                             <span style="color:red" ng-show="contactForm.email.$invalid && contactForm.email.$touched && !contactForm.email.$error.required">Email is invalid </span> 
+		                      </div>
+		                  </div>    
+		              </div>     
+	                       				<br> 
+	                  <div class="row">
+		                  <div class="col-md-4 col-sm-4">					
+		                     <p class="contactus_input_content"> Phone No : <b style="color: red">*</b> </p>
+		                  </div>
+			              <div class="col-md-7 col-sm-8">    
+			                  <input type="text" class="contactus_input form-control" name="phone" id="phone" ng-model="contactctrl.contact.phone" ng-minlength="10" ng-maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" placeholder="Phone No" required /> 
+			                  <div class="has-error" ng-show="contactForm.phone.$invalid">
+		                            
+		                            <span style="color:red" ng-show="contactForm.phone.$error.required && contactForm.phone.$touched">Phone No is required</span>
+		                             <span style="color:red" ng-show="((contactForm.phone.$error.minlength || contactForm.phone.$error.maxlength) && contactForm.phone.$dirty) "> Phone number is invalid </span>
+		                      </div>
+		                  </div>    
+		              </div>     
+	                       				<br>     				
+	                  <div class="row">
+		                  <div class="col-md-4 col-sm-4">     				
+		                   <p class="contactus_input_content"> Your Message : <b style="color: red">*</b> </p>
+		                  </div> 
+		                  <div class="col-md-7 col-sm-8">
+			                  <textarea rows="3" class="form-control" style="width:100%" name="yourmsg" id="yourmsg" placeholder="Write Your Message" ng-model="contactctrl.contact.yourmsg" required> </textarea> 
+			                  <div class="has-error" ng-show="contactForm.yourmsg.$invalid">
+		                            <span style="color:red" ng-show="contactForm.yourmsg.$error.required && contactForm.yourmsg.$touched">Message is required</span>
+		                      </div>
+		                  </div>
+		              </div>        
+                      					<br>    				
+	                  <p style="text-align:center"> <button type="submit"  ng-disabled="contactForm.$invalid" disabled="disabled" class="btn btn-large btn-success contactus_button"> <b> SUBMIT </b> </button> </p> <br> <br>
+	                  <p style="font-size:17px;color:green;text-align:center" id="usercreated">  </p>
+	                  <p style="font-size:17px;color:red;text-align:center" id="usernotcreated">  </p>
+              </form> -->
+
+
+                
+
+                </div>  
+            </div>
+
+                <!-- ....................................3rd........................................ -->  
+         <!--           
+                  <form class="form-horizontal" ng-submit="contactctrl.contactSubmit()" name="contactForm"> 
+                  <div class="row">
+                  	 <div class="col-lg-2 "> </div>
+                  	 <div class="col-lg-8">
+	                  <h4 style="text-align:center;color:#F37D22"> <u> CONNECT WITH US </u> </h4>
+	                  <p style="font-size:14px;text-align:center;margin-top:10px"> <b> Fill Up the Contact Form </b> </p>
+	                  <br> <br>
+	                  <div class="row">
+		                   <div class="col-md-4 col-sm-4">
+		                  		<p style="font-size:17px;text-align:right"> First Name : <b style="color: red">*</b> </p>
+		                   </div>
+		                   <div class="col-md-8 col-sm-8">
+				                  <input type="text" class="contactus_input" name="fname" id="fname" ng-model="contactctrl.contact.fname" placeholder="First Name" required />
+			                       <div class="has-error" ng-show="contactForm.fname.$invalid">
+			                           <span style="color:red" ng-show="contactForm.fname.$error.required && contactForm.fname.$touched">First name is required</span>
+			                       </div>
+			               </div>       
+                      </div>
+	                   					<br> <br>
+	                   <div class="row">
+		                   <div class="col-md-4">					
+		                  		<p style="font-size:17px;text-align:right"> Last Name : <b style="color: red">*</b> </p>
+		                   </div>
+		                   <div class="col-md-8">
+				                  <input type="text" class="contactus_input" name="lname" id="lname" ng-model="contactctrl.contact.lname" placeholder="Last Name" required /> 
+				                  <div class="has-error" ng-show="contactForm.lname.$invalid">
+			                            <span style="color:red" ng-show="contactForm.lname.$error.required && contactForm.lname.$touched">Last name is required</span>
+			                      </div>
+		                   </div>
+		               </div>       
+	                  					<br> <br>
+	                  <div class="row">
+		                  <div class="col-md-4">					
+		                     <p style="font-size:17px;text-align:right"> Email Id : <b style="color: red">*</b> </p>
+		                  </div>
+			              <div class="col-md-8">    
+			                  <input type="text" class="contactus_input" name="emailid" id="emailid" ng-model="contactctrl.contact.emailid" placeholder="Email Id" required /> 
+			                  <div class="has-error" ng-show="contactForm.emailid.$invalid">
+		                            <span style="color:red" ng-show="contactForm.emailid.$error.required && contactForm.emailid.$touched">Emaild is required</span>
+		                             <span style="color:red" ng-show="contactForm.emailid.$invalid && contactForm.emailid.$touched">Email is invalid </span>
+		                      </div>
+		                  </div>    
+		              </div>     
+	                       				<br> <br>
+	                  <div class="row">
+		                  <div class="col-md-4">					
+		                     <p style="font-size:17px;text-align:right"> Phone No : <b style="color: red">*</b> </p>
+		                  </div>
+			              <div class="col-md-8">    
+			                  <input type="text" class="contactus_input" name="phoneno" id="phoneno" ng-model="contactctrl.contact.phoneno" ng-minlength="10" 
+                   ng-maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" placeholder="Phone No" required /> 
+			                  <div class="has-error" ng-show="contactForm.phoneno.$invalid">
+		                            
+		                            <span style="color:red" ng-show="contactForm.phoneno.$error.required && contactForm.phoneno.$touched">Phone No is required</span>
+		                             <span style="color:red" ng-show="((contactForm.phoneno.$error.minlength || contactForm.phoneno.$error.maxlength) && contactForm.phoneno.$dirty) "> phone number should be 10 digits </span>
+		                      </div>
+		                  </div>    
+		              </div>     
+	                       				<br> <br>     				
+	                  <div class="row">
+		                  <div class="col-md-4">     				
+		                   <p style="font-size:17px;text-align:right"> Your Message : <b style="color: red">*</b> </p>
+		                  </div> 
+		                  <div class="col-md-8">
+			                  <textarea rows="7" style="width:100%" name="yourmsg" id="yourmsg" ng-model="contactctrl.contact.yourmsg" required> </textarea> 
+			                  <div class="has-error" ng-show="contactForm.yourmsg.$invalid">
+		                            <span style="color:red" ng-show="contactForm.yourmsg.$error.required && contactForm.yourmsg.$touched">Message is required</span>
+		                      </div>
+		                  </div>
+		              </div>        
+                      					<br> <br>    				
+	                  <p style="text-align:center"> <button type="submit"  ng-disabled="contactForm.$invalid" disabled="disabled" class="contactus_button button_slide"> <b> SUBMIT </b> </button> </p> <br> <br>
+	                  <p style="font-size:25px;color:green"> {{succMsg}} </p>
+	                 </div> 
+                     <div class="col-lg-2"> </div>  	                  
+                  </div>
+              </form> -->
+
+            </div>
+            </div>
+
+            <div style="margin-bottom:9px;margin-top:25px">
+                <iframe  id ="Contact_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8053208893607!2d88.39688391541856!3d22.586383438155675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275f0222cfdb7%3A0x99b24e05e822d26e!2sSharobi+Technologies+(India)+Pvt.+Ltd.!5e0!3m2!1sen!2sin!4v1560318006706!5m2!1sen!2sin" width="100%" height="430" frameborder="0" style="border:0" allowfullscreen ></iframe>
+            </div> 
+
+        </div>
+    </div>
+        

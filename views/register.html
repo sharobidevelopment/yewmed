@@ -1,0 +1,567 @@
+<div ng-controller="UserController as logctrl">
+  <div class="wrapper body-bg"> 
+   <!--    <div class="breadcrumb-area">
+         <div class="container">
+            <ol class="breadcrumb breadcrumb-list">
+               <li class="breadcrumb-item"><a href="/yewmed/">Home</a></li>
+               <li class="breadcrumb-item"><a href="account.html">Account</a></li>
+               <li class="breadcrumb-item active">register</li>
+            </ol>
+         </div>
+      </div> -->
+
+      <div class="page_deatil_main_div">
+          <div>
+               <h3>  REGISTER  </h3>
+               <p> <a href="{{contextpath1}}"> Home </a> / Create Acoount </p>   
+          </div>
+      </div>
+
+      <div class="register-area white-bg ptb-80" style="padding:85px 0px">
+         <div class="container">
+            <h3 class="register-header"> Register for an account </h3>
+            <div class="row">
+               <div class="offset-xl-0 col-xl-12">
+                 <!-- <div class="register-form login-form clearfix"> -->
+                     <!-- <form action="#"> -->
+                     <form class="form-horizontal" ng-submit="logctrl.userSubmit()" name="registerForm">
+                        <!-- <p>Already have an account? <b><a id="openlogin" ng-click="openLoginWindow()" href="" style="color:#F37D22;margin-left:10px;font-weight:500">Log in instead!</a> </b> </p> -->
+                        <h4 style="font-size:20px;font-weight:500;font-family: 'Poppins', sans-serif;"> Personal Details  </h4>
+                        <p style="font-size:16px;color:#707070"> *Required Fields </p>
+                        <div>{{ msg }}</div>
+                           <!-- <div class="alert alert-success" role="alert" ng-if="logctrl.successMessage">{{logctrl.successMessage}}</div> -->
+                           <!-- <div class="alert alert-danger" role="alert" ng-if="logctrl.errorMessage">{{logctrl.errorMessage}}</div> -->
+                           <br> 
+                        <!-- <div class="form-group row align-items-center"> -->
+                        <div class="row register_form_row">
+                           <!-- <label class="col-lg-3 col-md-3 col-form-label" for="fname">First Name <b style="color: red">*</b></label> -->
+                           <div class="col-lg-6 col-md-6 register_form_md_6" >
+                              <p> First Name<sup>*</sup> </p>
+                              <input type="text" ng-model="logctrl.register.fname" name="fname" id="fname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" required />
+                              <div class="has-error" ng-show="registerForm.fname.$invalid">
+                                 <!-- <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">fgdg</span> -->
+                                 <span style="color:#cc4749" ng-show="registerForm.fname.$error.required && registerForm.fname.$touched">First name is required</span>
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6">
+                              <p> Last Name<sup>*</sup> </p>
+                              <input type="text" ng-model="logctrl.register.lname" name="lname" id="lname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" required />
+                              <div class="has-error" ng-show="registerForm.lname.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.lname.$error.required && registerForm.lname.$touched">Last name is required</span>
+                              </div>
+                           </div>
+                        </div>
+
+
+
+
+                        <!-- <div class="form-group row align-items-center"> -->
+                          <div class="row register_form_row">
+                           <!-- <label class="col-lg-3 col-md-3 col-form-label" for="lname">Last Name <b style="color:red">*</b></label> -->
+                               <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                               <p> Date of Birth<sup>*</sup> </p> 
+                              <input  type="date" ng-model="logctrl.register.dob" name="dob" id="dob"  class="form-control" ng-required="true" max="{{currentDate1}}" class="span3">
+                              
+                              <!--  {{logctrl.register.dob | date:'yyyy-MM-dd'}} <br> <br>
+                                {{currentDate1 | date:'yyyy-MM-dd'}} <br> <br> 
+                                {{maxDate1}} -->
+                               <!--  <input type="text" datepicker="" ng-model="logctrl.register.dob" name="dob" id="dob"  class="form-control" ng-required="true" 
+                                max="{{maxDate1}}" max-mode="maxDate1" class="span3" placeholder="Date Of Birth" /> -->
+                              <span ng-show="registerForm.dob.$invalid && registerForm.dob.$touched">
+                              <span ng-show="registerForm.dob.$error.required" style="color: #cc4749">Date of Birth is required</span>
+                              </span>
+                              <span ng-show="registerForm.dob.$error.date" style="color: #cc4749">Date of Birth should be a valid date </span>
+                              <span ng-show="registerForm.dob.$error.max" style="color: red">Date of Birth can't be in future </span> 
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Email<sup>*</sup> </p> 
+                              <input type="email" ng-model="logctrl.register.email" name="email" id="email" required  class="span3 form-control" ng-blur="checkEmail()">
+                              <div class="has-error" ng-show="registerForm.email.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.email.$error.required && registerForm.email.$touched">Email is required</span>
+                                 <span style="color:#cc4749" ng-show="registerForm.email.$invalid && registerForm.email.$touched && !registerForm.email.$error.required">Email is invalid </span>
+
+                              </div>
+                               <span style="color:#cc4749" ng-if="email_check_status == '0'">Email is alreday exist now </span>
+                              <div id="success-alertEmail" style="color:green" ng-if="email_check_status == '1' && email_check_for_undefined !=undefined">{{ msgEmail }}</div>
+                           </div>
+                        </div>
+
+
+
+
+                        <!-- <div class="form-group row align-items-center"> -->
+                        <div class="row register_form_row">   
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Password<sup>*</sup> <i style="background:#F37D22;color:white;padding:1px 5px;border-radius:5px" data-toggle="toolsss" title="Password should be at least 8 characters long and should contain one number, one capital lettrer, one small letter and one special character"> ? </i> </p>
+                             <input type="password" ng-model="logctrl.register.password" name="password" id="password" ng-change="passwordCheck()" required class="span3 form-control" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/" ng-attr-type="{{ showPassword ? 'text':'password'}}"> 
+                              <span style="cursor:pointer;float:right;margin-top:-35px;margin-right:5px" ng-click="toggleShowPassword()" ng-class="{'fa fa-eye': showPassword,'fa fa-eye-slash': !showPassword}"></span> 
+                              <div class="has-error" ng-show="registerForm.password.$invalid" style="margin-top:0px"> 
+                                 <span style="color:#cc4749" ng-show="registerForm.password.$error.required && registerForm.password.$touched">Password is required</span>
+                                 <span style="color:#cc4749" ng-show="registerForm.password.$error.pattern && registerForm.password.$dirty"> Enter correct password </span>
+                                 <!-- <span style="color:red" ng-show="registerForm.password.$error.minlength  && registerForm.password.$dirty "> Password should be minimum 6 letter </span> -->
+                                 <!-- "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})" -->
+                                 <!-- /^(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/ -->
+                                 <!-- ng-minlength="6" -->
+                                 <!-- long and should contain one number,one character and one special character -->
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Confirm Password<sup>*</sup> </p>
+                             <input type="password" ng-model="confirmpassword" name="confirmpassword" id="confirmpassword" required class="span3 form-control" ng-change="passwordCheck()" required class="span3 form-control"> 
+                          <div class="has-error" ng-show="registerForm.confirmpassword.$invalid && registerForm.password.$invalid" style="margin-top:0px"> 
+                                 <span style="color:#cc4749" ng-show="registerForm.confirmpassword.$error.required && registerForm.confirmpassword.$touched">Confirm Password is required</span>
+                              </div>
+                              <span id="check_pswrd_match"> </span>
+                           </div>   
+                        </div>
+
+                      <!--  && registerForm.confirmpassword != registerForm.password -->
+
+
+                        <!-- <div class="form-group row align-items-center"> -->
+                        <div class="row register_form_row">
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Gender <sup>*</sup> </p>
+                              <select ng-model="logctrl.register.gender" name="gender" id="gender" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select Gender</option>
+                                 <option value="Male">Male</option>
+                                 <option value="Female">Female</option>
+                                 <option value="Others">Others</option>
+                              </select>
+                              <span ng-show="registerForm.gender.$invalid && registerForm.gender.$touched">
+                              <span ng-show="registerForm.gender.$error.required"
+                                 style="color: #cc4749">Gender is required</span>
+                              </span>
+                           </div>
+                        </div>
+
+
+                        <h4 style="font-size:20px;font-weight:500;font-family: 'Poppins', sans-serif;margin-top: 85px"> Delivery Details  </h4>
+                        <p style="font-size:16px;color:#707070;margin-top:5px"> *Required Fields </p>
+
+
+                        <!-- <div class="form-group row align-items-center"> -->
+                        <div class="row register_form_row">
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Country<sup>*</sup> </p>
+                              <select id="countryId" name="countryId" ng-change="getStates()"  ng-model="logctrl.register.addresses[0].countryId" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select Country</option>
+                                 <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option>
+                              </select>
+                              <!-- for error  -->
+                              <span ng-show="registerForm.countryId.$invalid && registerForm.countryId.$touched">
+                              <span ng-show="registerForm.countryId.$error.required"
+                                 style="color: #cc4749">Country is required </span>
+                              </span>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Postal Code <sup>*</sup> </p>
+                              <input type="text" ng-model="logctrl.register.addresses[0].pincode" name="pincode" id="pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" ng-minlength="6" ng-maxlength="6" required class="span3 form-control"> 
+                              <div class="has-error" ng-show="registerForm.pincode.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.pincode.$error.required && registerForm.pincode.$touched">Zip is required</span>
+                                 <span style="color:#cc4749" ng-show="((registerForm.pincode.$error.minlength || registerForm.pincode.$error.maxlength) && registerForm.pincode.$dirty) "> Zipcode is invalid </span>
+                              </div>
+                           </div>
+                        </div>
+
+
+
+                        <div class="row register_form_row">
+                            <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Address Line 1 <sup>*</sup> </p>
+                            <textarea ng-model="logctrl.register.streetAddress" name="streetAddress" id="streetAddress" required></textarea>
+                           <!-- for error  -->
+                           <span ng-show="registerForm.streetAddress.$invalid && registerForm.streetAddress.$touched">
+                           <span ng-show="registerForm.streetAddress.$error.required"
+                              style="color: #cc4749">Street Adress is required </span>
+                           </span>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Address Line 2 </p>
+                            <!-- <textarea ng-model="logctrl.register.addresses[0].streetAddress" name="streetAddress" id="streetAddress" required></textarea> -->
+                            <textarea ng-model="logctrl.register.streetAddress2" name="streetAddress2" id="streetAddress2"></textarea>
+                           <!-- for error  -->
+                           </div>
+                        </div>
+
+
+
+                        <div class="row register_form_row">
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                             <p> Town/City <sup>*</sup> </p> 
+                              <select ng-model="logctrl.register.addresses[0].cityId" name="city" id="city" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select City</option>
+                                 <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+                              </select>
+                              <!-- for error  -->
+                              <span ng-show="registerForm.city.$invalid && registerForm.city.$touched">
+                              <span ng-show="registerForm.city.$error.required"
+                                 style="color: #cc4749">City is required </span>
+                              </span>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                             <p> State/Province <sup>*</sup> </p> 
+                              <select name="stateId" id="stateId" ng-change="getCities()" ng-model="logctrl.register.addresses[0].stateId" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select State</option>
+                                 <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option>
+                              </select>
+                              <!-- for error  -->
+                              <span ng-show="registerForm.stateId.$invalid && registerForm.stateId.$touched">
+                              <span ng-show="registerForm.stateId.$error.required"
+                                 style="color: #cc4749">State is required </span>
+                              </span>
+                           </div>
+                        </div>
+
+
+
+
+                       <!--  <div class="form-group row align-items-center"> -->
+                         <div class="row register_form_row">
+                           <!-- <label class="col-lg-3 col-md-3 col-form-label" for="phone">Contact Number<b style="color: red">*</b></label> -->
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Contact Number <sup>*</sup> </p> 
+                              <!-- <input type="text" ng-model="logctrl.register.phone" name="phone" id="phone" placeholder="Contact Number" required  class="span3 form-control"> -->
+                              <input type="phone" ng-model="logctrl.register.phone" name="phone" id="phone"ng-minlength="9" ng-maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" required  class="span3 form-control" style="margin-left:-10px;width:105%;height: calc(2.25rem + 2px)">
+                              <div class="has-error" ng-show="registerForm.phone.$invalid" style="top:-10px;position:relative">
+                                 <span style="color:#cc4749" ng-show="registerForm.phone.$error.required && registerForm.phone.$touched">Contact Number is required</span>
+                                 <span style="color:#cc4749" ng-show="((registerForm.phone.$error.minlength || registerForm.phone.$error.maxlength) && registerForm.phone.$dirty) "> Contact number is invalid </span>
+                                 <!-- ng-minlength="10" ng-maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" -->
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Landmark <sup>*</sup> </p> 
+                              <input type="text" ng-model="logctrl.register.addresses[0].landmark" name="landmark" id="landmark" required class="span3 form-control"> 
+                              <div class="has-error" ng-show="registerForm.landmark.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.landmark.$error.required && registerForm.landmark.$touched">Landmark is required</span>
+                              </div>
+                           </div>
+                        </div>
+
+
+                        <!-- <div class="form-group row align-items-center"> -->
+                        <div class="row register_form_row">   
+                           <div class="col-lg-6 col-md-6 register_form_md_6_1">
+                              <p> Address Type <sup>*</sup> </p>
+                              <select ng-model="logctrl.register.addresses[0].type" name="type" id="type" class="form-control span3" ng-required="true">
+                                 <option value="" disabled>Select</option>
+                                 <option value="Home">Home</option>
+                                 <option value="Work">Work</option>
+                                 <option value="Others">Others</option>
+                              </select>
+                              <!-- for error  -->
+                              <span ng-show="registerForm.type.$invalid && registerForm.type.$touched">
+                              <span ng-show="registerForm.type.$error.required"
+                                 style="color: #cc4749">Address type required </span>
+                              </span>
+                           </div>
+                        </div>
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="email">Email<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <input type="email" ng-model="logctrl.register.email" name="email" id="email" placeholder="Email" required  class="span3 form-control" ng-blur="checkEmail()">
+                              <div class="has-error" ng-show="registerForm.email.$invalid">
+                                 <span style="color:red" ng-show="registerForm.email.$error.required && registerForm.email.$touched">Email is required</span>
+                                 <span style="color:red" ng-show="registerForm.email.$invalid && registerForm.email.$touched && !registerForm.email.$error.required">Email is invalid </span>
+
+                              </div>
+                               <span style="color:red" ng-if="email_check_status == '0'">Email is alreday exist now </span>
+                              <div id="success-alertEmail" style="color:green" ng-if="email_check_status == '1' && email_check_for_undefined !=undefined">{{ msgEmail }}</div>
+                           </div>
+                        </div> -->
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="password" valign="top" style="margin-top:-14px">Password<b style="color: red">*</b> <i style="background:#F37D22;color:white;padding:1px 5px;border-radius:5px" data-toggle="toolsss" title="Password should be at least 8 characters long and should contain one number, one capital lettrer, one small letter and one special character"> ? </i></label>
+                           <div class="col-lg-6 col-md-6">
+                             <p> <input type="password" ng-model="logctrl.register.password" name="password" id="password" placeholder="Password"  required class="span3 form-control" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/" ng-attr-type="{{ showPassword ? 'text':'password'}}"> 
+                              <span style="cursor:pointer;float:right;margin-top:-25px;margin-right:5px" ng-click="toggleShowPassword()" ng-class="{'fa fa-eye': showPassword,'fa fa-eye-slash': !showPassword}"></span> </p>
+                              <div class="has-error" ng-show="registerForm.password.$invalid" style="margin-top:-20px"> 
+                                 <span style="color:red" ng-show="registerForm.password.$error.required && registerForm.password.$touched">Password is required</span>
+                                 <span style="color:red" ng-show="registerForm.password.$error.pattern && registerForm.password.$dirty"> Enter correct password </span>
+                          
+                              </div>
+                           </div>
+                        </div> -->
+
+
+                        <!-- <h4 style="background:#00000024;padding:5px 15px">Your address</h4>
+                        <br> -->
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="streetAddress">Street Address<b style="color: red">*</b></label>
+                            <div class="col-lg-6 col-md-6">
+                           <textarea ng-model="logctrl.register.addresses[0].streetAddress" name="streetAddress" id="streetAddress" placeholder="Street Address" cols="26" rows="5" style="width:100%;border:1px solid #ced4da" required></textarea>
+                           <span ng-show="registerForm.streetAddress.$invalid && registerForm.streetAddress.$touched">
+                           <span ng-show="registerForm.streetAddress.$error.required"
+                              style="color: red">Street Adress is required </span>
+                           </span>
+                           </div>
+                        </div> -->
+
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="countryId">Country<b style="color: red">*</b>
+                           </label>
+                           <div class="col-lg-6 col-md-6">
+                              <select id="countryId" name="countryId" ng-change="getStates()"  ng-model="logctrl.register.addresses[0].countryId" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select Country</option>
+                                 <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option>
+                              </select>
+                              <span ng-show="registerForm.countryId.$invalid && registerForm.countryId.$touched">
+                              <span ng-show="registerForm.countryId.$error.required"
+                                 style="color: red">Country is required </span>
+                              </span>
+                           </div>
+                        </div> -->
+
+
+
+
+                   <!--      <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="stateId">State<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <select name="stateId" id="stateId" ng-change="getCities()" ng-model="logctrl.register.addresses[0].stateId" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select State</option>
+                                 <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option>
+                              </select>
+                              <span ng-show="registerForm.stateId.$invalid && registerForm.stateId.$touched">
+                              <span ng-show="registerForm.stateId.$error.required"
+                                 style="color: red">State is required </span>
+                              </span>
+                           </div>
+                        </div> -->
+
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="city">City<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <select ng-model="logctrl.register.addresses[0].cityId" name="city" id="city" class="form-control" ng-required="true" class="span3">
+                                 <option value="" disabled>Select City</option>
+                                 <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+                              </select>
+                              <span ng-show="registerForm.city.$invalid && registerForm.city.$touched">
+                              <span ng-show="registerForm.city.$error.required"
+                                 style="color: red">City is required </span>
+                              </span>
+                           </div>
+                        </div> -->
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="pincode">Zip / Postal Code<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <input type="text" ng-model="logctrl.register.addresses[0].pincode" name="pincode" id="pincode" placeholder="Zip / Postal Code"/  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" ng-minlength="6" ng-maxlength="6" required class="span3 form-control"> 
+                              <div class="has-error" ng-show="registerForm.pincode.$invalid">
+                                 <span style="color:red" ng-show="registerForm.pincode.$error.required && registerForm.pincode.$touched">Zip is required</span>
+                                 <span style="color:red" ng-show="((registerForm.pincode.$error.minlength || registerForm.pincode.$error.maxlength) && registerForm.pincode.$dirty) "> Zipcode is invalid </span>
+                              </div>
+                           </div>
+                        </div> -->
+
+
+                        <!-- <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="landmark">Landmark<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <input type="text" ng-model="logctrl.register.addresses[0].landmark" name="landmark" id="landmark" placeholder="Landmark"  required class="span3 form-control"> 
+                              <div class="has-error" ng-show="registerForm.landmark.$invalid">
+                                 <span style="color:red" ng-show="registerForm.landmark.$error.required && registerForm.landmark.$touched">Zip is required</span>
+                              </div>
+                           </div>
+                        </div> -->
+
+
+
+                     <!--    <div class="form-group row align-items-center">
+                           <label class="col-lg-3 col-md-3 col-form-label" for="type">Address Type<b style="color: red">*</b></label>
+                           <div class="col-lg-6 col-md-6">
+                              <select ng-model="logctrl.register.addresses[0].type" name="type" id="type" class="form-control span3" ng-required="true">
+                                 <option value="" disabled>Select</option>
+                                 <option value="Home">Home</option>
+                                 <option value="Work">Work</option>
+                                 <option value="Others">Others</option>
+                              </select>
+                              
+                              <span ng-show="registerForm.type.$invalid && registerForm.type.$touched">
+                              <span ng-show="registerForm.type.$error.required"
+                                 style="color: red">This is a required field</span>
+                              </span>
+                           </div>
+                        </div> -->
+
+
+
+
+                        <!-- <p><b>Note:</b> <b style="color: red">* </b>are Required field</p> -->
+                        <p class="regsiter_accept_conditions"> <input type="checkbox" ng-model="checked_term"> <span> By registering and submitting your data you are agreeing to our <a href="policy" target="_blank"> Privacy Policy </a>, <a href="useprivacy" target="_blank"> Cookie Policy </a> and <a href="terms-conditions" target="_blank"> Terms & Conditions </a> . </span> </p>
+                        <div>{{ msg }}</div>
+
+
+                        <p style="margin-top:50px"> <button id="register_button_id"  type="submit" ng-disabled="registerForm.$invalid || !checked_term || confirm_pswd_check_value == 'false'" disabled="disabled" class="btn btn-large register_button"> Register </button>   </p>
+
+                        <!-- <div class="form-check row p-0 mt-20">
+                           <div class="col-md-6 offset-md-3">
+                              <input class="form-check-input" value="#" id="offer" type="checkbox">
+                              <label class="form-check-label" for="offer">Receive offers from our partners</label>
+                           </div>
+                        </div>
+                        <div class="form-check row p-0 mt-20">
+                           <div class="col-md-8 offset-md-3">
+                              <input class="form-check-input" value="#" id="subscribe" type="checkbox">
+                              <label class="form-check-label" for="subscribe">Sign up for our newsletter<br>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers..</label>
+                           </div>
+                        </div> <br> <br> -->
+                        <!-- <div class="register-box mt-40">
+                           <button type="submit" class="login-btn float-right">Register</button>
+                           </div> -->
+
+                              <div ng-if="email_check_status == '0'" id="error_email_show"></div>
+                              <div class="alert alert-danger" role="alert" ng-if="logctrl.errorMessage">{{logctrl.errorMessage}}</div>
+
+                        <!-- <div class="register-box mt-40">
+                           <button type="button" ng-click="resetRegister()" class="btn btn-large btn-warning register_button float-right">Reset Form</button>
+                           <button  type="submit" ng-disabled="registerForm.$invalid" disabled="disabled" class="btn btn-large btn-success register_button float-right" style="margin-right:10px"> Register </button>            
+                        </div> -->
+                     </form>
+                 <!--  </div> -->
+               </div>
+            </div>
+         </div>
+
+          <div class="modal fade" id="login-window">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+         <div class="modal-content">
+            <form ng-submit="logctrl.login()" name="loginForm">
+               <!-- Modal Header -->
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+               <!-- Modal body -->
+               <div class="modal-body">
+                  <div class="login-form">
+                     <div class="form-group row">
+                        <label for="email" class="col-md-5 col-sm-4 col-form-label userlogin_model_div_1">Email</label>
+                        <div class="col-md-7 col-sm-8 userlogin_model_div_2">
+                           <input type="email" ng-model="logctrl.user.userName"
+                              name="email" id="uid" class="span3" required />
+                           <div class="has-error" ng-show="loginForm.$dirty">
+                              <span ng-show="loginForm.email.$error.required" style="color:#cc4749">Email is required</span> 
+                              <span ng-show="loginForm.email.$invalid" style="color:#cc4749">Email is invalid </span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="inputPassword" class="col-md-5 col-sm-4 col-form-label userlogin_model_div_1">Password</label>
+                        <div class="col-md-7 col-sm-8 userlogin_model_div_2">
+                           <input type="password" ng-model="logctrl.user.password"
+                              name="password" id="pwd" class="span3" required />
+                              <span toggle="#pwd" style="cursor: pointer;" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                           <div class="has-error" ng-show="loginForm.$dirty">
+                              <span ng-show="loginForm.password.$error.required" >Password
+                              is required </span>
+                           </div>
+                              <!-- <button class="btn show-btn" type="button">
+                                 <span toggle="#pwd" class="fa fa-eye toggle-password">Show</span>
+                              </button> -->
+                        </div>
+                     </div>
+                              <!-- <div>{{ msg }}</div> -->
+                              <div ng-if="msg"> Hello </div>
+                     <div class="login-details text-center mb-25">
+                        <a href="forgot-password.html">Forgot your password?</a>
+                        <button type="submit" class="login-btn" ng-disabled="loginForm.$invalid">Sign in
+                        </button>
+                     </div>
+                     <div class="login-footer text-center">
+                        <p>No account?<a href="register" class="fa fa-user"ng-click="closeLoginWindow()" style="padding:10px"><b style="margin-left:5px">Create one here</b></a></p>
+                     </div>
+                     <!-- <div class="login-footer text-center">
+                        <p>No account?<a style="cursor:pointer" ng-click="closeLoginWindow()">Create one here</a></p>
+                        </div> -->
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+         </div>
+      </div>
+   </div>
+   <!-- -------------------------login-window End---------------   -->
+
+      </div>
+     <!--  <div class="subscribe-area">
+         <div class="container">
+            <div class="subscribe-content  offset-lg-6  text-center">
+               <h6><span>special ofers</span> for subscribers</h6>
+               <h2>ten percent member discount</h2>
+               <p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
+               <div class="newsletter-box">
+                  <form action="#">
+                     <input class="subscribe" placeholder="your email address" name="email"  type="email">
+                     <button type="submit" class="submit">submit</button>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div> -->
+
+         <!-- online support code start -->
+
+   <!--    <div class="online-support">
+         <div class="container">
+            <div class="row">
+               
+               <div class="col-lg-4">
+                  <div class="single-support mb-all-30">
+                     <div class="support-img">
+                        <img src="img/icons/s1.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>Free delivery</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="single-support mb-all-30">
+                     <div class="support-img">
+                        <img src="img/icons/s2.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>money guarantee</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="single-support">
+                     <div class="support-img">
+                        <img src="img/icons/s3.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>online support</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div> -->
+
+      <!-- online support code end -->
+
+   </div>
+</div>
+
+
+<script>
+      $("#phone").intlTelInput({
+         // initialCountry: 'IN',
+         preferredCountries: [ "us", "gb" ]
+      });
+      $('[data-toggle="toolsss"]').tooltip();
+</script>
+

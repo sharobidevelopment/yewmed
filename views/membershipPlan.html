@@ -1,0 +1,39 @@
+ <div class="white-bg">
+ <div class="container new_container">
+ <div class="main-product-thumbnail ptb-80">
+            
+                <div class="row">
+
+<div class="snip1214" ng-controller="MemberPlanController as memberplanctrl">
+  <h1 class="breadcrumb_memeber"> <u> Membership Plan </u> </h1>
+  <div class="breadcrumb-area" style="margin-top:20px;padding-top:0px">
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active"> <a href=""> Membership Plan </a> </li>
+                </ol>
+            </div>
+        </div>
+
+
+  <div class="plan" ng-repeat="obj in plans" id="membershipdiv_{{obj.id}}" style="margin-top:30px"> <!-- featured (this class in div for highlight)-->
+
+    <h3 class="plan-title">
+    
+     {{obj.name}}
+      
+    </h3>
+    <div class="plan-cost">
+          <span class="plan-price">{{obj.pointMin}}</span>
+          <span class="plan-type"> Point</span>
+    </div>
+        <ul class="plan-features" ng-repeat="featureobj in features" style="text-align: left;margin-left: 1 0px;margin-right: 10px;">
+            <li ng-if="checkFeature(featureobj.id,obj)"><i class="ion-checkmark"> </i>{{featureobj.name}}</li>
+             <li ng-if="!checkFeature(featureobj.id,obj)"><i class="ion-close"> </i>{{featureobj.name}}</li>
+       </ul>
+   <!--  <div class="plan-select"><a href="#" ng-click="">Your Plan</a></div>  -->
+  </div>
+   {{setActiveMembership()}} 
+</div>
+</div></div></div> </div>

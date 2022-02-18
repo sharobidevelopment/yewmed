@@ -1,0 +1,286 @@
+<!-- <ul class="breadcrumb">
+	<li><a href="{{contextpath}}">Home</a> <span class="divider">/</span></li>
+	<li class="active">Products <span class="divider">/</span></li>
+	
+</ul> -->
+<div class="row mobile_view_opacity" ng-controller="LoginController as logctrl" style="margin-right:0px;margin-left:0px" onclick="off_opacity()">
+
+   <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+              .col-an-2 {
+              	width:20%;
+              	padding: 5px
+              }
+              p:focus, img:focus{
+              	border:0px ;
+              }
+
+              @media only screen and (max-width: 1200px) {
+              	.col-an-2 {
+	              width:25%;
+	              padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 991px) {
+              	.col-an-2 {
+	              width:33.33%;
+	              padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 675px) {
+              	.col-an-2 {
+	              width:50%;
+	              padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 510px) {
+              	.col-an-2 {
+	              width:100%;
+	              padding: 5px
+                }
+              }
+           </style>
+        </div>
+
+
+	<!-- <div class="col-as-3"> </div> -->
+        <!-- Breadcrumb Area Start Here -->
+        <div class="container-fluid">
+
+
+        <!-- <div class="breadcrumb-area">
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/yewmed/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">shop</a></li>
+                    <li class="breadcrumb-item active">Groups</li>
+                </ol>
+            </div>
+        </div> -->
+
+
+        <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item"> <a href="{{contextpath}}/category/{{cate_name}}-{{cate_id}}" class="everypge_topic_a">{{cate_name}} </a> </li>
+                    <li class="breadcrumb-item active" style="cursor:default">{{grp_name}}</li>
+                </ol>
+            </div>
+
+
+        <!-- Breadcrumb Area End Here -->
+        <!-- Product Thumbnail Start -->
+
+         <!-- <select ng-model="order">
+            <option value="price">Price (low to high)</option>
+            <option value="-price">Price (high to low)</option>
+            <option value="name">Name A-Z</option>
+            <option value="-name">Name Z-A</option>
+        </select> -->
+
+
+        <div class="all_page_middle_div all_page_header" style="margin-top:40px">
+	     <h3 class="all_page_header_h3"> {{grp_name}} 
+           <span style="font-size:16px;font-family: 'Josefin Sans', sans-serif;margin-left:20px;font-weight:400;text-transform: initial;"> 1 - 20 of 20 products </span>
+	     </h3>
+	     <hr>
+	    </div>
+
+ 
+
+	<div class="span9">
+		<div id="myTabContent" class="tab-content">
+		<!--class="tab-pane fade active in"  -->
+			
+			 
+			
+				   <!-- class="tab-pane" -->
+				   <!-- {{aniket}}
+				   {{logctrl.itemGroupWise.length}} -->
+				   <div ng-if="logctrl.itemGroupWise.length ==0" style="text-align:center"><img src="/yewmed/themes/img/nodata.jpeg" 
+								style="max-width: 100%;" /></div>
+				   <div ng-if="logctrl.itemGroupWise.length >0" class="all_page_middle_div"> 
+					<div  class="row" id="listView1" infinite-scroll='loadMore()' infinite-scroll-distance='2' infinite-scroll-disabled="scrollStatus">
+					<!-- <div ng-repeat="rp in logctrl.itemGroupWise | orderBy: order"> -->
+					<div ng-repeat="rp in logctrl.itemGroupWise" class="col-an-2">
+
+						<!-- <div class="row" style="margin-right:0px;margin-left:0px;padding-top:20px;padding-bottom:20px">
+                            
+
+
+							<div class="span2 col-md-4 col-sm-5 col-xa-5">
+								
+								<img src="themes/img/{{rp.groupId==7 ? 'cap' : (rp.groupId==6 ? 'tablet' : 'tablet')}}.png" 
+								style="max-width: 100%;" />
+								<img src="themes/img/groups/{{rp.groupId}}.png" alt="product-view" style="max-width: 100%;">
+								 {{rp.groupId}}
+								<img ng-show="rp.groupId==7" src="themes/img/cap.png" 
+								style="max-width: 100%;" />
+								<img ng-show="rp.groupId==6" src="themes/img/tablet.png" 
+								style="max-width: 100%;" />
+								<img ng-show="rp.groupId>8 || rp.groupId<6" src="themes/img/tablet.png" 
+								style="max-width: 100%;" /> 
+							</div>
+							<div class="span4 col-md-8 col-sm-7 col-xa-7">
+								<h3 class="products_name_h3">{{rp.name}}</h3>
+								<hr class="soft product_before_vdet_hr" />
+								<p>{{rp.name}} ({{rp.schedule}})</p>
+								
+								 <br class="clr" />
+
+								 <div class="span3 alignR">
+								<form class="form-horizontal qtyFrm">
+									<h4 class="products_price_h4">Rs.{{rp.price}}</h4>
+									<br /> <br class="product_before_vdet_hr">
+									<p> <button class="btn btn-large btn-primary cart_change_a" type="button" ng-click="logctrl.viewItems(rp.id)" style="border:2px #dd2c00b5">View Details</button> </p>	
+									<div class="btn-group">
+										<a href="product_details.html"
+											class="btn btn-large btn-primary"> Add to <i
+											class=" icon-shopping-cart"></i></a> <a
+											href="product_details.html" class="btn btn-large"><i
+											class="icon-zoom-in"></i></a>
+									</div>
+								</form>
+							</div>
+									
+							</div>
+							<div class="span3 alignR col-md-2">
+								<form class="form-horizontal qtyFrm">
+									<h3>Rs.{{rp.price}}</h3>
+									<br />
+									<button class="btn btn-large btn-primary pull-right" type="button" ng-click="pctrl.viewItems(rp.id)">View Details</button>	
+									
+								</form>
+							</div>
+
+						</div>
+						<hr class="soft"> -->
+
+                        <div class="groups_product_div">
+                        	<!-- <p style="text-align:right;margin-right:20px;font-size:25px"><i class="fa fa-heart-o" aria-hidden="true"> </i></p> -->
+                            <p ng-if="rp.groupId !=133" style="text-align:center;padding:40px 0px 30px 0px;cursor:pointer;"  ng-click="logctrl.viewItems(rp.id,rp.groupId,rp.group,rp.category,rp.categoryId,rp.metaTag)">  <!-- <img src="themes/img/yewmed_new_pics/product/tablet.jpg"> -->
+                            <img src="/yewmed/themes/img/yewmed_new_pics/product2/{{rp.groupId}}.jpg"> </p>
+                            <p ng-if="rp.groupId ==133" style="text-align:center;padding:40px 0px 30px 0px;cursor:pointer;"  ng-click="logctrl.viewItems(rp.id,rp.groupId,rp.group,rp.category,rp.categoryId,rp.metaTag)">  
+                            <img src="/yewmed/themes/img/yewmed_new_pics/productwise2/{{rp.id}}.jpg"> </p>  
+                            <div class="groups_product_div_div" ng-click="logctrl.viewItems(rp.id,rp.groupId,rp.group,rp.category,rp.categoryId,rp.metaTag)">
+                            <p class="groups_product_name"> {{rp.name}} </p>
+                            <p style="font-size:14px;margin-top:-3px;color:#424242"> contains {{rp.conversion}} Qty in a pack </p>
+                            </div>
+                            <div class="row" style="margin-left:-15px;margin-right:-15px">
+                            	<div class="col-md-6 col-sm-6 col_xs_6" style="font-size:10px;color:#424242"> 
+                            		<p style="font-size:12px;color:#424242">  MRP </p> 
+                            		<p style="margin-top:-4px"><img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-4px"> <span style="font-size:18px;color:#424242"> {{rp.price | number:2}} </span> </p>
+                            	</div>
+                            	<div class="col-md-6 col-sm-6 col_xs_6" style="text-align:right"> <!-- <button type="button" class="groups_addtocart_button"  ng-click="prouddetailctrl.addItems(product.id,customer_selected_qty)" id="addToCart"><i class="fa fa-shopping-cart groups_addtocart_button_i"></i> <b> Add to cart </b> 
+                                       </button> --> 
+
+                                      <i class="fa fa-heart-o groups_addtocart_button_i" ng-click="logctrl.addItemsInWishList(rp.id)"></i> 
+                                      <!-- <img src="themes/img/yewmed_new_pics/product/cart_icon1.png" class="groups_addtocart_button_i" style="margin-top:-1px">   -->
+                                      <!-- <i class="groups_addtocart_button_i_1"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="10px" height="10px" style="position:relative;top:1px" viewBox="0 0 510 510" xml:space="preserve">
+    <path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306
+      c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7
+      c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408
+      c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z"/>
+</svg> </i> -->
+                                     
+                                   </div>
+                          
+                        </div>
+
+
+					   </div>
+					   
+						<!-- <hr class="soft" /> -->
+						<!-- <div style="text-align:center">
+						<button ng-if="loadButtonShow" ng-click="scrollStart()" style="width:60%;border-radius: 6px;" class="btn new_carts_button">Load More</button>
+					    </div> -->
+						<!-- <div class="row">
+							<div class="span2">
+								<img src="themes/images/products/5.jpg" alt="" />
+							</div>
+							<div class="span4">
+								<h3>New | Available</h3>
+								<hr class="soft" />
+								<h5>Product Name</h5>
+								<p>Nowadays the lingerie industry is one of the most
+									successful business spheres.We always stay in touch with the
+									latest fashion tendencies - that is why our goods are so
+									popular..</p>
+								<a class="btn btn-small pull-right" href="product_details.html">View
+									Details</a> <br class="clr" />
+							</div>
+							<div class="span3 alignR">
+								<form class="form-horizontal qtyFrm">
+									<h3>$222.00</h3>
+									<label class="checkbox"> <input type="checkbox">
+										Adds product to compair
+									</label><br />
+									<div class="btn-group">
+										<a href="product_details.html"
+											class="btn btn-large btn-primary"> Add to <i
+											class=" icon-shopping-cart"></i></a> <a
+											href="product_details.html" class="btn btn-large"><i
+											class="icon-zoom-in"></i></a>
+									</div>
+								</form>
+							</div>
+						</div> -->
+						<!-- <hr class="soft" /> -->
+					</div>
+					
+				</div>
+				<br class="clr">
+				<!-- <ul class="pagination">
+					<li ng-repeat="i in pctrl.productsCount track by $index" >
+						<p ng-click="pctrl.goToPage($index+1)">{{$index+1}} </p>
+					</li>
+				</ul> -->
+			
+		</div>
+	</div>
+</div>
+<!-- <div class="col-as-3 product_adimage_p" style="text-align:center"> 
+    	<div style="border:1px solid rgba(0,0,0,.1);width:90%;display:inline-block;padding:100px 0px">
+    		<h3 style="color:red"> SPACE FOR AD </h3>
+
+    	</div>	
+</div> -->
+
+
+</div>
+
+<!-- <script type="text/javascript">
+    $( document ).ready(function() {
+    	alert("document");
+     var groups_product_div_height = 0;
+        
+        $('.groups_product_div').each(function() { 
+            // alert("lasetsheight_p"+ lasetsheight_p);
+             if ($(this).height() > groups_product_div_height) {
+                groups_product_div_height = $(this).height();    
+                alert(groups_product_div_height);       
+             }     
+          });
+        $('.groups_product_div').height(groups_product_div_height);
+        
+        });
+    </script> -->
+
+
+</div>
+
+
+
+
+
+
+
+

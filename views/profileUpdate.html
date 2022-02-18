@@ -1,0 +1,660 @@
+<div ng-controller="ProfileController as logctrl" class="mobile_view_opacity" onclick="off_opacity()">
+<div class="wrapper body-bg">
+   <div class="breadcrumb-area">
+      <div class="container">
+         <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a href="{{contextpath1}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{contextpath1}}">Account</a></li>
+            <li class="breadcrumb-item active">profile</li>
+         </ol>
+      </div>
+   </div>
+   <div class="register-area white-bg ptb-80" style="background:transparent;padding-top:0px">
+      <div class="container">
+         <h3 class="login-header">Update your profile </h3>
+         <div class="row">
+            <div class="col-xl-3 col-md-3"> 
+                <ul class="profileupdate_sitediv_ul">
+                   <li class="profileupdate_sitediv_li" target="1"> Change Name </li>
+                   <li class="profileupdate_sitediv_li" target="2"> Change Password </li>
+                   <li class="profileupdate_sitediv_li" target="3"> Change Number </li>
+                   <li class="profileupdate_sitediv_li" target="4"> Address </li>
+                </ul>
+            </div>
+            <div class="col-xl-9 col-md-9">
+               <div class="register-form login-form clearfix" style="margin-top:10px">
+                  <!-- <form action="#"> -->
+                  <div class="well">
+                     <div>
+                        <!-- <div class="checkbox">
+                           <label>
+                           <input type="checkbox" ng-model="oneAtATime">
+                           Open only one at a time
+                           </label>
+                        </div> -->
+                        <div id="accordion" close-others="oneAtATime">
+
+<!-- ==================Change Name Start=================== -->
+
+                           <div class="card" id="new_sitediv1">
+                              <div class="card-header" id="headingOne">
+                                 <h5 class="mb-0">
+                                    <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Change Name:
+                                    </button> -->
+                                    <button class="btn btn-link">
+                                    Change Name:
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                 <div class="card-body">
+                                    <form class="form-horizontal" ng-submit="updateName()" name="updateNameForm">
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="fname">First Name: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="text" ng-model="users.fname" name="fname" id="fname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" placeholder="First Name" style="margin-left: 10px;width: 126%" required />
+                                             <div class="has-error" ng-show="updateNameForm.fname.$invalid">
+                                                <span style="color:red" ng-show="updateNameForm.fname.$error.required && updateNameForm.fname.$touched">First name is required</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="lname">Last Name: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="text" ng-model="users.lname" name="lname" id="lname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" placeholder="Last name" style="margin-left: 10px;width: 126%" required />
+                                             <div class="has-error" ng-show="updateNameForm.lname.$invalid">
+                                                <span style="color:red" ng-show="updateNameForm.lname.$error.required && updateNameForm.lname.$touched">Last name is required</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center" >
+                                          <div class="controls">
+                                             <div id="success-alertName" style="color:green">{{ msgName }}</div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <div class="controls">
+                                             <button  type="submit" ng-disabled="updateNameForm.$invalid" disabled="disabled" class="btn btn-large btn-success register_button" style="margin-left:15px"> Edit </button>
+                                          </div>
+                                          <!-- <div>
+                                             <button type="button" class="btn btn-default btn-sm" ng-click="updateName()">edit</button>
+                                             </div> -->
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+
+<!-- ==================Change Name End=================== -->                           
+
+<!-- ==================Change Password Start=================== -->
+
+                           <div class="card" id="new_sitediv2">
+                              <div class="card-header" id="headingOne">
+                                 <h5 class="mb-0">
+                                    <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                                    Change Password:
+                                    </button> -->
+                                    <button class="btn btn-link">
+                                    Change Password:
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapse2" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                 <div class="card-body">
+                                    <form class="form-horizontal" ng-submit="updatePassword()" name="updateForm">
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="oldPassword">Old Password: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.oldPassword" name="oldPassword" id="oldPassword" placeholder="Old Password" required  class="span3 form-control" style="margin-left: 10px;width: 126%">
+                                             <div class="has-error" ng-show="updateForm.oldPassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.oldPassword.$error.required && updateForm.oldPassword.$touched">Password is required</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="newPassword">New Password: <span style="color: red">*</span>
+                                          <i style="background:#F37D22;color:white;padding:1px 5px;border-radius:5px" data-toggle="toolsss" title="Password should be at least 8 characters long and should contain one number, one capital lettrer, one small letter and one special character"> ? </i></label>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.newPassword" name="newPassword" id="newPassword" placeholder="New Password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/" required class="span3 form-control" style="margin-left: 10px;width: 126%">
+                                             <div class="has-error" ng-show="updateForm.newPassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.newPassword.$error.required && updateForm.newPassword.$touched">Password is required</span>
+                                                <span style="color:red" ng-show="updateForm.newPassword.$error.pattern && updateForm.newPassword.$dirty"> Enter valid password </span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="reTypePassword">Retype Password: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.reTypePassword" name="reTypePassword" id="reTypePassword" placeholder="Retype Password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/" required valid-password-c="users.newPassword" class="span3 form-control" style="margin-left: 10px;width: 126%">
+                                             <div class="has-error" ng-show="updateForm.reTypePassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.reTypePassword.$error.required && updateForm.reTypePassword.$touched">Password is required</span>
+                                                <span style="color:red" ng-show="updateForm.reTypePassword.$error.noMatch && !updateForm.reTypePassword.$error.required && updateForm.newPassword.$error.pattern && updateForm.newPassword.$dirty"></span>
+                                                <span style="color:red" ng-show="updateForm.reTypePassword.$error.noMatch && !updateForm.reTypePassword.$error.required">Password is not match</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- <div class="control-group" style="color: red">
+                                          <div class="controls">{{ msg }}</div>
+                                          </div> -->
+                                       <div class="control-group" >
+                                          <div class="controls">
+                                             <div id="success-alert" style="{{passStyle}}">{{ msgPassword }}</div>
+                                             <!-- <div id="success-alert" ng-bind-html="msgPassword"> </div> -->
+                                          </div> <br>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <div class="controls">
+                                             <button type="submit" ng-disabled="updateForm.$invalid" disabled="disabled" class="btn btn-large btn-success register_button" style="margin-left:15px"> Edit Password </button>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+<!-- ==================Change Password End=================== -->
+
+<!-- =================Change Number Start==================== -->
+                           <div class="card" id="new_sitediv3">
+                              <div class="card-header" id="headingOne">
+                                 <h5 class="mb-0">
+                                    <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                                    Change Number:
+                                    </button> -->
+                                    <button class="btn btn-link">
+                                    Change Number:
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapse3" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                 <div class="card-body">
+                                    <form class="form-horizontal" ng-submit="updatePhone()" name="phoneForm">
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="phone">Contact Number: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="text" ng-model="users.phone" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" ng-minlength="10" ng-maxlength="15" id="phone" placeholder="Contact Number" required  class="span3 form-control">
+                                             <div class="has-error" ng-show="phoneForm.phone.$invalid">
+                                                <span style="color:red" ng-show="phoneForm.phone.$error.required && phoneForm.phone.$touched">Contact Number is required</span>
+                                                <span style="color:red" ng-show="((phoneForm.phone.$error.minlength || phoneForm.phone.$error.maxlength) && phoneForm.phone.$dirty) "> Contact number is invalid </span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <label class="col-lg-3 col-md-3 col-form-label" for="password">Password: <span style="color: red">*</span></label>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.password" name="password" id="password" placeholder="password" required  class="span3 form-control" style="width: 126%">
+                                             <!-- {{users.password}} -->
+                                             <div class="has-error" ng-show="phoneForm.password.$invalid">
+                                                <span style="color:red" ng-show="phoneForm.password.$error.required && phoneForm.password.$touched">Password is required</span>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="control-group" >
+                                          <div class="controls">
+                                             <div id="success-alertPhone" style="{{msgPhoneStyle}}">{{ msgPhone }}</div>
+                                          </div> <br>
+                                       </div>
+                                       <div class="form-group row align-items-center">
+                                          <div class="controls">
+                                             <button  type="submit" ng-disabled="phoneForm.$invalid" disabled="disabled" class="btn btn-large btn-success register_button" style="margin-left:15px"> Edit phone </button>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+<!-- =================Change Number End==================== -->
+
+<!-- =================Change Address Start==================== -->                           
+                           <div class="card" id="new_sitediv4">
+                              <div class="card-header" id="headingOne">
+                                 <h5 class="mb-0">
+                                    <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                                    Address:
+                                    </button> -->
+                                    <button class="btn btn-link">
+                                    Address:
+                                    </button>
+                                 </h5>
+                              </div>
+                              <div id="collapse4" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                 <div class="card-body">
+                                    <!-- <p>Your address:</p> -->
+                                    <!-- <div class="modal fade" id="addressmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+                                    <div class="modal-dialog" style="max-width:700px" ng-repeat="data in users.addresses | orderBy : 'id'">
+                                       <!-- Modal content-->
+                                       <div class="modal-content">
+                                          <!-- <div class="modal-header"> -->
+                                             <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+                                          <!-- </div> -->
+                                          <div class="modal-body" style="padding:30px 20px">
+                                             <!-- <div> -->
+                                                <div class="well">
+                                                   <h5 style="text-transform: uppercase"> <b> <u> Address {{$index+1}} ({{data.type}}) </u> </b> </h5>  
+                                                   <div class="control-group">
+                                                      <div style="margin-top:20px" class="row">
+                                                          <div class="col-md-3 col-sm-4"> <b>  Address: </b> </div>
+                                                          <div class="col-md-9 col-sm-8"> {{data.streetAddress}} <br>
+                                                                                 {{data.city.name}},{{data.state.name}}({{data.country.name}}) <br>
+                                                                                 {{data.pincode}}
+                                                          </div> 
+                                                      </div> 
+                                                      <!-- <div style="margin-top:10px">{{data.city.name}},{{data.state.name}}({{data.country.name}})</div>
+                                                      <div style="margin-top:10px">{{data.pincode}}</div> -->
+                                                      <div style="margin-top:10px" class="row">
+                                                          <div class="col-md-3 col-sm-4"> <b> Landmark: </b> </div>
+                                                          <div class="col-md-9 col-sm-8"> {{data.landmark}}
+                                                          </div>  
+                                                      </div>
+                                                      <div style="margin-top:10px" class="row">
+                                                           <div class="col-md-3 col-sm-4"> <b> Phone No: </b> </div>
+                                                           <div class="col-md-9 col-sm-8">  {{data.contactPhone}}
+                                                           </div>
+                                                      </div>
+                                                      <div style="margin-top:10px">{{data.invoiceMail}}
+                                                      </div>
+                                                   </div><!-- 
+                                                   <div class="control-group" ">
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.streetAddress}}</label>
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.country.name}},{{data.state.name}},{{data.city.name}}</label>
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.pincode}}</label>
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.landmark}}</label>
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.contactPhone}}</label>
+                                                      <label class="col-lg-3 col-md-3 col-form-label">{{data.invoiceMail}}
+                                                      </label>
+                                                   </div> -->
+                                                   <div class="controls row" style="text-align:left">
+                                                      <div class="col-md-12">
+                                                      <span style="top:4px;position:relative"> <input type="checkbox" ng-checked="data.isDefault==1" ng-click="makeDefault(data.id)" ng-disabled="data.isDefault==1"> </span> <span style="top:4px;position:relative"> Default </span>
+                                                      <!-- <a class="btn btn-small" data-toggle="modal" data-target="#addressmodal"> Change</a> -->
+                                                      <button class="btn btn-small" data-toggle="modal" data-target="#addressaddmodal" style="margin-left:10px;margin-top:10px"> Add</button>
+                                                      <!-- <a class="btn btn-small" data-toggle="modal" data-target="#addresseditmodal"> Edit</a> -->
+                                                      <button type="button" class="btn block" ng-click="editAddress(data);" style="margin-left:10px;margin-top:10px">Edit</button>
+                                                      <button type="button" ng-if="data.isDefault!=1" class="btn block" ng-click="deleteAddress(data.id);" style="margin-left:10px;margin-top:10px">Delete Address</button>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <!-- <div class="controls">
+                                                   <button type="button" class="btn block" ng-click="checkShippingPosibility(data.id,data.latitude,data.longitude);">Select Address</button>
+                                                   </div> -->
+                                             <!-- </div> -->
+                                             
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+<!-- ==============Ends AddAddress Model Test Test============== -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- <div class="online-support" style="margin-top:20px">
+         <div class="container">
+            <div class="row">
+               
+               <div class="col-lg-4">
+                  <div class="single-support mb-all-30">
+                     <div class="support-img">
+                        <img src="img/icons/s1.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>Free delivery</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="single-support mb-all-30">
+                     <div class="support-img">
+                        <img src="img/icons/s2.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>money guarantee</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="single-support">
+                     <div class="support-img">
+                        <img src="img/icons/s3.png" alt="support-img">
+                     </div>
+                     <div class="support-desc">
+                        <h4>online support</h4>
+                        <p>Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div> -->
+   </div>
+</div>
+<!-- ==========================Start addressAddmodal========================== -->
+<div class="modal fade" id="addressaddmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title"> <u> Add Address </u> </h4>
+            </div> <br>
+            <form class="form-horizontal"  ng-submit="addNewAddress()" name="addressAddForm">
+               <div class="modal-body">
+                  <div class="well">
+                    
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label>
+                        </div>
+                        <!--  <div class="controls"> -->
+                        <div class="col-md-8">   
+                           <textarea name="streetAddress" id="streetAddress" ng-model="newaddress.streetAddress"  cols="26" rows="5" style="width:100%" required></textarea>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.streetAddress.$invalid && addressAddForm.streetAddress.$touched"><br>
+                           <span ng-show="addressAddForm.streetAddress.$error.required"
+                              style="color: red">Address is required </span>
+                           </span>
+                        <!-- </div> -->
+                     </div> </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                           <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                           </label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select id="countryId_add" name="countryId" ng-change="getStates(1)"  ng-model="newaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                              <!-- <option value="" disabled>Select Country</option>
+                              <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option> -->
+                           </select>
+                          <!--  <select id="countryId_add" name="countryId" ng-change="getStates()"  ng-model="newaddressa.ddresses[0].countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                           </select> -->
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.countryId.$invalid && addressAddForm.countryId.$touched"><br>
+                           <span ng-show="addressAddForm.countryId.$error.required"
+                              style="color: red">Country is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select name="stateId" id="stateId_{{$index}}" ng-change="getCities(1)" ng-model="newaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                              <!-- <option value="" disabled>Select-State</option>
+                              <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.stateId.$invalid && addressAddForm.stateId.$touched"><br>
+                           <span ng-show="addressAddForm.stateId.$error.required"
+                              style="color: red"> State is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                        </div>    
+                        <div class="controls col-md-8">
+                           <select ng-model="newaddress.cityId" name="city" id="city_add" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                              <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.city.$invalid && addressAddForm.city.$touched"><br>
+                           <span ng-show="addressAddForm.city.$error.required"
+                              style="color: red"> City is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <!-- <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="phone">Phone<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="newaddress.contactPhone" name="phone" placeholder="phone"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressAddForm.phone.$invalid">
+                              <span style="color:red" ng-show="addressAddForm.phone.$error.required && addressAddForm.phone.$touched"> Phone Number is required </span>
+                           </div>
+                        </div>
+                     </div> <br> -->
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="newaddress.pincode" maxlength="6" numbers-only name="pincode" placeholder="Zip / Postal Code"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressAddForm.pincode.$invalid"><br>
+                              <span style="color:red" ng-show="addressAddForm.pincode.$error.required && addressAddForm.pincode.$touched">Zipcode is required</span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="newaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressAddForm.landmark.$invalid"><br>
+                              <span style="color:red" ng-show="addressAddForm.landmark.$error.required && addressAddForm.landmark.$touched">Landmark is required</span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select class=""  ng-model="newaddress.type" name="type" class="form-control" ng-required="true" class="span3 addaddressmodal_input">
+                              <option value="" disabled>Select</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Others">Others</option>
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.type.$invalid && addressAddForm.type.$touched"><br>
+                           <span ng-show="addressAddForm.type.$error.required"
+                              style="color: red"> Address type is required </span>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-default btn-sm" ng-disabled="addressAddForm.$invalid" disabled="disabled">Add</button>
+                     <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+            </form>
+            </div>
+         </div>
+      </div>
+<!-- ==========================End addressAddmodal========================== -->
+
+<!-- =======================Start addressEditmodal========================== -->
+   <div class="modal fade" id="addresseditmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title"> <u> Edit Address </u> </h4>
+            </div> <br>
+            <form class="form-horizontal"  ng-submit="updateAddress()" name="addressEditForm">
+              <input type="text" ng-model="selectedaddress.id" style="display:none;">
+               <div class="modal-body">
+                  <div class="well">
+                     <div class="control-group row">
+                        <div class="col-md-12">
+                        <label>
+                        <input type="checkbox" ng-checked="selectedaddress.isDefault==1" ng-click="makeDefault(selectedaddress.id)">
+                        Default
+                        </label>                   
+                     </div> </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                        <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label>
+                     </div>
+                        <!--  <div class="controls"> -->
+                     <div class="col-md-8">      
+                        <textarea ng-model="selectedaddress.streetAddress" name="streetAddress"  cols="26" rows="5" style="width:100%" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.streetAddress.$invalid && addressEditForm.streetAddress.$touched"><br>
+                        <span ng-show="addressEditForm.streetAddress.$error.required"
+                           style="color: red"> Address is required </span>
+                        </span>
+                        <!-- </div> -->
+                      </div> </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                           <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                           </label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select id="countryId" name="countryId" ng-change="getStates(2)"  ng-model="selectedaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                              
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.countryId.$invalid && addressEditForm.countryId.$touched"><br>
+                           <span ng-show="addressEditForm.countryId.$error.required"
+                              style="color: red"> Country is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                           <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select name="stateId" id="stateId_{{$index}}" ng-change="getCities(2)" ng-model="selectedaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                             
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.stateId.$invalid && addressEditForm.stateId.$touched"><br>
+                           <span ng-show="addressEditForm.stateId.$error.required"
+                              style="color: red"> State is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select name="city" id="city" ng-model="selectedaddress.cityId" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                              <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.city.$invalid && addressEditForm.city.$touched"><br>
+                           <span ng-show="addressEditForm.city.$error.required"
+                              style="color: red"> City is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="phone">Phone<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="selectedaddress.contactPhone" name="phone" placeholder="phone"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.phone.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.phone.$error.required && addressEditForm.phone.$touched"> Phone Number is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                        </div>    
+                        <div class="controls col-md-8">
+                           <input type="text" maxlength="6" ng-model="selectedaddress.pincode" name="pincode" placeholder="Zip / Postal Code" numbers-only required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.pincode.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.pincode.$error.required && addressEditForm.pincode.$touched"> Zipcode is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="selectedaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.landmark.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.landmark.$error.required && addressEditForm.landmark.$touched"> Landmark is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select class=""  ng-model="selectedaddress.type" name="type" class="form-control" ng-required="true" class="span3 addaddressmodal_input">
+                              <option value="" disabled>Select</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Others">Others</option>
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.type.$invalid && addressEditForm.type.$touched"><br>
+                           <span ng-show="addressEditForm.type.$error.required"
+                              style="color: red"> Address type is required </span>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-default btn-sm" ng-disabled="addressEditForm.$invalid" disabled="disabled">Update</button>
+                     <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+            </form>
+            </div>
+         </div>
+      </div>
+<!-- ==========================End addressEditmodal========================== -->
+
+</div>
+
+
+<script type="text/javascript">
+        $(function() {
+        $('.card').hide();
+        $('#new_sitediv1').show();
+        $(".profileupdate_sitediv_ul li:first").addClass("profileupdate_stediv_active");
+
+        $('.profileupdate_sitediv_li').click(function() {
+          $('.card').hide();
+          $('.profileupdate_sitediv_li').removeClass('profileupdate_stediv_active');
+          $('#new_sitediv' + $(this).attr('target')).show();
+          // alert($(this).attr('target'));
+          $(this).addClass('profileupdate_stediv_active');
+      });
+        $('[data-toggle="toolsss"]').tooltip();
+      //   $("#phone").intlTelInput({
+      //    initialCountry: +91
+      // });
+});
+    </script>
+
+   <!--  <script>
+      $("#phone").intlTelInput({
+         initialCountry: +91
+      });
+
+</script> -->
+
+  <!--   <script>
+      
+</script> -->

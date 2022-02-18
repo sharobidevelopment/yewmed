@@ -1,0 +1,151 @@
+<div ng-controller="ProfileController as logctrl" class="mobile_view_opacity" onclick="off_opacity()">
+ 
+    <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+              @media only screen and (max-width: 639px){
+                .footer_above{
+                   margin-top:20px
+                }
+               }  
+           </style>
+        </div>
+
+      <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">My Account</li>
+                </ol>
+            </div>
+
+      <div class="all_page_middle_div" style="margin-top:40px">
+             <h3 class="all_page_header_h3"> My Account
+             </h3>
+             <hr>
+          </div> 
+
+      <div class="all_page_middle_div" style="margin-top:30px">
+      	   <p style="color:#747474;padding:15px;background:#f5f5f5;font-family: 'Poppins', sans-serif;;font-size:16px;border:1px solid #e0e0e0"> Edit Account Information </p>
+      	   <div class="row" style="padding:30px 0px;border:1px solid #e0e0e0">
+      	   	   <div class="col-md-6" style="padding:0px 50px 15px 30px">  
+      	   	   		<p style="font-size:22px;font-weight:600;font-family:'Poppins', sans-serif;color:#292929"> Account Information </p>
+      	   	   		<form class="form-horizontal" ng-submit="updateName()" name="updateNameForm" style="margin-top:35px">
+                                          <p style="font-size:18px;color:#292929"> First Name: <span style="color: red">*</span> </p>
+                                          <div class="controls">
+                                             <input type="text" ng-model="users.fname" name="fname" id="fname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" placeholder="First Name" style="border-radius:0px" ng-change="updt_name_chng()" required />
+                                             <div class="has-error" ng-show="updateNameForm.fname.$invalid">
+                                                <span style="color:red" ng-show="updateNameForm.fname.$error.required && updateNameForm.fname.$touched">First name is required</span>
+                                             </div>
+                                          </div>
+                                         <p style="font-size:18px;color:#292929;margin-top:20px"> Last Name: <span style="color: red">*</span> </p>
+                                          <div class="controls">
+                                             <input type="text" ng-model="users.lname" name="lname" id="lname" class="span3 form-control" ng-pattern-restrict="^$|^[A-Za-z]+" placeholder="Last name" style="border-radius:0px" ng-change="updt_name_chng()" required />
+                                             <div class="has-error" ng-show="updateNameForm.lname.$invalid">
+                                                <span style="color:red" ng-show="updateNameForm.lname.$error.required && updateNameForm.lname.$touched">Last name is required</span>
+                                             </div>
+                                          </div>
+                                    </form>
+                                    <p style="margin-top:30px;font-size:18px"> <input type="checkbox" name="change_email" id="change1"> Change Email </p>
+                                    <p style="font-size:18px;margin-top:20px"> <input type="checkbox" name="change_password" id="change2"> Change Password </p>
+
+                                    <div style="margin-top:50px" class="my_profile_updt_btns_for_pc">
+
+                                     <p style="font-size:14px"> <span id="success-alertName" style="color:green">{{ msgName }}</span>
+                                        <span id="success-alertEmail" style="{{msgPhoneStyle}}">{{ msgEmail }}</span> 
+                                        <span id="success-alert" style="{{passStyle}}">{{ msgPassword }}</span> </p>
+
+                                    <button  type="submit" id="button_name" ng-disabled="updateNameForm.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updateName()"> SAVE </button>
+                                    <button type="submit" id="button_password" ng-disabled="updateForm.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updatePassword()"> SAVE </button>
+                                    <button type="submit" id="button_email" ng-disabled="updateEmailform.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updateEmail()"> SAVE </button>
+                                    </div>  
+                                    
+                                    </div>
+
+
+<!-- ............................................................................................. -->
+
+
+      	   	   <div class="col-md-6" style="padding:0px 50px 15px 30px">
+      	   	        
+      	   	        <div id="update_password"> 
+      	   	   	     <p style="font-size:22px;font-weight:600;font-family:'Poppins', sans-serif;color:#292929"> Change Password </p>
+      	   	   	     <form class="form-horizontal" ng-submit="updatePassword()" name="updateForm" style="margin-top:35px">
+                                          <p style="font-size:18px;color:#292929;margin-top:20px"> Current Password: <span style="color: red">*</span> </p>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.oldPassword" name="oldPassword" id="oldPassword" placeholder="Old Password" required  class="span3 form-control" style="border-radius:0px">
+                                             <div class="has-error" ng-show="updateForm.oldPassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.oldPassword.$error.required && updateForm.oldPassword.$touched">Password is required</span>
+                                             </div>
+                                          </div>
+
+                                          <p style="font-size:18px;color:#292929;margin-top:20px"> New Password: <span style="color: red">*</span>
+                                          </p>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.newPassword" name="newPassword" id="newPassword" placeholder="New Password" required class="span3 form-control" style="border-radius:0px">
+                                             <div class="has-error" ng-show="updateForm.newPassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.newPassword.$error.required && updateForm.newPassword.$touched">Password is required</span>
+                                             </div>
+                                          </div>
+
+                                          <p style="font-size:18px;color:#292929;margin-top:20px"> Confirm New Password: <span style="color: red">*</span> </p>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.reTypePassword" name="reTypePassword" id="reTypePassword" placeholder="Retype Password" required valid-password-c="users.newPassword" class="span3 form-control" style="border-radius:0px">
+                                             <div class="has-error" ng-show="updateForm.reTypePassword.$invalid">
+                                                <span style="color:red" ng-show="updateForm.reTypePassword.$error.required && updateForm.reTypePassword.$touched">Password is required</span>
+                                                <span style="color:red" ng-show="updateForm.reTypePassword.$error.noMatch && !updateForm.reTypePassword.$error.required">Password is not match</span>
+                                             </div>
+                                          </div>
+                                    </form>
+      	   	   	    </div>
+
+
+                      <!-- ......................Change Email Div............................. -->
+
+                      <div id="update_email"> 
+      	   	   	     <p style="font-size:22px;font-weight:600;font-family:'Poppins', sans-serif;color:#292929"> Change Emailid </p>
+      	   	   	     <form class="form-horizontal" ng-submit="updateEmail()" name="updateEmailform" style="margin-top:35px">
+                                         <p style="font-size:18px;color:#292929;margin-top:20px"> Email Id: <span style="color: red">*</span>
+                                          </p>
+                                          <div class="controls">
+                                             <input type="email" ng-model="users.email" name="email" id="email" placeholder="Enter Your Email Id" required class="span3 form-control" style="border-radius:0px" ng-change="updt_email_chng()">
+                                             <div class="has-error" ng-show="updateEmailform.email.$invalid">
+                                                <span style="color:red" ng-show="updateEmailform.email.$error.required && updateEmailform.email.$touched">Emailid is required</span>
+                                             </div>
+                                          </div>
+
+
+                                         <!--  <p style="font-size:18px;color:#292929;margin-top:20px"> Password: <span style="color: red">*</span> </p>
+                                          <div class="controls">
+                                             <input type="password" ng-model="users.Password" name="oldPassword" id="oldPassword" placeholder="Password" required  class="span3 form-control" style="border-radius:0px">
+                                             <div class="has-error" ng-show="updateEmail.oldPassword.$invalid">
+                                                <span style="color:red" ng-show="updateEmail.oldPassword.$error.required && updateEmail.oldPassword.$touched">Password is required</span>
+                                             </div>
+                                          </div> -->
+
+                                          
+                                    </form>
+      	   	   	    </div>
+
+
+
+      	   	   	    <!-- .................................................................................... -->
+                    <div style="margin-top:50px" class="my_profile_updt_btns_for_mb">
+                          <p style="font-size:14px"> <span id="success-alertName1" style="color:green">{{ msgName }}</span>
+                                <span id="success-alertEmail1" style="{{msgPhoneStyle}}">{{ msgEmail }}</span> 
+                                <span id="success-alert1" style="{{passStyle}}">{{ msgPassword }}</span> 
+                          </p>
+                                <button  type="submit" id="button_name1" ng-disabled="updateNameForm.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updateName()"> SAVE </button>
+                                <button type="submit" id="button_password1" ng-disabled="updateForm.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updatePassword()"> SAVE </button>
+                                <button type="submit" id="button_email1" ng-disabled="updateEmailform.$invalid" disabled="disabled" class="my_account_save_button" ng-click="updateEmail()"> SAVE </button>
+                    </div> 
+
+
+      	   	   </div>
+      	   </div>
+      </div>         
+
+
+</div>

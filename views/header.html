@@ -1,0 +1,1477 @@
+<div ng-controller="LoginController as logctrl">
+   <header class="breadcrumb-bg absolute-header header-sticky">
+      <div class="header-top mobile_view_opacity" onclick="off_opacity()">
+                <div class="container-fluid" style="padding-left:0px;padding-right:0px">
+                    <div>
+                        <div class="row justify-content-md-between justify-content-center">
+                            <!-- Header Top Left Start -->
+                            <div class="header-top-left header_left col-lg-6 col-md-12 col-sm-12 mb-sm-15 col_grid_padding_0">
+                                <ul>
+                                    <li style="cursor: auto"><i class="fa fa-phone" aria-hidden="true" style="margin-right:10px;color:#fff"></i> 1800-833-1233</li>
+                                    <li style="cursor: auto">  <i class="fa fa-envelope" aria-hidden="true" style="margin-right:10px;color:#fff"></i> yewpos.support@sharobitech.com  </li>
+                                    <!-- <li style="margin-top:12px;font-size:14px">
+                                      <a href="/yewmed/" ng-if="statusCookie == 'Active'">Welcome! {{activeusername}}
+                                      <strong>
+                                         <span id="current_location"></span>
+                                      </strong>
+                                      </a>
+                                 </li> -->
+                                </ul>
+                            </div>
+                            <!-- Header Top Left End -->
+                            <!-- Header Top Right Start -->
+                            <div class="header-top-right header_right search-cart-area col-lg-6 col-md-12 col-sm-12 col_grid_padding_0">
+                                <ul class="new_header_ul_for_mb">
+                                  <!-- <li ng-if="statusCookie == 'Active'">
+                                   <div class="membership-point {{activeclass}}"  
+                                   id="pointdisplaydiv" style="color:black;">
+                                      {{points}}
+                                   </div>
+                                </li> -->
+
+                                <!-- <li ng-if="statusCookie == 'Active'">
+                                   <a href="memberplan"> <div 
+                                   id="pointdisplaydiv" style="color:black;">
+                                     <img src="themes/img/{{activeclass}}.png" style="height:40px;width:40px"> 
+                                     <span ng-if="points <= 9" style="position:relative;left:-27px"> <b> {{points}} </b> </span>
+                                     <span ng-if="points >= 10 && points < 100" style="position:relative;left:-30px"> <b> {{points}} </b> </span>
+                                     <span ng-if="points >= 100" style="position:relative;left:-34px"> <b> {{points}} </b> </span>
+                                   </div> </a>
+                                </li> -->
+
+
+                                <li ng-if="statusCookie != 'Active'" ng-click="openTeleMedicine()" class="display_none_headers_icon header_dropdown_list_new_1" style="padding:0px">
+                                   <a href=""><i class="fa fa-stethoscope" aria-hidden="true" style="color:#fff"></i> <b style="margin-left:10px;color:#fff;font-weight:500"> Doctor </b> </a>
+                                </li> 
+
+                                <li ng-if="statusCookie != 'Active'" ng-click="openLoginWindow()" class="display_none_headers_icon header_dropdown_list_new_1" style="padding:0px">
+                                   <a href=""><i class="fa fa-sign-in" aria-hidden="true" style="color:#fff"></i> <b style="margin-left:10px;color:#fff;font-weight:500"> Sign In/Register </b> </a>
+                                </li>   
+
+<!-- 
+                                <li ng-if="statusCookie == 'Active'" ng-click="logctrl.logout()" class="display_none_headers_icon" style="display:none">
+                                   <i class="fa fa-sign-out" aria-hidden="true" style="margin-right:5px"></i> Sign Out
+                                </li> -->
+
+                                <li ng-if="statusCookie == 'Active'" ng-click="openTeleMedicine()" class="display_none_headers_icon header_dropdown_list_new_1" style="padding:0px">
+                                   <a href=""><i class="fa fa-stethoscope" aria-hidden="true" style="color:#fff"></i> <b style="margin-left:10px;color:#fff;font-weight:500"> Doctor </b> </a>
+                                </li> 
+
+                                 <li ng-if="statusCookie == 'Active'" class="display_none_headers_icon user_icon_for_tab header_dropdown_list_new_1" style="padding:0px">
+                                 <!-- <i class="fa fa-cog header_icon_li" aria-hidden="true"></i> -->
+                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="header_top_svg" style="fill:#fff"><path d="M 16 5 C 12.144531 5 9 8.144531 9 12 C 9 14.410156 10.230469 16.550781 12.09375 17.8125 C 8.527344 19.34375 6 22.882813 6 27 L 8 27 C 8 22.570313 11.570313 19 16 19 C 20.429688 19 24 22.570313 24 27 L 26 27 C 26 22.882813 23.472656 19.34375 19.90625 17.8125 C 21.769531 16.550781 23 14.410156 23 12 C 23 8.144531 19.855469 5 16 5 Z M 16 7 C 18.773438 7 21 9.226563 21 12 C 21 14.773438 18.773438 17 16 17 C 13.226563 17 11 14.773438 11 12 C 11 9.226563 13.226563 7 16 7 Z"/></svg> <span style="margin-left:5px"> My Account </span>
+                                 <ul class="ht-dropdown cart-box-width currency-selector">
+                                    <li class="new_header_li" style="width:100%;text-align:left;padding:5px 0px"><a href="myaccount">My Account</a></li>
+                                    <li class="new_header_li" style="width:100%;text-align:left;padding:5px 0px"><a href="manageaddress">Manage Address</a></li>
+                                    <li class="new_header_li" style="width:100%;text-align:left;padding:5px 0px"><a href="ordersDetails">My Orders</a></li>
+                                    <!-- <li class="divider"></li> -->
+                                    <li role="menuitem" class="new_header_li" style="width:100%;text-align:left;padding:5px 0px"><a href="#" ng-click="logctrl.logout()">Sign out</a></li>
+                                 </ul>
+                              </li>
+
+                              <li ng-if="statusCookie == 'Active'" class="display_none_headers_icon user_icon_for_tab new_header_li_for_mb" style="padding:0px">
+                                 <!-- <i class="fa fa-cog header_icon_li" aria-hidden="true"></i> -->
+                                 <a href="{{contextpath1}}mywishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="header_top_svg"><path d="M 9.5 5 C 5.363281 5 2 8.402344 2 12.5 C 2 13.929688 2.648438 15.167969 3.25 16.0625 C 3.851563 16.957031 4.46875 17.53125 4.46875 17.53125 L 15.28125 28.375 L 16 29.09375 L 16.71875 28.375 L 27.53125 17.53125 C 27.53125 17.53125 30 15.355469 30 12.5 C 30 8.402344 26.636719 5 22.5 5 C 19.066406 5 16.855469 7.066406 16 7.9375 C 15.144531 7.066406 12.933594 5 9.5 5 Z M 9.5 7 C 12.488281 7 15.25 9.90625 15.25 9.90625 L 16 10.75 L 16.75 9.90625 C 16.75 9.90625 19.511719 7 22.5 7 C 25.542969 7 28 9.496094 28 12.5 C 28 14.042969 26.125 16.125 26.125 16.125 L 16 26.25 L 5.875 16.125 C 5.875 16.125 5.390625 15.660156 4.90625 14.9375 C 4.421875 14.214844 4 13.273438 4 12.5 C 4 9.496094 6.457031 7 9.5 7 Z"/></svg> <a href="{{contextpath1}}mywishlist"><span class="whislist_li_span">{{totalitemsinwishlist}}</span></a> <a href="{{contextpath1}}mywishlist" class="header_top_a">Whistlist  </a> </a>
+                              </li>
+
+                              <li class="user_icon_for_tab new_header_li_for_mb" style="padding:0px">
+                                 <!-- <i class="fa fa-cog header_icon_li" aria-hidden="true"></i> -->
+                                 <a href="{{contextpath1}}mycart">
+                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="header_top_svg"><path d="M 5 7 C 4.449219 7 4 7.449219 4 8 C 4 8.550781 4.449219 9 5 9 L 7.21875 9 L 9.84375 19.5 C 10.066406 20.390625 10.863281 21 11.78125 21 L 23.25 21 C 24.152344 21 24.917969 20.402344 25.15625 19.53125 L 27.75 10 L 11 10 L 11.5 12 L 25.15625 12 L 23.25 19 L 11.78125 19 L 9.15625 8.5 C 8.933594 7.609375 8.136719 7 7.21875 7 Z M 22 21 C 20.355469 21 19 22.355469 19 24 C 19 25.644531 20.355469 27 22 27 C 23.644531 27 25 25.644531 25 24 C 25 22.355469 23.644531 21 22 21 Z M 13 21 C 11.355469 21 10 22.355469 10 24 C 10 25.644531 11.355469 27 13 27 C 14.644531 27 16 25.644531 16 24 C 16 22.355469 14.644531 21 13 21 Z M 13 23 C 13.5625 23 14 23.4375 14 24 C 14 24.5625 13.5625 25 13 25 C 12.4375 25 12 24.5625 12 24 C 12 23.4375 12.4375 23 13 23 Z M 22 23 C 22.5625 23 23 23.4375 23 24 C 23 24.5625 22.5625 25 22 25 C 21.4375 25 21 24.5625 21 24 C 21 23.4375 21.4375 23 22 23 Z"/></svg> <a> <span class="cart_li_span" ng-if="cartdata_dup.length == NULL">{{totalitemsincart}}</span>
+                                    <span class="cart_li_span" ng-if="cartdata_dup.length != NULL">{{cartdata_dup.length}}</span> </a> <a href="{{contextpath1}}mycart" class="header_top_a"> Cart </a> </a> 
+                                      <ul class="ht-dropdown cart-box-width currency-selector dropdown_cart_ul" ng-if="cartdata_dup.length>0">
+                                    <li  ng-repeat="cp in cartdata_dup | limitTo:2" style="cursor:auto;width:100%">   
+                                        
+                                        <div style="padding:15px 0px;border-bottom:1px solid #ebebeb">
+                                          <div>
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                              <p style="font-size:16px;color:#969696;font-family: 'BebasNeue-Regular';line-height:17px;text-align:left">  {{cp.name}} </p>
+                                              <p style="font-size:10px;color:#969696;font-family: 'Poppins', sans-serif;line-height:17px;font-weight:600;text-align:left"> <span> Qty: </span> <span style="margin-left:5px;text-align:left">{{cp.packQty}}  </span> </p>
+                                            </div>
+                                            <div class="col-md-4" style="text-align:right"> 
+                                            <p> <span style="position:relative;top:-2px"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon2.png" style="width:auto"> </span> <span style="font-size:15px;font-weight:600;color: #000000"> {{cp.price*cp.packQty|number:2}} </span> </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>
+                                    </li>
+                                    <div style="padding:10px 15px;" ng-if="cartdata_dup.length>2" style="width:100%">
+                                       <p style="font-size:14px;color:#000000;font-family: 'Poppins', sans-serif;text-transform:lowercase;font-weight:600;text-align:left">   +{{cartdata_dup.length-2}} More Item<span ng-if="cartdata_dup.length-2>1">S </span> </p>
+                                    </div>
+                                    <li style="width:100%"> <div style="margin-top:10px;margin-left:40px;margin-right:40px;padding-bottom:15px"> <a href="{{contextpath1}}mycart" style="padding-right:0px"> <button class="dropdown_cart_ul_btn"> VIEW CART </button> </a> </div> </li>
+                                 </ul>
+                              </li>
+
+
+
+                             <!--    <li class="display_none_headers_icon">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> </a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true" style="margin-left:10px"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true" style="margin-left:10px"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true" style="margin-left:10px"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true" style="margin-left:10px"></i></a>
+                                </li> -->
+
+                                 <!-- <li>
+                                 <a href="/yewmed/" ng-if="statusCookie == 'Active'">Welcome! {{activeusername}}
+                                    <strong>
+                                       <span id="current_location"></span>
+                                    </strong>
+                                 </a>
+                                 </li> -->
+                                </ul>
+                            </div>
+                            <!-- Header Top Right End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Container End -->
+            </div>
+   <div class="header-bottom ">
+         <div class="container-fluid container_fluid_for_mb">
+            <div class="main-header">
+               <div class="row header_border_bottom">
+                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-4 col_grid_padding_0 padding_left_0">
+                    <ul class="d-flex">
+                      <li class="logo_li" style="z-index:99">
+                        <a href="{{contextpath1}}" style="cursor:pointer"><img class="yewmedlogo" src="/yewmed/themes/img/yewmed_new_pics/logo_new.png" alt="brand-image">
+                        </a>
+                      </li>
+                    </ul>
+                     <!-- <div class="logo">
+                        <a href="/yewmed/"><img class="yewmedlogo" src="themes/img/others/yewpos_ogo.png" alt="brand-image">
+                        </a>
+                     </div> -->
+                  </div>
+                  <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-8 col_grid_padding_0">
+                     <div class="maain-menu-area position-relative d-flex justify-content-lg-between justify-content-end">
+                        <div class="primary-menu d-none d-lg-block menu_margin_top">
+                           <nav>
+                              <ul class="primary-menu-list d-flex header_left_new">
+                                 <!-- <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Three Column <b class="caret"></b></a>
+                                    <ul class="dropdown-menu multi-column columns-3">
+                                       <div class="row">
+                                          <div class="col-sm-4">
+                                             <ul class="multi-column-dropdown">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">One more separated link</a></li>
+                                             </ul>
+                                          </div>
+                                          <div class="col-sm-4">
+                                             <ul class="multi-column-dropdown">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">One more separated link</a></li>
+                                             </ul>
+                                          </div>
+                                          <div class="col-sm-4">
+                                             <ul class="multi-column-dropdown">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">One more separated link</a></li>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </ul>
+                                </li> -->
+                                 <li ng-repeat="u in logctrl.categoriesMenu">
+                                    <a href="">{{u.name}}<!-- <i class="fa fa-angle-down" ng-if="u.groups != 0"></i> --></a>
+                                    <ul class="ht-dropdown single-dropdown" id="navbar_header{{u.id}}" ng-if="u.groups.length > 0">
+                                       <li ng-repeat="sc in u.groups | orderBy:'name'">
+                                          <!-- <a ng-click="logctrl.viewProducts('subcategory',sc.id)"> -->
+                                          <a ng-click="logctrl.viewGroupWiseProducts(sc.id , sc.name, u.name, u.id)" style="text-transform:capitalize;">
+                                             {{sc.name}}
+                                          </a>
+                                          <!-- <a href="{{contextpath1}}groups/{{u.name}}/{{sc.name}}-{{sc.id}}" style="text-transform:capitalize;">
+                                             {{sc.name}}
+                                          </a> -->
+                                       </li>
+
+                                    </ul>
+                                 </li>
+                                <!--  <li>
+                                    <a href="/yewmed/">Groups<i class="fa fa-angle-down"></i></a>
+                                    <ul class="ht-dropdown single-dropdown header_group_ul_custom">
+                                       <li ng-repeat="sc in logctrl.allGroups">
+                                          <a ng-click="logctrl.viewGroupWiseProducts(sc.id)">
+                                             {{sc.name}}
+                                          </a>
+                                       </li>
+
+                                    </ul>
+                                 </li> -->
+                                <!-- <li><a href="memberplan"> Membership Plan </a></li> -->
+<!-- <li class="position-static">
+   <a href="#">women<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+   <ul class="ht-dropdown megamenu d-flex">
+      <li class="dropdown-submenu" ng-repeat="u in logctrl.categoriesMenu">
+         <a tabindex="-1" href="#">{{u.name}}</a>
+            <ul class="dropdown-menu">
+               <li><a tabindex="-1" href="#">Second level</a></li>
+               <li class="dropdown-submenu">
+                  <a href="#">Even More..</a>
+                  <ul class="dropdown-menu">
+                     <li><a href="#">3rd level</a></li>
+                     <li><a href="#">3rd level</a></li>
+                  </ul>
+               </li>
+               <li><a href="#">Second level</a></li>
+               <li><a href="#">Second level</a></li>
+            </ul>
+      </li>
+   </ul>
+</li>
+
+             -->                 <!--  <li class="position-static">
+                                    <a href="#">women<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <ul class="ht-dropdown megamenu d-flex"> -->
+                                        <!-- <li>
+                                          <ul ng-repeat="u in logctrl.categoriesMenu">
+                                             <li class="menu-title">{{u.name}} -->
+                                                 <!-- <ul>
+                                                   <li ng-repeat="sc in u.subCategories">
+                                                    <a ng-click="ctrl.viewProducts('subcategory',sc.id)">
+                                                         <i class="icon-chevron-right"></i>{{sc.name}}
+                                                    </a>
+                                                   </li>
+                                                </ul> -->
+                                             <!-- </li>
+                                          </ul>
+                                       </li> -->
+                                      <!-- <li>
+                                          <ul>
+                                             <li class="menu-title">shoes</li>
+                                             <li><a href="shop.html">sandals</a></li>
+                                             <li><a href="shop.html">canvas shoes</a></li>
+                                             <li><a href="shop.html">sneakers</a></li>
+                                             <li><a href="shop.html">boots</a></li>
+                                          </ul>
+                                       </li> -->
+                                       <!-- <li>
+                                          <ul>
+                                             <li class="menu-title">satchels & tote bags</li>
+                                             <li><a href="shop.html">evening bags</a></li>
+                                             <li><a href="shop.html">wallets & accessories</a></li>
+                                             <li><a href="shop.html">crossbody bags</a></li>
+                                          </ul>
+                                       </li> -->
+                                       <!-- <li>
+                                          <ul>
+                                             <li class="menu-title">swimwear</li>
+                                             <li><a href="shop.html">outerwear</a></li>
+                                             <li><a href="shop.html">lingerie</a></li>
+                                             <li><a href="shop.html">plus size</a></li>
+                                          </ul>
+                                       </li> -->
+                                   <!--  </ul>
+                                 </li> -->
+                              </ul>
+                           </nav>
+                        </div>
+                        <!-- Primary Menu End -->
+                        <!-- Cart & Search Area Start -->
+                        <div class="search-cart-area pr-all-50">
+                           <ul class="d-flex">
+
+                            <!-- new search part -->
+
+                            <li ng-if="statusCookie != 'Active'" style="position:relative;">  
+                              <form ng-submit="$event.preventDefault()" class="new_search_box">
+                                                <md-autocomplete id="custom-template" 
+                                                   ng-disabled="logctrl.isDisabled" 
+                                                   ng-enter="pressEnter()"
+                                                   md-no-cache="logctrl.noCache" 
+                                                   md-selected-item="logctrl.selectedItem" 
+                                                   md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" 
+                                                   md-search-text="logctrl.searchText" 
+                                                   md-selected-item-change="logctrl.selectedItemChange(item)"
+                                                   md-items="item in logctrl.repos"
+                                                   md-item-text="item.name" 
+                                                   md-min-length="2" 
+                                                   input-aria-label="Current Repository" 
+                                                   placeholder="Search for products" 
+                                                   md-menu-class="autocomplete-custom-template" 
+                                                   md-menu-container-class="custom-container">
+                                                   <md-item-template>
+                                                      <span class="item-title">
+                                                        <!--  <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon> -->
+                                                         <!-- <span> <i class="fas fa-capsules"></i> </span> -->
+                                                         <span> <img src="/yewmed/themes/img/med_icons/{{item.group}}.png" style="height:20px;width:20px"> </span>
+                                                         
+                                                         <span style="margin-left:20px"> {{item.name}} </span>
+                                                      </span>
+                                                      <span class="item-metadata">
+                                                      <span>
+                                                      <strong>{{item.watchers}}</strong>
+                                                      </span>
+                                                      <span>
+                                                      <strong>{{item.forks}}</strong>
+                                                      </span>
+                                                      </span>
+                                                   </md-item-template>
+                                                </md-autocomplete>
+                                             
+                                             <button type="button" aria-label="Clear Input" tabindex="-1" ng-click="pressEnter()" class="ng-scope" style="position:absolute;right:0px;top:0px;padding:2px 10px;background:#0871b9;border:1px solid #0871b9;z-index:99"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;fill:white;height:18px;margin-top:5px" xml:space="preserve">
+<g>
+  <g>
+    <path d="M508.874,478.708L360.142,329.976c28.21-34.827,45.191-79.103,45.191-127.309c0-111.75-90.917-202.667-202.667-202.667
+      S0,90.917,0,202.667s90.917,202.667,202.667,202.667c48.206,0,92.482-16.982,127.309-45.191l148.732,148.732
+      c4.167,4.165,10.919,4.165,15.086,0l15.081-15.082C513.04,489.627,513.04,482.873,508.874,478.708z M202.667,362.667
+      c-88.229,0-160-71.771-160-160s71.771-160,160-160s160,71.771,160,160S290.896,362.667,202.667,362.667z"/>
+  </g>
+</g>
+</svg></button>
+</form>
+                            </li>
+                            <li ng-if="statusCookie == 'Active'" style="position:relative;">  
+                              <form ng-submit="$event.preventDefault()" class="new_search_box_dup">
+                                                <md-autocomplete id="custom-template" 
+                                                   ng-disabled="logctrl.isDisabled" 
+                                                   ng-enter="pressEnter()"
+                                                   md-no-cache="logctrl.noCache" 
+                                                   md-selected-item="logctrl.selectedItem" 
+                                                   md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" 
+                                                   md-search-text="logctrl.searchText" 
+                                                   md-selected-item-change="logctrl.selectedItemChange(item)" 
+                                                   md-items="item in logctrl.repos"
+                                                   md-item-text="item.name" 
+                                                   md-min-length="2" 
+                                                   input-aria-label="Current Repository" 
+                                                   placeholder="Search for Products" 
+                                                   md-menu-class="autocomplete-custom-template" 
+                                                   md-menu-container-class="custom-container">
+                                                   <md-item-template>
+                                                      <span class="item-title">
+                                                        <!--  <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon> -->
+                                                         <!-- <span> <i class="fas fa-capsules"></i> </span> -->
+                                                         <span> <img src="/yewmed/themes/img/med_icons/{{item.group}}.png" style="height:20px;width:20px"> </span>
+                                                         <span style="margin-left:20px"> {{item.name}} </span>
+                                                      </span>
+                                                      <span class="item-metadata">
+                                                      <span>
+                                                      <strong>{{item.watchers}}</strong>
+                                                      </span>
+                                                      <span>
+                                                      <strong>{{item.forks}}</strong>
+                                                      </span>
+                                                      </span>
+                                                   </md-item-template>
+                                                </md-autocomplete>
+                                                     <button type="button" aria-label="Clear Input" tabindex="-1" ng-click="pressEnter()" class="ng-scope" style="position:absolute;right:0px;top:26px;padding:2px 10px;background:#0871b9;border:1px solid #0871b9;z-index:99"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;fill:white;height:18px;margin-top:5px" xml:space="preserve">
+<g>
+  <g>
+    <path d="M508.874,478.708L360.142,329.976c28.21-34.827,45.191-79.103,45.191-127.309c0-111.75-90.917-202.667-202.667-202.667
+      S0,90.917,0,202.667s90.917,202.667,202.667,202.667c48.206,0,92.482-16.982,127.309-45.191l148.732,148.732
+      c4.167,4.165,10.919,4.165,15.086,0l15.081-15.082C513.04,489.627,513.04,482.873,508.874,478.708z M202.667,362.667
+      c-88.229,0-160-71.771-160-160s71.771-160,160-160s160,71.771,160,160S290.896,362.667,202.667,362.667z"/>
+  </g>
+</g>
+</svg></button>
+                                             </form>
+                            </li>
+                              <!-- <li ng-if="statusCookie != 'Active'">
+                                 <a id="openlogin" class="fa fa-user" ng-click="openLoginWindow()"></a>
+                              </li> -->
+                              <li ng-if="statusCookie == 'Active'" class="display_none_headers_icon user_icon_for_tab" style="display:none">
+                                 <i class="fa fa-cog header_icon_li" aria-hidden="true"></i>
+                                 <!-- <img src="themes/img/yewmed_new_pics/user_icon.png"> -->
+                                 <!-- Currency & Language Selection Start -->
+                                 <ul class="ht-dropdown cart-box-width currency-selector">
+                                    <li class="new_header_li"><a href="{{contextpath1}}myaccount">My Account</a></li>
+                                    <li class="new_header_li"><a href="{{contextpath1}}manageaddress">Manage Address</a></li>
+                                    <!-- <li class="new_header_li"><a href="profileUpdate">Profile</a></li> -->
+                                    <li class="new_header_li"><a href="{{contextpath1}}ordersDetails">My Orders</a></li>
+                                    <!-- <li role="menuitem" class="new_header_li"><a href="#">Setting</a></li> -->
+                                    <li class="divider"></li>
+                                    <li role="menuitem" class="new_header_li"><a href="#" ng-click="logctrl.logout()">Sign out</a></li>
+                                    <!-- <li>
+                                       <h3>USD</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">€ euro</a></li>
+                                          <li><a href="#">$ us dollar</a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <h3>English</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">english</a></li>
+                                          <li><a href="#">اللغة العربية</a></li>
+                                       </ul>
+                                    </li> -->
+                                   <!--  <li>
+                                       <h3>my account</h3>
+                                       <ul>
+                                          <li><a href="account.html">My Account</a></li>
+                                          <li><a href="checkout.html">Checkout</a></li>
+                                          <li>
+                                            
+                                             <a href="#" ng-click="logctrl.logout()">Sign out</a>
+                                          </li>
+                                       </ul>
+                                    </li> -->
+                                 </ul>
+                                 <!-- Currency & Language Selection End -->
+                              </li>
+                              <!-- <li>
+                                 <img src="themes/img/icons/search.png" alt="search-img">
+                                 <ul class="ht-dropdown search-box-view">
+                                    <li>
+                                             <form ng-submit="$event.preventDefault()">
+                                                <md-autocomplete id="custom-template" 
+                                                   ng-disabled="logctrl.isDisabled" 
+                                                   md-no-cache="logctrl.noCache" 
+                                                   md-selected-item="logctrl.selectedItem" 
+                                                   md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" md-search-text="logctrl.searchText" 
+                                                   md-selected-item-change="logctrl.selectedItemChange(item)" 
+                                                   md-items="item in logctrl.querySearch(logctrl.searchText)" md-item-text="item.name" 
+                                                   md-min-length="2" 
+                                                   input-aria-label="Current Repository" 
+                                                   placeholder="Pick an item" 
+                                                   md-menu-class="autocomplete-custom-template" 
+                                                   md-menu-container-class="custom-container">
+                                                   <md-item-template>
+                                                      <span class="item-title">
+                                                         <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                                                         <span> {{item.name}} </span>
+                                                      </span>
+                                                      <span class="item-metadata">
+                                                      <span>
+                                                      <strong>{{item.watchers}}</strong>
+                                                      </span>
+                                                      <span>
+                                                      <strong>{{item.forks}}</strong>
+                                                      </span>
+                                                      </span>
+                                                   </md-item-template>
+                                                </md-autocomplete>
+                                             </form>
+                                    </li>
+                                 </ul>
+                              </li> -->
+                              <!-- <li>
+                                 <a href="mywishlist" style="padding-right: 22px;color:#fff;">
+                                    <i ng-if="totalitemsinwishlist>0" class="fas fa-heart"></i>
+                                    <i ng-if="totalitemsinwishlist==0" class="far fa-heart"></i>
+                                    <span>{{totalitemsinwishlist}}</span>
+                                 </a>
+                              </li> -->
+                              <li ng-if="statusCookie == 'Active'" class="display_none_headers_icon" style="display:none">
+                                 <a href="{{contextpath1}}mywishlist" style="padding-right: 22px;color:#fff;">
+                                    <i class="fa fa-heart header_icon_li"></i>
+                                    <span class="whislist_li_span">{{totalitemsinwishlist}}</span>
+                                 </a>
+                              </li>
+                              <li class="carticon_sml_mobile carticon_sym" style="display:none">
+                                <!-- {{dumi_data}} -->
+                                 <a href="{{contextpath1}}mycart"><!-- <img src="themes/img/yewmed_new_pics/cart.png" alt="cart-img"> -->
+                                 <!--  <i class="fa fa-shopping-cart" aria-hidden="true" style="color:#a7a7a7;font-size:25px;margin-right:10px"></i> -->
+                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class="header_icon_svg" viewBox="0 0 510 510" xml:space="preserve">
+    <path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306
+      c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7
+      c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408
+      c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z"/>
+</svg>
+                                     <span class="cart_li_span" ng-if="cartdata_dup.length == NULL">{{totalitemsincart}}</span>  <!-- {{cartdata_dup.length}} -->
+                                    <span class="cart_li_span" ng-if="cartdata_dup.length != NULL">{{cartdata_dup.length}}</span>
+                                      <ul class="ht-dropdown cart-box-width currency-selector dropdown_cart_ul" ng-if="cartdata_dup.length>0">
+                                    <li  ng-repeat="cp in cartdata_dup | limitTo:2" style="cursor:auto">   
+                                        
+                                        <div style="padding:15px 0px;border-bottom:1px solid #ebebeb">
+                                          <div>
+                                         <!--  <p style="text-align:right"> <span style="margin-right:10px"> <i class="fa fa-heart-o dropdown_cart_ul_span" aria-hidden="true"> </i> </span> <span> <i class="fa fa-trash-o dropdown_cart_ul_span" aria-hidden="true" ng-click="remove_itm(cp.id)"> </i> </span> </p> -->
+                                          <div class="row">
+                                            <div class="col-md-8"> <!-- <img src="themes/img/groups/{{cp.groupId}}.png" alt="product-view"> --> 
+                                              <p style="font-size:16px;color:#969696;font-family: 'BebasNeue-Regular';line-height:17px">  {{cp.name}} </p>
+                                              <p style="font-size:10px;color:#969696;font-family: 'Poppins', sans-serif;line-height:17px;font-weight:600"> <span> Qty: </span> <span style="margin-left:5px">{{cp.packQty}}  </span> </p>
+                                            </div>
+                                            <div class="col-md-4" style="text-align:right"> 
+                                            <p> <span style="position:relative;top:-2px"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon2.png" style="width:auto"> </span> <span style="font-size:15px;font-weight:600;color: #000000"> {{cp.price*cp.packQty|number:2}} </span> </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        </div>
+                                    </li>
+                                    <div style="padding:10px 15px;" ng-if="cartdata_dup.length>2">
+                                       <p style="font-size:14px;color:#000000;font-family: 'Poppins', sans-serif;text-transform:lowercase;font-weight:600">   +{{cartdata_dup.length-2}} More Item<span ng-if="cartdata_dup.length-2>1">S </span> </p>
+                                    </div>
+                                    <li> <div style="margin-top:10px;margin-left:40px;margin-right:40px;padding-bottom:15px"> <a href="{{contextpath1}}mycart" style="padding-right:0px"> <button class="dropdown_cart_ul_btn"> VIEW CART </button> </a> </div> </li>
+                                    <!-- <li class="new_header_li"><a href="ordersDetails">Orders</a></li>
+                                    <li role="menuitem" class="new_header_li"><a href="#" ng-click="logctrl.logout()">Sign out</a></li> -->
+                                    <!-- <li>
+                                       <h3>USD</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">€ euro</a></li>
+                                          <li><a href="#">$ us dollar</a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <h3>English</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">english</a></li>
+                                          <li><a href="#">اللغة العربية</a></li>
+                                       </ul>
+                                    </li> -->
+                                   <!--  <li>
+                                       <h3>my account</h3>
+                                       <ul>
+                                          <li><a href="account.html">My Account</a></li>
+                                          <li><a href="checkout.html">Checkout</a></li>
+                                          <li>
+                                            
+                                             <a href="#" ng-click="logctrl.logout()">Sign out</a>
+                                          </li>
+                                       </ul>
+                                    </li> -->
+                                 </ul>
+                                 </a>
+                                 <!-- Cart Box Start -->
+                                 <!-- <ul class="ht-dropdown cart-box-width"> -->
+                                    <!-- Single Cart Box Start -->
+                                   <!--  <li class="single-cart-box">
+                                       <div class="cart-img">
+                                          <a href="#"><img src="themes/img/products/p1.jpg" alt="cart-image"></a>
+                                          <span class="pro-quantity">1X</span>
+                                       </div>
+                                       <div class="cart-content">
+                                          <h6><a href="product-details.html">Printed Summer Red </a></h6>
+                                          <span class="cart-price">27.45</span>
+                                          <span>Size: S</span>
+                                          <span>Color: Yellow</span>
+                                       </div>
+                                       <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                                    </li> -->
+                                    <!-- Single Cart Box End -->
+                                    <!-- Single Cart Box Start -->
+                                    <!-- <li class="single-cart-box">
+                                       <div class="cart-img">
+                                          <a href="#"><img src="themes/img/products/p2.jpg" alt="cart-image"></a>
+                                          <span class="pro-quantity">1X</span>
+                                       </div>
+                                       <div class="cart-content">
+                                          <h6><a href="product-details.html">Printed Round Neck</a></h6>
+                                          <span class="cart-price">45.00</span>
+                                          <span>Size: XL</span>
+                                          <span>Color: Green</span>
+                                       </div>
+                                       <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                                    </li> -->
+                                    <!-- Single Cart Box End -->
+                                    <!-- Cart Footer Inner Start -->
+                                    <!-- <li class="cart-footer">
+                                       <ul class="price-content">
+                                          <li>Subtotal <span>$57.95</span></li>
+                                          <li>Shipping <span>Free</span></li>
+                                          <li>Taxes <span>$0.00</span></li>
+                                          <li>Total <span>$64.95</span></li>
+                                       </ul>
+                                       <div class="cart-actions text-center">
+                                          <a class="cart-checkout" href="checkout.html">Checkout</a>
+                                       </div>
+                                    </li> -->
+                                    <!-- Cart Footer Inner End -->
+                                 <!-- </ul> -->
+                                 <!-- Cart Box End -->
+                              </li>
+                           </ul>
+                        </div>
+                        <!-- Cart & Search Area End -->
+                     </div>
+                  </div>
+                  <!-- Header Menu & Cart Area End Here -->
+               </div>
+               <!-- Mobile Menu Start -->
+
+<div id="mySidenav" class="sidenav">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <form ng-submit="$event.preventDefault()" class="" style="padding:0px 20px;position:relative;">
+                                                <md-autocomplete id="custom-template" 
+                                                   ng-disabled="logctrl.isDisabled"
+                                                   ng-enter="pressEnter()" 
+                                                   md-no-cache="logctrl.noCache" 
+                                                   md-selected-item="logctrl.selectedItem" 
+                                                   md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" 
+                                                   md-search-text="logctrl.searchText" 
+                                                   md-selected-item-change="logctrl.selectedItemChange(item)" 
+                                                   md-items="item in logctrl.repos"
+                                                   md-item-text="item.name" 
+                                                   md-min-length="2" 
+                                                   input-aria-label="Current Repository" 
+                                                   placeholder="Search for Products" 
+                                                   md-menu-class="autocomplete-custom-template" 
+                                                   md-menu-container-class="custom-container">
+                                                   <md-item-template>
+                                                      <span class="item-title">
+                                                        <!--  <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon> -->
+                                                         <!-- <span> <i class="fas fa-capsules"></i> </span>
+                                                         <span> {{item.groupId}} </span> -->
+                                                         <span> <img src="/yewmed/themes/img/med_icons/{{item.group}}.png" style="height:20px;width:20px"> </span>
+                                                         <span style="margin-left:20px"> {{item.name}} </span>
+                                                      </span>
+                                                      <span class="item-metadata">
+                                                      <span>
+                                                      <strong>{{item.watchers}}</strong>
+                                                      </span>
+                                                      <span>
+                                                      <strong>{{item.forks}}</strong>
+                                                      </span>
+                                                      </span>
+                                                   </md-item-template>
+                                                </md-autocomplete>
+                                                <button type="button" aria-label="Clear Input" tabindex="-1" ng-click="pressEnter()" class="ng-scope" style="position:absolute;right:20px;top:0px;padding:4px 9px;background:#0871b9;border:1px solid #0871b9;z-index:99"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;fill:white;height:14px;margin-top:5px" xml:space="preserve">
+<g>
+  <g>
+    <path d="M508.874,478.708L360.142,329.976c28.21-34.827,45.191-79.103,45.191-127.309c0-111.75-90.917-202.667-202.667-202.667
+      S0,90.917,0,202.667s90.917,202.667,202.667,202.667c48.206,0,92.482-16.982,127.309-45.191l148.732,148.732
+      c4.167,4.165,10.919,4.165,15.086,0l15.081-15.082C513.04,489.627,513.04,482.873,508.874,478.708z M202.667,362.667
+      c-88.229,0-160-71.771-160-160s71.771-160,160-160s160,71.771,160,160S290.896,362.667,202.667,362.667z"/>
+  </g>
+</g>
+</svg></button>
+                                             </form>
+
+       
+                                <ul style="padding:15px 20px">
+                                  <li ng-if="statusCookie != 'Active'" ng-click="openLoginWindow()" class="">
+                                      <a href=""> Sign In/ Register </a>
+                                  </li>   
+                                  <li ng-if="statusCookie == 'Active'" class="header_dropdown_list_new" onclick="off_opacity()">
+                                    <a href="{{contextpath1}}mywishlist">
+                                      My Whistlist
+                                    </a>
+                                  </li>
+                                 <li ng-if="statusCookie == 'Active'" class="nav_mobile_li">
+                                 <a>My Account <span style="font-size:12px;float:right"> <i class="fa fa-plus" aria-hidden="true"></i> </span> </a>
+                                 <ul class="nav_mobile_ul" style="margin-left:20px">
+                                    <li onclick="off_opacity()"><a href="myaccount">My Account</a></li>
+                                    <li onclick="off_opacity()"><a href="manageaddress">Manage Address</a></li>
+                                    <li onclick="off_opacity()"><a href="ordersDetails">My Orders</a></li>
+                                    <li onclick="off_opacity()"><a href="#" ng-click="logctrl.logout()">Sign out</a></li>
+                                 </ul>
+                                 </li>
+
+                                 <!-- .................................................................... -->
+                                 
+                                  <li ng-repeat="u in logctrl.categoriesMenu" class="nav_mobile_li">
+                                    <a>{{u.name}} <span style="font-size:12px;float:right"> <i class="fa fa-plus" aria-hidden="true" ng-if="u.groups.length>0"></i> </span> </a>
+                                    <ul class="nav_mobile_ul" ng-if="u.groups.length>0" style="margin-left:20px">
+                                       <li ng-repeat="sc in u.groups">
+                                          <a ng-click="logctrl.viewGroupWiseProducts(sc.id , sc.name, u.name, u.id)">
+                                             {{sc.name}}
+                                          </a>
+                                       </li>
+                                    </ul>
+                                 </li>
+                                 <li ng-if="statusCookie == 'Active'" ng-click="logctrl.logout()" class="">
+                                      <a href=""> Sign Out </a>
+                                 </li>
+
+       </ul>
+
+
+
+</div>
+
+
+
+
+               <div class="mobile-menu d-block d-lg-none mean-container"><div class="mean-bar"><a href="#" class="meanmenu-reveal" style="background:;color:;right:0;left:auto;" id="aniketnav_button" onclick="openSideNav()"><span></span><span></span><span></span></a>
+                    <nav class="mean-nav aniketnav" style="padding:0px 14px;margin-left:-14px">
+                                <ul>
+                                  <li ng-if="statusCookie != 'Active'" ng-click="openLoginWindow()" class="">
+                                      <a href=""> Sign In/ Register </a>
+                                  </li>   
+                                  <li ng-if="statusCookie == 'Active'" ng-click="logctrl.logout()" class="">
+                                      <a href=""> Sign Out </a>
+                                  </li>
+                                  <li ng-if="statusCookie == 'Active'" class="header_dropdown_list_new">
+                                    <a href="{{contextpath1}}mywishlist">
+                                      My Whistlist
+                                    </a>
+                                  </li>
+                                 <li ng-if="statusCookie == 'Active'" class="nav_mobile_li">
+                                 <a>My Account <span style="font-size:12px;float:right"> <i class="fa fa-plus" aria-hidden="true"></i> </span> </a>
+                                 <ul class="nav_mobile_ul">
+                                    <li><a href="myaccount">My Account</a></li>
+                                    <li><a href="manageaddress">Manage Address</a></li>
+                                    <li><a href="ordersDetails">My Orders</a></li>
+                                    <li><a href="#" ng-click="logctrl.logout()">Sign out</a></li>
+                                 </ul>
+                                 </li>
+
+                                 <!-- .................................................................... -->
+                                 
+                                  <li ng-repeat="u in logctrl.categoriesMenu" class="nav_mobile_li">
+                                    <a>{{u.name}} <span style="font-size:12px;float:right"> <i class="fa fa-plus" aria-hidden="true" ng-if="u.groups.length>0"></i> </span> </a>
+                                    <ul class="nav_mobile_ul" ng-if="u.groups.length>0">
+                                       <li ng-repeat="sc in u.groups">
+                                          <a ng-click="logctrl.viewGroupWiseProducts(sc.id , sc.name, u.name)">
+                                             {{sc.name}}
+                                          </a>
+                                       </li>
+                                    </ul>
+                                 </li>
+                                 <!-- <li> <a href="memberplan"> Membership Plan </a> </li> -->
+
+                                    <!-- <li class="nav_mobile_li"><a href="#"> ALLOPATHY <span style="font-size:12px;float:right"> <i class="fa fa-plus" aria-hidden="true"></i> </span></a>
+                                        
+                                        <ul class="nav_mobile_ul">
+                                            <li><a href="index.html">Home Version 1</a></li>
+                                            <li><a href="home-2.html">Home Version 2</a></li>
+                                            <li><a href="home-3.html">Home Version 3</a></li>
+                                            <li><a href="home-4.html">Home Version 4</a></li>
+                                        </ul>
+                                      </li>
+                                    <li><a href="#">men</a>
+                                       
+                                        <ul class="submobile-mega-dropdown" style="display: none;">
+                                            <li><a href="#">watches</a>
+                                                
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">Military Watches </a></li>
+                                                    <li><a href="shop.html">Smart watches </a></li>
+                                                    <li><a href="shop.html">Sport Watches </a></li>
+                                                    <li><a href="shop.html">Pocket Watches </a></li>
+                                                </ul>
+                                                
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                            <li><a href="#">shoes for Men’s</a>
+                                                
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">Men's Boots</a></li>
+                                                    <li><a href="shop.html">Men's Slippers</a></li>
+                                                    <li><a href="shop.html">Athletic Shoes</a></li>
+                                                    <li><a href="shop.html">Casual Shoes</a></li>
+                                                </ul>
+                                                
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                            <li><a href="#">Men's Bags</a>
+                                               
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">Backpacks</a></li>
+                                                    <li><a href="shop.html">bags waterproof </a></li>
+                                                    <li><a href="shop.html">bags laptop </a></li>
+                                                    <li><a href="shop.html">bags hand </a></li>
+                                                </ul>
+                                                
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                        </ul>
+                                        
+                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                    <li><a href="#">women</a>
+                                        
+                                        <ul class="submobile-mega-dropdown" style="display: none;">
+                                            
+                                            <li><a href="#">Dress</a>
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">cold-shoulder dresses</a></li>
+                                                    <li><a href="shop.html">a-line dresses</a></li>
+                                                    <li><a href="shop.html">jacket dresses</a></li>
+                                                    <li><a href="shop.html">lace dresses</a></li>
+                                                </ul>
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                           
+                                            <li><a href="#">shoes</a>
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">sandals</a></li>
+                                                    <li><a href="shop.html">canvas shoes</a></li>
+                                                    <li><a href="shop.html">sneakers</a></li>
+                                                    <li><a href="shop.html">boots</a></li>
+                                                </ul>
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                           
+                                            <li><a href="#">satchels &amp; tote bags</a>
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">evening bags</a></li>
+                                                    <li><a href="shop.html">wallets &amp; accessories</a></li>
+                                                    <li><a href="shop.html">crossbody bags</a></li>
+                                                </ul>
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                            
+                                            <li><a href="#">swimwear</a>
+                                                <ul style="display: none;">
+                                                    <li><a href="shop.html">outerwear</a></li>
+                                                    <li><a href="shop.html">lingerie</a></li>
+                                                    <li><a href="shop.html">plus size</a></li>
+                                                </ul>
+                                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                            
+                                        </ul>
+                                        
+                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                    <li><a href="#">shop</a>
+                                       
+                                        <ul style="display: none;">
+                                            <li><a href="shop.html">Shop</a></li>
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="compare.html">compare</a></li>
+                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                        </ul>
+                                        
+                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                    <li><a href="#">Blog</a>
+                                      
+                                        <ul style="display: none;">
+                                            <li><a href="blog.html">3 column</a></li>
+                                            <li><a href="blog-3-column-fullwidth.html">3 column full width</a></li>
+                                            <li><a href="blog-4-column-fullwidth.html">4 column full width</a></li>
+                                            <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
+                                            <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
+                                            <li><a href="blog-fullwidth-left-sidebar.html">Full Width Left Sidebar</a></li>
+                                            <li><a href="blog-fullwidth-right-sidebar.html">Full Width Right Sidebar</a></li>
+                                            <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                            <li><a href="blog-details.html">Blog Details Right Sidebar</a></li>
+                                            <li><a href="blog-details-fullwidth.html">Blog Details Full Width</a></li>
+                                        </ul>
+                                        
+                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                    <li><a href="#">pages</a>
+                                        
+                                        <ul style="display: none;">
+                                            <li><a href="about.html">about us</a></li>
+                                            <li><a href="account.html">My account</a></li>
+                                            <li><a href="register.html">register</a></li>
+                                            <li><a href="login.html">Login</a></li>
+                                            <li><a href="404.html">404</a></li>
+                                            <li><a href="forgot-password.html">forgot password</a></li>
+                                        </ul>
+                                        
+                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                    <li class="mean-last"><a href="contact.html">contact us</a></li>
+                                </ul>
+                            </nav></div>
+                            <div class="mean-push"></div><nav style="display: none;">
+                                <ul>
+                                    <li><a href="#">home</a>
+                                        
+                                        <ul>
+                                            <li><a href="index.html">Home Version 1</a></li>
+                                            <li><a href="home-2.html">Home Version 2</a></li>
+                                            <li><a href="home-3.html">Home Version 3</a></li>
+                                            <li><a href="home-4.html">Home Version 4</a></li>
+                                        </ul>
+                                        
+                                    </li>
+                                    <li><a href="#">men</a>
+                                        
+                                        <ul class="submobile-mega-dropdown">
+                                            <li><a href="#">watches</a>
+                                                
+                                                <ul>
+                                                    <li><a href="shop.html">Military Watches </a></li>
+                                                    <li><a href="shop.html">Smart watches </a></li>
+                                                    <li><a href="shop.html">Sport Watches </a></li>
+                                                    <li><a href="shop.html">Pocket Watches </a></li>
+                                                </ul>
+                                                
+                                            </li>
+                                            <li><a href="#">shoes for Men’s</a>
+                                                
+                                                <ul>
+                                                    <li><a href="shop.html">Men's Boots</a></li>
+                                                    <li><a href="shop.html">Men's Slippers</a></li>
+                                                    <li><a href="shop.html">Athletic Shoes</a></li>
+                                                    <li><a href="shop.html">Casual Shoes</a></li>
+                                                </ul>
+                                                
+                                            </li>
+                                            <li><a href="#">Men's Bags</a>
+                                                
+                                                <ul>
+                                                    <li><a href="shop.html">Backpacks</a></li>
+                                                    <li><a href="shop.html">bags waterproof </a></li>
+                                                    <li><a href="shop.html">bags laptop </a></li>
+                                                    <li><a href="shop.html">bags hand </a></li>
+                                                </ul>
+                                                
+                                            </li>
+                                        </ul>
+                                        
+                                    </li>
+                                    <li><a href="#">women</a>
+                                        
+                                        <ul class="submobile-mega-dropdown">
+                                            
+                                            <li><a href="#">Dress</a>
+                                                <ul>
+                                                    <li><a href="shop.html">cold-shoulder dresses</a></li>
+                                                    <li><a href="shop.html">a-line dresses</a></li>
+                                                    <li><a href="shop.html">jacket dresses</a></li>
+                                                    <li><a href="shop.html">lace dresses</a></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <li><a href="#">shoes</a>
+                                                <ul>
+                                                    <li><a href="shop.html">sandals</a></li>
+                                                    <li><a href="shop.html">canvas shoes</a></li>
+                                                    <li><a href="shop.html">sneakers</a></li>
+                                                    <li><a href="shop.html">boots</a></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <li><a href="#">satchels &amp; tote bags</a>
+                                                <ul>
+                                                    <li><a href="shop.html">evening bags</a></li>
+                                                    <li><a href="shop.html">wallets &amp; accessories</a></li>
+                                                    <li><a href="shop.html">crossbody bags</a></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <li><a href="#">swimwear</a>
+                                                <ul>
+                                                    <li><a href="shop.html">outerwear</a></li>
+                                                    <li><a href="shop.html">lingerie</a></li>
+                                                    <li><a href="shop.html">plus size</a></li>
+                                                </ul>
+                                            </li>
+                                            
+                                        </ul>
+                                        
+                                    </li>
+                                    <li><a href="#">shop</a>
+                                        
+                                        <ul>
+                                            <li><a href="shop.html">Shop</a></li>
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="compare.html">compare</a></li>
+                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                        </ul>
+                                        
+                                    </li>
+                                    <li><a href="#">Blog</a>
+                                        
+                                        <ul>
+                                            <li><a href="blog.html">3 column</a></li>
+                                            <li><a href="blog-3-column-fullwidth.html">3 column full width</a></li>
+                                            <li><a href="blog-4-column-fullwidth.html">4 column full width</a></li>
+                                            <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
+                                            <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
+                                            <li><a href="blog-fullwidth-left-sidebar.html">Full Width Left Sidebar</a></li>
+                                            <li><a href="blog-fullwidth-right-sidebar.html">Full Width Right Sidebar</a></li>
+                                            <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                            <li><a href="blog-details.html">Blog Details Right Sidebar</a></li>
+                                            <li><a href="blog-details-fullwidth.html">Blog Details Full Width</a></li>
+                                        </ul>
+                                        
+                                    </li>
+                                    <li><a href="#">pages</a>
+                                        
+                                        <ul>
+                                            <li><a href="about.html">about us</a></li>
+                                            <li><a href="account.html">My account</a></li>
+                                            <li><a href="register.html">register</a></li>
+                                            <li><a href="login.html">Login</a></li>
+                                            <li><a href="404.html">404</a></li>
+                                            <li><a href="forgot-password.html">forgot password</a></li>
+                                        </ul>
+                                       
+                                    </li>
+                                    <li><a href="contact.html">contact us</a></li> -->
+                                </ul>
+                            </nav>
+                        </div>
+               <!-- Mobile Menu End -->
+            </div>
+         </div>
+         <!-- Container End -->
+      </div>
+      <!-- Header Bottom End Here -->
+   </header>
+   <!-- Main Header Area End Here -->
+
+
+   <!-- -------------------------register success modal start---------------   -->
+
+
+   <div class="modal fade" id="success_register_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:50px"> 
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content" style="">
+            <div class="modal-body" style="padding-top:30px">
+              <h5 style="color:green;font-family:'Poppins', sans-serif;font-size:25px;font-weight:600"> You are Successfully Registered </h5>
+              <p style="font-size:22px;margin-top:18px;font-family:sans-serif;font-weight:500;letter-spacing:.25px"> Do you want to Login ? </p>   
+            </div>
+            <div class="modal-footer" style="padding-bottom:30px;margin-top:10px"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_login(1)">OK</button>  
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_login(2)">CANCEL</button>
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+
+   <!-- -------------------------Search-window starts---------------   -->
+
+
+   <!-- -------------------------generate otp start---------------   -->
+
+
+   <div class="modal fade" id="generate_otp_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:50px;padding:10px 20px"> 
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content" style="">
+            <div class="modal-body" style="padding:30px 10px 0px 10px">
+              <h5 style="color:green;font-family:'Poppins', sans-serif;font-size:15px;font-weight:500" id="generateotp_h5">  </h5>
+               <div style="text-align:center;margin-top: 20px"><div style="text-align:left; margin-top:10px;width:100%;display: inline;"> 
+                  <input type="text" name="generateotp" class="span3" placeholder="Please Enter Otp" style="height: 30px" id="generate_otp_input" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+               </div> </div>
+               <p style="color:orange;margin-top:20px;font-size:16px;font-weight:700"> Time Remaining : <span class="countdown"></span> </p>
+               <p style="color:red;font-size:14px;margin-top:20px" id="error_otp_msg"> </p>
+            </div>
+            <div class="modal-footer" style="padding-bottom:30px;margin-top:10px"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="login_with_otp()">SEND</button>  
+            <!-- <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_login(2)">CANCEL</button> -->
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+
+   <!-- -------------------------generate otp End---------------   -->
+
+   <!-- -------------------------Resend generate otp ---------------   -->
+
+   <div class="modal fade" id="re_generate_otp_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:50px;padding:10px 20px"> 
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content" style="">
+            <div class="modal-body" style="padding:30px 10px 0px 10px">
+              <h5 style="color:green;font-family:'Poppins', sans-serif;font-size:15px;font-weight:500" id="re_generate_otp">   </h5>
+              <!-- <h5 style="color:green;font-family:'Poppins', sans-serif;font-size:15px;font-weight:500" ng-if="regenerate_otp == 2"> A key send to your mailid. Pleae enter the key and complete the registration process </h5> -->
+              <!-- {{regenerate_otp}} -->
+               <!-- <div style="text-align:center;margin-top: 20px"><div style="text-align:left; margin-top:10px;width:100%;display: inline;"> 
+                  <input type="text" name="generateotp" class="span3" placeholder="Please Enter Otp" style="height: 30px" required />
+               </div> </div>
+               <p style="color:red;margin-top:20px;font-size:16px;font-weight:700"> Time Remaining : <span class="countdown"></span> </p> -->
+            </div>
+            <div class="modal-footer" style="padding-bottom:30px;margin-top:10px"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="otp_send_to_mail()">REESEND</button>  
+            <!-- <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_login(2)">CANCEL</button> -->
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+
+   <!-- -------------------------Resend generate otp End---------------   -->
+
+
+
+
+
+
+
+   <!-- -------------------------login-window Start---------------   -->
+   <div class="modal fade" id="login-window">
+      <div class="modal-dialog modal-lg login-modal modal-dialog-centered" style="top:-100px">
+         <div class="modal-content">
+            <form ng-submit="logctrl.login()" name="loginForm">
+               <!-- Modal Header -->
+               <!-- <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div> -->
+               <!-- Modal body -->
+               <div class="modal-body">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <div class="login-form" style="padding:50px">
+                       <h3 style="text-align:center;color:#000000;font-weight:700;text-transform:capitalize;font-family:'Poppins', sans-serif;font-size:39px"> Login </h3>
+
+                     <!-- <div class="form-group row">
+                        <label for="email" class="col-md-5 col-sm-4 col-form-label userlogin_model_div_1">Email</label>
+                        <div class="col-md-7 col-sm-8 userlogin_model_div_2"> -->
+                          <p style="margin-top:52px;font-size:14px;text-align:left;color:black"> Username </p>
+
+                          <!-- <p style="text-align:left;line-height:0px"> <img src="themes/img/yewmed_new_pics/login_modal_usericon.png"> </p> -->
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                           <input type="text" ng-model="logctrl.user.userName"
+                              name="username" id="login_uid" class="span3" placeholder="Type your username" required /> </p>
+                           <div class="has-error" ng-show="loginForm.username.$invalid">
+                              <span ng-show="loginForm.username.$error.required && loginForm.username.$touched" style="color:red"> Username is required </span> 
+<!--                               <span
+                                 ng-show="loginForm.email.$invalid && loginForm.email.$touched && !loginForm.email.$error.required" style="color:red">Email id is not valid </span> -->
+                           </div>
+                       <!--  </div>
+                     </div> -->
+                    <!--  <div class="form-group row">
+                        <label for="inputPassword" class="col-md-5 col-sm-4 col-form-label userlogin_model_div_1">Password</label>
+                        <div class="col-md-7 col-sm-8 userlogin_model_div_2"> -->
+
+                          <p style="margin-top:22px;font-size:14px;text-align:left;color:black"> Password </p>
+
+                          <!-- <p style="text-align:left;line-height:0px"> <img src="themes/img/yewmed_new_pics/login_modal_passicon.png"> </p> -->
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                           <input type="password" ng-model="logctrl.user.password"
+                              name="password" id="login_pwd" class="span3" placeholder="Type your password" required /> </p>
+                              <span toggle="#login_pwd" style="cursor: pointer;float:right;margin-top:-28px;padding-right:25px" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                           <div class="has-error login_password" ng-show="loginForm.$invalid">
+                              <span ng-show="loginForm.password.$error.required && loginForm.password.$touched" style="color:red"> Password is required </span>
+                           </div>
+                              <!-- <button class="btn show-btn" type="button">
+                                 <span toggle="#pwd" class="fa fa-eye toggle-password">Show</span>
+                              </button> -->
+                     <!--    </div>
+                     </div> -->
+                              <!-- <div>{{ msg }}</div> -->
+                              <div ng-if="msg" style="color:red"> <span> {{msg}} </span> </div> <br>
+                     <div class="login-details text-center">
+                       <p style="text-align:right"> <a href="" ng-click="resetpswrdWindow()">Forgot your password?</a> </p>
+                        <button type="submit" class="login-btn" ng-disabled="loginForm.$invalid">Login
+                        </button>
+
+                     </div>
+                     <div class="login-footer text-center">
+                        <!-- <p style="font-family:'Poppins', sans-serif;">Not a member yet?<a href="register" class="fa fa-user"ng-click="closeLoginWindow()" style="padding:10px"><b style="margin-left:5px"><b>Create one here</b></a></p> -->
+                        <p style="font-family:'Poppins', sans-serif;margin-top:5px">Not a member yet? <a href="" ng-click="registerWindow()"><b> Sign up now</b></a></p>
+                     </div>
+                     <!-- <div class="login-footer text-center">
+                        <p>No account?<a style="cursor:pointer" ng-click="closeLoginWindow()">Create one here</a></p>
+                        </div> -->
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+         </div>
+      </div>
+   </div>
+   <!-- -------------------------login-window End---------------   -->
+
+
+
+      <!-- -------------------------Telemedicine Window Start---------------   -->
+   <div class="modal fade" id="telemedicine-window">
+      <div class="modal-dialog modal-lg login-modal modal-dialog-centered" style="top:-100px">
+         <div class="modal-content">
+            <form name="teliMedForm">
+               <div class="modal-body">
+                  <div class="login-form" style="padding:50px">
+                      <p ng-if="!present_emailid" style="margin-top:52px;font-size:14px;text-align:left;color:black"> Email Id </p>
+                        <p ng-if="!present_emailid" style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                        <input type="text" name="username" id="emailid_telimed" class="span3" placeholder="Type your Emailid" autocomplete="off" /> </p>
+                        <p style="color:red;font-weight:900" ng-if="emailidTeliMedVlidation"> Please Enter Valid Emal Id. </p>
+                        <p ng-if="!present_phoneno" style="margin-top:22px;font-size:14px;text-align:left;color:black"> Phone No </p>
+                        <p ng-if="!present_phoneno" style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                        <input type="text" name="phoneno" id="phoneno_telimed" class="span3" placeholder="Type your PhoneNo" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" /> </p>
+                        <p style="color:red;font-weight:900" ng-if="phonenoTeliMedVlidation" id="teleMedPhoneErrorMsg"> </p>
+                        <div class="login-details text-center" style="margin-top:20px">
+                        <button type="submit" ng-click="callTeliMedApi()" class="login-btn">Submit
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+         </div>
+      </div>
+   </div>
+
+
+   <!-- .................................Telemedicine Window.............................. -->
+
+
+
+
+
+<!-- -------------------------register-window Start---------------   -->
+   <div class="modal fade" id="register-window">
+      <div class="modal-dialog modal-lg login-modal modal-dialog-centered" style="top:-50px">
+      <div class="modal-content">
+            <form ng-submit="logctrl.userSubmit()" name="registerForm">
+               <!-- Modal body -->
+               <div class="modal-body">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <div class="login-form" style="padding:50px"> 
+                       <h3 style="text-align:center;color:#000000;font-weight:700;text-transform:capitalize;font-family:'Poppins', sans-serif;font-size:39px"> Register </h3>
+                          <p style="margin-top:52px;font-size:14px;text-align:left;color:black"> Name <sub style="font-size:20px;color:red"> * </sub> </p>
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                           <input type="text" ng-model="logctrl.register.name" name="fname" class="span3" placeholder="Type your name" ng-pattern-restrict="^$|^[A-Za-z]+" id="reg_name" required /> </p>
+                           <div class="has-error" ng-show="registerForm.fname.$invalid">
+
+                                 <span style="color:#cc4749" ng-show="registerForm.fname.$error.required && registerForm.fname.$touched"> Name is required</span>
+                              </div>
+                         <p style="margin-top:22px;font-size:14px;text-align:left;color:black"> Username <sub style="font-size:20px;color:red"> * </sub> </p>
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                           <input type="text" ng-model="logctrl.register.userName" name="userName" id="reg_userName" class="span3" placeholder="Type your phone no or email id" ng-change="checkUserid()" required /> </p>
+                           <div class="has-error" ng-show="registerForm.userName.$invalid">
+                                 <!-- <span style="color:red" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">fgdg</span> -->
+                                 <span style="color:#cc4749" ng-show="registerForm.userName.$error.required && registerForm.userName.$touched"> Username is required</span>
+                           </div>
+                           <span id="username_error_check" style="color:#cc4749">   </span>
+
+
+
+
+                          <p style="margin-top:22px;font-size:14px;text-align:left;color:black"> Password <sub style="font-size:20px;color:red"> * </sub> 
+                            <!-- <i style="background:#F37D22;color:white;padding:1px 5px;border-radius:5px" data-toggle="toolsss" title="Password should be at least 8 characters long and should contain one number, one capital lettrer, one small letter and one special character"> ? </i>  -->
+                          </p>
+
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                           <input type="password" ng-model="logctrl.register.password" name="password" id="reg_password" required class="span3" placeholder="Enter Password" ng-attr-type="{{ showPassword ? 'text':'password'}}"></p>
+                            <span style="cursor:pointer;float:right;margin-top:-28px;padding-right:15px" ng-click="toggleShowPassword()" ng-class="{'fa fa-eye': showPassword,'fa fa-eye-slash': !showPassword}"></span>
+                            <div class="has-error" ng-show="registerForm.password.$invalid" style="margin-top:0px"> 
+                                 <span style="color:#cc4749" ng-show="registerForm.password.$error.required && registerForm.password.$touched">Password is required</span>
+                            </div>
+
+                            <p style="margin-top:22px;font-size:14px;text-align:left;color:black"> Pincode <sub style="font-size:20px;color:red"> * </sub> </p>
+                            <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px">
+                            <input type="text" ng-model="logctrl.register.addresses[0].pincode" name="pincode" id="reg_pincode" placeholder="Enter your pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" ng-minlength="6" ng-maxlength="6" required class="span3"> 
+                            </p>
+                            <div class="has-error" ng-show="registerForm.pincode.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.pincode.$error.required && registerForm.pincode.$touched">Pincode is required</span>
+                                 <span style="color:#cc4749" ng-show="((registerForm.pincode.$error.minlength || registerForm.pincode.$error.maxlength) && registerForm.pincode.$dirty) "> Pincode is invalid </span>
+                              </div>
+
+
+                            <p style="margin-top:20px"> <input type="checkbox" ng-model="checked_term" style="width:auto"> <span> By registering and submitting your data you are agreeing to our <a href="policy" target="_blank"> Privacy Policy </a>. </span> </p>
+
+
+                              <div ng-if="msg" style="color:red"> <span> {{msg}} </span> </div> <br>
+                     <div class="login-details text-center">
+                        <button type="submit" class="login-btn" id="register_button_id" ng-disabled="registerForm.$invalid || !checked_term">Register
+                        </button>
+
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+            </div>
+      </div>
+   </div>
+   <!-- -------------------------register-window End---------------   -->
+
+
+
+
+
+<!-- -------------------------reset password-window Start---------------   -->
+
+
+<div class="modal fade" id="resetpswrd-window">
+      <div class="modal-dialog modal-lg login-modal modal-dialog-centered" style="top:-100px">
+         <div class="modal-content">
+            <form ng-submit="logctrl.resetPassword()" name="resetpswrdForm">
+               <!-- Modal Header -->
+               <!-- <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div> -->
+               <!-- Modal body -->
+               <div class="modal-body">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                  <div class="login-form" style="padding:50px">
+                       <p style="text-align:center;color:#000000;font-family:'Poppins', sans-serif;font-size:14px"> Please enter your E-mail ID and we will send a link to your registered E-mail ID to reset your password. </p>
+
+                           <p style="text-align:left;border:2px solid #d9d9d9;padding:7px 15px 5px 15px;margin-top:14px">
+                           <input type="email" ng-model="logctrl.resetpswrd.email"
+                              name="email" id="uid" class="span3" placeholder="Enter your email id" required /> </p>
+                           <div class="has-error" ng-show="resetpswrdForm.$invalid">
+                              <span ng-show="resetpswrdForm.email.$error.required && resetpswrdForm.email.$touched" style="color:red"> Email id is required </span>
+                              <span
+                                 ng-show="resetpswrdForm.email.$invalid && resetpswrdForm.email.$touched && !resetpswrdForm.email.$error.required" style="color:red">Email id is not valid </span> 
+                           </div>
+                           <span id="reset_pswd_error" style="color:red">  </span>
+                        <button type="submit" class="login-btn" ng-disabled="resetpswrdForm.$invalid" style="margin-top:24px">reset password
+                        </button>
+
+                        <div class="login-footer" style="margin-top:20px">
+                        <p style="margin-top:5px;font-family:'Poppins', sans-serif;">Back to <a href="" ng-click="openLoginWindow()"><b>Sign In</b></a></p>
+                      </div>
+
+                     </div>
+
+ 
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+         </div>
+      </div>
+   </div>
+
+
+<!-- -------------------------reset password-window end---------------   -->
+
+
+
+
+
+   <!-- <div layout="column" ng-cloak="" class="autocompletedemoCustomTemplate" ng-app="MyApp">
+      <md-content layout-padding="" layout="column">
+         <form ng-submit="$event.preventDefault()">
+            <p>Use <code>˂md-autocomplete˃</code> with custom templates to show styled autocomplete results.</p>
+            <md-autocomplete id="custom-template" 
+               ng-disabled="logctrl.isDisabled" 
+               md-no-cache="logctrl.noCache" 
+               md-selected-item="logctrl.selectedItem" 
+               md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" md-search-text="logctrl.searchText" 
+               md-selected-item-change="logctrl.selectedItemChange(item)" 
+               md-items="item in logctrl.querySearch(logctrl.searchText)" md-item-text="item.name" 
+               md-min-length="2" 
+               input-aria-label="Current Repository" 
+               placeholder="Pick an item" 
+               md-menu-class="autocomplete-custom-template" 
+               md-menu-container-class="custom-container">
+               <md-item-template>
+                  <span class="item-title">
+                     <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                     <span> {{item.name}} </span>
+                  </span>
+                  <span class="item-metadata">
+                  <span>
+                  <strong>{{item.watchers}}</strong> watchers
+                  </span>
+                  <span>
+                  <strong>{{item.forks}}</strong> forks
+                  </span>
+                  </span>
+               </md-item-template>
+            </md-autocomplete>
+         </form>
+      </md-content>
+   </div> -->
+   <!-- -------------------------Search-window End---------------   -->
+   <!--
+      Copyright 2018 Google LLC. All Rights Reserved. 
+      Use of this source code is governed by an MIT-style license that can be found
+      in the LICENSE file at http://material.angularjs.org/HEAD/license.
+      -->
+</div>
+
+
+
+
+<script type="text/javascript">
+   $(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
+<style type="text/css">
+   
+.dropdown-submenu {
+    position: relative;
+}
+
+.md-show-clear-button button{
+    display:none;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+   $(".toggle-pwd").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+
+   $(document).ready(function(){
+  // $("#aniketnav_button").click(function(){
+  //   $(".aniketnav").toggle("slide", { direction: "up" }, 1000);
+  //   // alert("hi");
+  // });
+  $(document).on('click',".nav_mobile_li",function(){
+    // alert("hi");
+    $(this).find(".nav_mobile_ul").toggle(1000);
+    $(this).find('i').toggleClass('fa fa-plus fa fa-minus');
+  });
+});
+
+   function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      $('.mobile_view_opacity').css({"opacity":"1"})
+   }
+
+   function openSideNav() {
+      document.getElementById("mySidenav").style.width = "70%";
+      $('.mobile_view_opacity').css({"opacity":"0.3"})
+   }
+
+   function off_opacity() {
+         document.getElementById("mySidenav").style.width = "0";
+         $('.mobile_view_opacity').css({"opacity":"1"})
+    }
+
+   // $('[data-toggle="toolsss"]').tooltip();
+</script>

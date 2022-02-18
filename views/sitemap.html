@@ -1,0 +1,71 @@
+<!-- <p style="margin-top:100px"> <b>  Aniket Daw </b> </p> -->
+
+<div ng-controller="LoginController as logctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+   <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+    <div class="container-fluid">
+        <!-- <div ng-class="{true: 'breadcrumb-area', false: 'breadcrumb-area1'}[statusCookie == 'Active']">
+            <div class="container">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/yewmed/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="sitemap">Sitemap</a></li>
+                </ol>
+            </div>
+        </div> -->
+        
+          <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Sitemap</li>
+                </ol>
+            </div>
+
+
+
+        <div class="all_page_middle_div">
+               <h2 style="color:#F37D22;font-weight:400;text-align:center"> <u> Sitemap </u> </h2> <br> <br> <br> <br>
+                 <h4 style="padding-bottom:10px"> YewMed Information </h4>
+                 <hr>
+                 <ul class="sitemap_ul">
+                 	<li> <a href="{{contextpath1}}delivery"> <i class="fa fa-angle-right" style="margin-right:5px"></i>Delivery </a> </li> <br>
+                 	<li> <a href="{{contextpath1}}legal-notice"> <i class="fa fa-angle-right" style="margin-right:5px"></i>Legal Notice </a> </li> <br>
+                 	<li> <a href="{{contextpath1}}terms-conditions"> <i class="fa fa-angle-right" style="margin-right:5px"></i>Terms & Conditions </a> </li> <br>
+                 	<li> <a href="{{contextpath1}}sitemap"> <i class="fa fa-angle-right" style="margin-right:5px"></i>Sitemap </a> </li> <br>
+                  <li> <a href="{{contextpath1}}userprivacy"> <i class="fa fa-angle-right" style="margin-right:5px"></i>User Privacy </a> </li> <br>
+                 	<!-- <li> <a href="memberplan"> <i class="fa fa-angle-right" style="margin-right:5px"></i> Membership Plan </a> </li> -->
+                 </ul> <br> <br> <br> <br>
+
+                 <h4 style="padding-bottom:10px"> YewMed Product </h4>
+                 <hr>
+                 <ul class="sitemap_ul">
+                 	<li> <a href="{{contextpath1}}best-sales"> <i class="fa fa-angle-right" style="margin-right:5px"></i> Best Sales </a> </li> <br>
+                 	<li> <a href="{{contextpath1}}ordersDetails"> <i class="fa fa-angle-right" style="margin-right:5px"></i> Orders </a> </li> <br>
+                  <li> <a href="{{contextpath1}}aboutus"> <i class="fa fa-angle-right" style="margin-right:5px"></i>About Us </a></li> <br>
+                 	<li> <a href="{{contextpath1}}contactus"> <i class="fa fa-angle-right" style="margin-right:5px"></i> Contact Us </a> </li> <br>
+                 	<li> <a href="{{contextpath1}}policy"> <i class="fa fa-angle-right" style="margin-right:5px"></i> Privacy Policy </a> </li>
+                 </ul> <br> <br> <br> <br>
+                 <h4 style="padding-bottom:10px"> YewMed General Store </h4>
+                 <hr>
+                 <div class="row">
+                      <div class="col-lg-3" ng-repeat="u in logctrl.categoriesMenu"> 
+                          <h6 style="margin-left:10px"> <i class="fa fa-angle-right" style="margin-right:5px"></i>{{u.name}} </h6> <br> 
+                          <ul class="sitemap_ul" style="margin-left:30px">
+                          	  <li ng-repeat="sc in u.groups">
+                                    <a ng-click="logctrl.viewGroupWiseProducts(sc.id , sc.name, u.name)">
+                                      <i class="fa fa-angle-right" style="margin-right:5px"></i>  {{sc.name}}
+                                    </a> <br> <br>
+                              </li>
+                          </ul>
+                      </div>  
+                 </div>
+                 
+        </div>
+        

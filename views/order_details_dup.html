@@ -1,0 +1,497 @@
+<div ng-app="myApp">
+   <div id="register" ng-controller="OrdersController as ctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+        <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+              .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+                    z-index: 3;
+                    color: #fff;
+                    cursor: default;
+                    background-color: #f26222;
+                    border-color: #f26222;
+                }
+                .pagination>li>a, .pagination>li>span {
+                    position: relative;
+                    float: left;
+                    padding: 6px 12px;
+                    margin-left: -1px;
+                    line-height: 1.42857143;
+                    color: #f26222;
+                    text-decoration: none;
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                }
+                .pagination li a:hover{
+                    background:#f26222a1;
+                    border-color:#f26222a1
+                }
+                .order_Table tr:nth-child(even){
+                    background:#dee2e6
+                } 
+                table td{
+                  color:#424242;
+                  padding:7px 3px;
+                  font-size:14px;
+                  border: 1px solid #ccc
+                }
+                table th{
+                	padding:10px 3px!important;
+                	font-size:14px;
+                	background-color: #0871b9
+                }
+                .show_details_table_div{
+                	padding:20px 10px;
+                	border:1px solid #ccc;
+                	margin-top:10px;display:none
+                }
+                .show_details_table_div table th{
+                	background-color:black
+                }
+                .show_details_tr{
+
+                }
+                .show_details_tr_active{
+                   background-color: #ccc;
+                }
+
+                ::-webkit-scrollbar-y {
+                    width: 3px;
+                }
+                
+                /*.................for order tracking purpose.....................*/
+
+                ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+.show_progtrckr{
+  display: none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    border: none;
+    border-radius: 2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
+}
+
+@media only screen and (max-width: 890px){ 
+  ol.progtrckr li.progtrckr-done, ol.progtrckr li.progtrckr-todo{
+      font-size:10px;
+  }
+}
+
+@media only screen and (max-width: 767px){ 
+     .show_status_for_mb_2{
+        display:none;
+     }
+}
+
+@media only screen and (max-width: 600px){ 
+     table td{
+         font-size:12px
+     }
+     .show_status_for_mb_2{
+          display:block
+     }
+     .show_status_for_mb{
+          display:none
+     }
+}
+
+
+
+</style>
+</div>
+
+      <!-- <ul class="breadcrumb">
+         <li><a href="/yewmed/">Home</a> <span class="divider">/</span></li>
+         <li class="active">Orders:</li>
+      </ul> -->
+      <div class="container-fluid">
+            <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Orders </li>
+                </ol>
+            </div>
+        </div>
+
+
+      <div class="checkbox" style="display:none">
+         <label>
+         <input type="checkbox" ng-model="oneAtATime">
+         Open only one at a time
+         </label>
+      </div>
+      <div id="accordion" close-others="oneAtATime" class="container-fluid"> 
+         <div infinite-scroll='moreOrders()' infinite-scroll-distance='2' infinite-scroll-disabled="scrollStatus" class="all_page_middle_div">
+
+
+                <!-- new table start -->
+
+                  <!-- {{ctrl.orders.length}} -->
+
+                  <div ng-if="ctrl.orders.length == 0" style="text-align:center;margin-top:110px" class="display nowrap"> 
+                    <span style="text-align:center;padding:50px;border:10px solid black;border: 10px solid #00000038;background:#ebebeb;font-size:23px"> No Order Found </span>
+                  </div>
+        
+
+        <div class="new_ordertable_for_mb">
+         <div ng-repeat="u in copy_items | orderBy: '-createdDate' |  limitTo:limit" style="margin-top:50px">
+           <table style="width:100%">
+            <thead>
+            <tr style="text-align:left">
+                <th>SL NO</th>
+                <th> DATE </th>
+                <th> INVOICE NO </th>
+                <th> TOTAL AMOUNT </th>
+                <th> STATUS </th>
+                <th> DETAILS </th>
+                <th>  </th>
+            </tr>
+            </thead>
+            <tr>
+             <td> {{limit *(index_no)+$index+1}}. </td>
+                <td> {{u.createdDate.split(' ')[0] | date : "dd-MM-yyyy"}} </td>
+                <td> {{u.invNo}} </td>
+                <td> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{u.netAmount | number:2}} </td>
+                <td>
+                     <span>
+                     <button class="datatable_custom_btn" ng-click="orderCancel(u.id)" ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color:#f26222">Canceled</i>
+                  </span>
+                  <span 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color:#0871b9">Accepted</i>
+                  </span>
+                </td>
+                      <td> <button class="datatable_custom_btn" ng-click="openDetails(u,1);" style="font-size:17px">
+                     Details
+                     </button></td>
+                     <td> <button class="datatable_custom_btn" ng-click="openDetails(u,2);" style="font-size:17px">
+                     Files
+                     </button> </td>
+            </tr>
+            </table>
+
+
+
+            <!-- ...............show order details................................. -->
+
+            <div class="show_details_table_div" id="show_details_table_div_{{u.id}}">
+              <h3 style="text-align:center"> <b> Oder Details </b> </h3>
+            <table style="width:100%;margin-top:10px">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Index</th>
+                    <th style="text-align: center;">Name</th>
+                    <th style="text-align: center;">Quantity</th>
+                    <th style="text-align: center;">Price</th>
+                    <th style="text-align: center;">Discount</th>
+                    <th style="text-align: center;">Tax</th>
+                    <th style="text-align: center;">Total</th>
+                    <th style="text-align: center;">Status</th>
+                </tr> 
+            </thead>
+                <tr ng-repeat="order in u.orderDetails" class="show_details_tr" id="show_details_tr_{{order.id}}">
+                    <td style="text-align: center;color:#424242">{{$index+1}}</td>
+                    <td style="text-align: center;color:#424242">{{order.itemName}}</td>
+                    <td style="text-align: center;color:#424242">{{order.packQty}}</td>
+                    <td style="text-align: center;color:#424242">{{order.grossAmount|number:2}}</td>
+                    <td style="text-align: center;color:#424242"> {{order.disc}} </td>
+                    <td style="text-align: center;color:#424242">{{order.taxAmount|number:2}} </td>
+                    <td style="text-align: center;color:#424242">{{order.netAmount|number:2}}</td>
+                    <td> <button class="datatable_custom_btn" style="padding:7px 10px;font-size:14px" ng-click="showOrderStatus(order,u.id);" style="font-size:17px">
+                     Status
+                     </button> </td>
+                </tr>
+                </table>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_0_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-todo">Accepted</li><li class="progtrckr-todo">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_1_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-todo">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_2_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_3_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-done">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_4_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-done">Out for Delivery</li><li class="progtrckr-done">Delivered</li>
+</ol>
+            </div>
+
+
+            <!-- ...............show order details end................................. -->
+
+
+
+            <!-- ...............show prescription................................. -->
+
+            <div class="show_details_table_div" id="show_prescription_div_{{u.id}}">
+              <h3 style="text-align:center"> <b> Download Prescription </b> </h3>
+              <table style="width:100%;margin-top:10px">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Index</th>
+                        <th style="text-align: center;">File. Name</th>
+                        <th style="text-align: center;">Download/View</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr ng-repeat="p in u.prescriptions" id="tr_{{rp.id}}">
+                         <td style="text-align: center;">{{$index+1}}</td>
+                         <td style="text-align: center;">{{p.userFilename}}</td>
+                         <td style="text-align: center;"><a style="cursor: pointer;" ng-click="prescriptionsDownload(p.id,p.userFilename)"><button>
+                           Download</button></a></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <!-- ...............show prescription end................................. -->
+         </div>
+         </div>
+
+
+
+         <!-- ............................for moble......................... -->
+
+         <div class="new_whistlisttable_for_mb" style="margin-top:30px;padding: 0px 15px 0px 15px;" ng-if="ctrl.orders.length != 0">
+
+    <div ng-repeat="u in copy_items | orderBy: '-createdDate' |  limitTo:limit" class="tables_for_mb">
+   
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Invoice No </div>
+          <div class="mobile_tableformat_2nd_div">  {{u.invNo}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> DATE </div>
+          <div class="mobile_tableformat_2nd_div">  {{u.createdDate.split(' ')[0] | date : "dd-MM-yyyy"}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Total Amount </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{u.netAmount | number:2}} </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Status </div>
+          <div class="mobile_tableformat_2nd_div" style="text-transform:capitalize"> <span>
+                     <button ng-click="orderCancel(u.id)" ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color:#f26222;font-size:14px">Canceled</i>
+                  </span>
+                  <span 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color:#0871b9;font-size:14px">Accepted</i>
+                  </span> 
+          </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Tracking </div>
+          <div class="mobile_tableformat_2nd_div" style="text-transform:capitalize"> <span>
+                     <button ng-click="openDetails_for_mob(u,1)"> Details
+                     </button>
+                  </span>
+          </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Prescription </div>
+          <div class="mobile_tableformat_2nd_div" style="text-transform:capitalize"> <span>
+                     <button ng-click="openDetails_for_mob(u,2)"> Files
+                     </button>
+                  </span>
+          </div>
+     </div> 
+
+
+
+
+     <!-- ........................order details start........................... -->
+
+     <div class="show_details_table_div" id="show_details_table_div_dup_{{u.id}}" style="overflow-x:auto">
+              <h3 style="text-align:center"> <b> Oder Details </b> </h3>
+            <table style="width:100%;margin-top:10px">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Name</th>
+                    <th style="text-align: center;">Quantity</th>
+                    <th style="text-align: center;">Total</th>
+                    <th style="text-align: center;">Status</th>
+                </tr> 
+            </thead>
+                <tr ng-repeat="order in u.orderDetails" class="show_details_tr" id="show_details_tr_dup_{{order.id}}">
+                    <td style="text-align: center;color:#424242">{{order.itemName}}</td>
+                    <td style="text-align: center;color:#424242">{{order.packQty}}</td>
+                    <td style="text-align: center;color:#424242">{{order.netAmount|number:2}}</td>
+                    <td> <button class="datatable_custom_btn" style="padding:7px 10px;font-size:14px" ng-click="showOrderStatus_dup(order,u.id);" style="font-size:17px">
+                     Status
+                     </button> </td>
+                </tr>
+                </table>
+
+
+<div class="show_status_for_mb">                
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup_0_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-todo">Accepted</li><li class="progtrckr-todo">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup_1_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-todo">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup_2_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-todo">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup_3_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-done">Out for Delivery</li><li class="progtrckr-todo">Delivered</li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup_4_{{u.id}}">
+<li class="progtrckr-done">Order Placed</li><li class="progtrckr-done">Accepted</li><li class="progtrckr-done">Packaged</li><li class="progtrckr-done">Out for Delivery</li><li class="progtrckr-done">Delivered</li>
+</ol>
+</div>
+
+
+<div class="show_status_for_mb_2"> 
+   <p id="order_status_put_{{u.id}}"> </p>
+
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup1_0_{{u.id}}">
+<li class="progtrckr-done"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup1_1_{{u.id}}">
+<li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li>
+</ol>
+<ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup1_2_{{u.id}}"> 
+<li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-todo"></li><li class="progtrckr-todo"></li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup1_3_{{u.id}}">
+<li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-todo"></li>
+</ol>
+                <ol class="progtrckr show_progtrckr" data-progtrckr-steps="5" id="show_status_dup1_4_{{u.id}}">
+<li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li><li class="progtrckr-done"></li>
+</ol>
+</div>
+            </div>
+
+
+            <!-- ...............show order details end................................. -->
+
+
+
+            <!-- ...............show prescription................................. -->
+
+            <div class="show_details_table_div" id="show_prescription_div_dup_{{u.id}}">
+              <h3 style="text-align:center"> <b> Download Prescription </b> </h3>
+              <table style="width:100%;margin-top:10px">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Index</th>
+                        <th style="text-align: center;">File. Name</th>
+                        <th style="text-align: center;">Download/View</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr ng-repeat="p in u.prescriptions" id="tr_{{rp.id}}">
+                         <td style="text-align: center;">{{$index+1}}</td>
+                         <td style="text-align: center;">{{p.userFilename}}</td>
+                         <td style="text-align: center;"><a style="cursor: pointer;" ng-click="prescriptionsDownload(p.id,p.userFilename)"><button>
+                           Download</button></a></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+            <!-- ...............show prescription end................................. -->
+     <br>
+     <hr>
+   </div>
+
+  </div>
+
+  <!-- ..............................for mobile end................................  -->
+    
+
+
+      <div ng-if="ctrl.orders.length != 0" style="text-align:right;margin-top:20px">
+
+    <nav aria-label="Page navigation" align="left" style="display:inline-block">
+                    <ul class="pagination">
+                        <li ng-class="{disabled:!navigators.prev.state}">
+                            <a aria-label="Previous" ng-click="prev()" >
+                              <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="page in pages" ng-class="{active:page.active}" ng-disabled="page.active">
+                            <a  ng-click="setPageActive(page.page)" >{{page.page}}</a>
+                        </li>
+                        <li ng-class="{disabled:!navigators.next.state}">
+                            <a aria-label="Next" ng-click="next()">
+                               <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+              </div>
+
+
+
+   
+  

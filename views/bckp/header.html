@@ -1,0 +1,750 @@
+<div ng-controller="LoginController as logctrl">
+   <header class="breadcrumb-bg">
+      <div class="header-top">
+                <div class="container">
+                    <div class="col-sm-12">
+                        <div class="row justify-content-md-between justify-content-center">
+                            <!-- Header Top Left Start -->
+                            <div class="header-top-left mb-sm-15">
+                                <ul>
+                                    <li>Call us : 0123-456-789</li>
+                                    <li>email <a href="#">: demo@example.com</a></li>
+                                </ul>
+                            </div>
+                            <!-- Header Top Left End -->
+                            <!-- Header Top Right Start -->
+                            <div class="header-top-right">
+                                <ul>
+                                 <li>
+                                 <a href="/yewmed/" ng-if="statusCookie == 'Active'">Welcome! {{activeusername}}
+                                    <strong>
+                                       <span id="current_location"></span>
+                                    </strong>
+                                 </a>
+                                 </li>
+                                    <!-- <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> -->
+                                </ul>
+                            </div>
+                            <!-- Header Top Right End -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Container End -->
+            </div>
+   <div class="header-bottom header-sticky">
+         <div class="container">
+            <div class="main-header">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-2 col-md-2 col-sm-3 col-4">
+                     <div class="logo">
+                        <a href="/yewmed/"><img src="themes/img/logo/logo.png" alt="brand-image">
+                        </a>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-10 col-md-10 col-sm-9 col-8">
+                     <div class="maain-menu-area position-relative d-flex justify-content-lg-between justify-content-end">
+                        <div class="primary-menu d-none d-lg-block">
+                           <nav>
+                              <ul class="primary-menu-list d-flex">
+                                 <li class="active">
+                                    <a href="/yewmed/">home<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <ul class="ht-dropdown single-dropdown">
+                                       <li><a href="index.html">Home Version 1</a></li>
+                                       <li><a href="home-2.html">Home Version 2</a></li>
+                                       <li><a href="home-3.html">Home Version 3</a></li>
+                                       <li><a href="home-4.html">Home Version 4</a></li>
+                                    </ul>
+                                 </li>
+
+<li class="position-static">
+   <a href="#">women<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+   <ul class="ht-dropdown megamenu d-flex">
+      <li class="dropdown-submenu" ng-repeat="u in logctrl.categoriesMenu">
+         <a tabindex="-1" href="#">{{u.name}}</a>
+            <ul class="dropdown-menu">
+               <li><a tabindex="-1" href="#">Second level</a></li>
+               <li class="dropdown-submenu">
+                  <a href="#">Even More..</a>
+                  <ul class="dropdown-menu">
+                     <li><a href="#">3rd level</a></li>
+                     <li><a href="#">3rd level</a></li>
+                  </ul>
+               </li>
+               <li><a href="#">Second level</a></li>
+               <li><a href="#">Second level</a></li>
+            </ul>
+      </li>
+   </ul>
+</li>
+
+                                 <li class="position-static">
+                                    <a href="#">women<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <ul class="ht-dropdown megamenu d-flex">
+                                        <li>
+                                          <ul ng-repeat="u in logctrl.categoriesMenu">
+                                             <li class="menu-title">{{u.name}}
+                                                <!-- <ul>
+                                                   <li ng-repeat="sc in u.subCategories">
+                                                    <a ng-click="ctrl.viewProducts('subcategory',sc.id)">
+                                                         <i class="icon-chevron-right"></i>{{sc.name}}
+                                                    </a>
+                                                   </li>
+                                                </ul> -->
+                                             </li>
+                                          </ul>
+                                       </li>
+  <!--  <ul class="nav nav-tabs nav-stacked">
+      <li ng-repeat="u in ctrl.categoriesMenu" class="subMenu" uib-accordion-group class="panel-default" heading="{{u.name}}" is-open="status.isSecondOpen" is-disabled="status.isFirstDisabled">
+         <ul>
+            <li ng-repeat="sc in u.subCategories">
+               <a ng-click="ctrl.viewProducts('subcategory',sc.id)"><i class="icon-chevron-right"></i>{{sc.name}}</a>
+            </li>
+         </ul>
+      </li>
+   </ul> -->
+                                       <!-- <li>
+                                          <ul>
+                                             <li class="menu-title">Dress</li>
+                                             <li><a href="shop.html">cold-shoulder dresses</a></li>
+                                             <li><a href="shop.html">a-line dresses</a></li>
+                                             <li><a href="shop.html">jacket dresses</a></li>
+                                             <li><a href="shop.html">lace dresses</a></li>
+                                          </ul>
+                                       </li> -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">shoes</li>
+                                             <li><a href="shop.html">sandals</a></li>
+                                             <li><a href="shop.html">canvas shoes</a></li>
+                                             <li><a href="shop.html">sneakers</a></li>
+                                             <li><a href="shop.html">boots</a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                       <!-- Single Column Start -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">satchels & tote bags</li>
+                                             <li><a href="shop.html">evening bags</a></li>
+                                             <li><a href="shop.html">wallets & accessories</a></li>
+                                             <li><a href="shop.html">crossbody bags</a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                       <!-- Single Column Start -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">swimwear</li>
+                                             <li><a href="shop.html">outerwear</a></li>
+                                             <li><a href="shop.html">lingerie</a></li>
+                                             <li><a href="shop.html">plus size</a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                    </ul>
+                                    <!-- Mega-Menu End -->
+                                 </li>
+                                 <li>
+                                    <a href="#">men<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <!--  Mega-Menu Start -->
+                                    <ul class="ht-dropdown megamenu-two d-flex">
+                                       <!-- Single Column Start -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">watches</li>
+                                             <li><a href="shop.html">Military Watches </a></li>
+                                             <li><a href="shop.html">Smart watches </a></li>
+                                             <li><a href="shop.html">Sport Watches </a></li>
+                                             <li><a href="shop.html">Pocket Watches </a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                       <!-- Single Column Start -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">shoes for Men’s</li>
+                                             <li><a href="shop.html">Men's Boots</a></li>>
+                                             <li><a href="shop.html">Men's Slippers</a></li
+                                             <li><a href="shop.html">Athletic Shoes</a></li>
+                                             <li><a href="shop.html">Casual Shoes</a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                       <!-- Single Column Start -->
+                                       <li>
+                                          <ul>
+                                             <li class="menu-title">Men's Bags</li>
+                                             <li><a href="shop.html">Backpacks</a></li>
+                                             <li><a href="shop.html">bags waterproof </a></li>
+                                             <li><a href="shop.html">bags laptop </a></li>
+                                             <li><a href="shop.html">bags hand </a></li>
+                                          </ul>
+                                       </li>
+                                       <!-- Single Column End -->
+                                    </ul>
+                                    <!-- Mega-Menu End -->
+                                 </li>
+                                 <li>
+                                    <a href="#">Blog<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <!-- Home Version Dropdown Start -->
+                                    <ul class="ht-dropdown single-dropdown blog-dropdown">
+                                       <li><a href="blog.html">3 column</a></li>
+                                       <li><a href="blog-3-column-fullwidth.html">3 column full width</a></li>
+                                       <li><a href="blog-4-column-fullwidth.html">4 column full width</a></li>
+                                       <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
+                                       <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
+                                       <li><a href="blog-fullwidth-left-sidebar.html">Full Width Left Sidebar</a></li>
+                                       <li><a href="blog-fullwidth-right-sidebar.html">Full Width Right Sidebar</a></li>
+                                       <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                       <li><a href="blog-details.html">Blog Details Right Sidebar</a></li>
+                                       <li><a href="blog-details-fullwidth.html">Blog Details Full Width</a></li>
+                                    </ul>
+                                    <!-- Home Version Dropdown End -->
+                                 </li>
+                                 <li>
+                                    <a href="#">pages<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <!-- Home Version Dropdown Start -->
+                                    <ul class="ht-dropdown single-dropdown">
+                                       <li><a href="contact.html">contact us</a></li>
+                                       <li><a href="about.html">about us</a></li>
+                                       <li>
+                                          <!-- <a href="register.html">register</a> -->
+                                          <a href="register" ng-if="statusCookie != 'Active'"><span>Sign In / Register </span> </a>
+                                       </li>
+                                       <li>
+                                          <!-- <a href="login.html">Login</a> -->
+                                          <a href="login" ><span>Login</span> </a>
+                                       </li>
+                                       <li><a href="404.html">404</a></li>
+                                       <li><a href="forgot-password.html">forgot password</a></li>
+                                    </ul>
+                                    <!-- Home Version Dropdown End -->
+                                 </li>
+                                 <li>
+                                    <a href="#">shop<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <!-- Home Version Dropdown Start -->
+                                    <ul class="ht-dropdown single-dropdown">
+                                       <li><a href="shop.html">Shop</a></li>
+                                       <li><a href="product-details.html">product details</a></li>
+                                       <li><a href="compare.html">compare</a></li>
+                                       <li><a href="mycart">cart</a></li>
+                                       <li><a href="checkout.html">checkout</a></li>
+                                       <li><a href="mywishlist">wishlist</a></li>
+                                    </ul>
+                                    <!-- Home Version Dropdown End -->
+                                 </li>
+                              </ul>
+                           </nav>
+                        </div>
+                        <!-- Primary Menu End -->
+                        <!-- Cart & Search Area Start -->
+                        <div class="search-cart-area pr-all-50">
+                           <ul class="d-flex">
+                              <li ng-if="statusCookie != 'Active'">
+                                 <a id="openlogin" class="fa fa-user" ng-click="openLoginWindow()"></a>
+                              </li>
+                              <li ng-if="statusCookie != 'Deactive'">
+                                 <i class="fa fa-cog" aria-hidden="true"></i>
+                                 <!-- Currency & Language Selection Start -->
+                                 <ul class="ht-dropdown cart-box-width currency-selector">
+                                    <li><a href="profileUpdate">Profile</a></li>
+                                    <li><a href="ordersDetails">Orders</a></li>
+                                    <li role="menuitem"><a href="#">Setting</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="#" ng-click="logctrl.logout()">Sign out</a></li>
+                                    <li>
+                                       <h3>USD</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">€ euro</a></li>
+                                          <li><a href="#">$ us dollar</a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <h3>English</h3>
+                                       <ul class="mb-15">
+                                          <li><a href="#">english</a></li>
+                                          <li><a href="#">اللغة العربية</a></li>
+                                       </ul>
+                                    </li>
+                                    <li>
+                                       <h3>my account</h3>
+                                       <ul>
+                                          <li><a href="account.html">My Account</a></li>
+                                          <li><a href="checkout.html">Checkout</a></li>
+                                          <li>
+                                             <!-- <a href="login.html">Sign out</a> -->
+                                             <!-- <a href="login" ><span>Sign out</span></a> -->
+                                             <a href="#" ng-click="logctrl.logout()">Sign out</a>
+                                          </li>
+                                       </ul>
+                                    </li>
+                                 </ul>
+                                 <!-- Currency & Language Selection End -->
+                              </li>
+                              <li>
+                                 <img src="themes/img/icons/search.png" alt="search-img">
+                                 <!-- Search Area Start -->
+                                 <ul class="ht-dropdown search-box-view">
+                                    <li>
+                                       <!-- <form action="#" class="position-relative">
+                                          <input class="email" placeholder="Search our catalog" name="email" type="text">
+                                          <button type="submit" class="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                          </form> -->
+                                       <!-- <div layout="column" ng-cloak="" class="autocompletedemoCustomTemplate">
+                                          <md-content layout-padding="" layout="column"> -->
+                                             <form ng-submit="$event.preventDefault()">
+                                                <md-autocomplete id="custom-template" 
+                                                   ng-disabled="logctrl.isDisabled" 
+                                                   md-no-cache="logctrl.noCache" 
+                                                   md-selected-item="logctrl.selectedItem" 
+                                                   md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" md-search-text="logctrl.searchText" 
+                                                   md-selected-item-change="logctrl.selectedItemChange(item)" 
+                                                   md-items="item in logctrl.querySearch(logctrl.searchText)" md-item-text="item.name" 
+                                                   md-min-length="2" 
+                                                   input-aria-label="Current Repository" 
+                                                   placeholder="Pick an item" 
+                                                   md-menu-class="autocomplete-custom-template" 
+                                                   md-menu-container-class="custom-container">
+                                                   <md-item-template>
+                                                      <span class="item-title">
+                                                         <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                                                         <span> {{item.name}} </span>
+                                                      </span>
+                                                      <span class="item-metadata">
+                                                      <span>
+                                                      <strong>{{item.watchers}}</strong>
+                                                      </span>
+                                                      <span>
+                                                      <strong>{{item.forks}}</strong>
+                                                      </span>
+                                                      </span>
+                                                   </md-item-template>
+                                                </md-autocomplete>
+                                             </form>
+                                          <!-- </md-content>
+                                       </div> -->
+                                    </li>
+                                 </ul>
+                                 <!-- Search Area End -->
+                              </li>
+                              <!-- <li>
+                                 <a href="mywishlist" style="padding-right: 22px;color:#fff;">
+                                    <i ng-if="totalitemsinwishlist>0" class="fas fa-heart"></i>
+                                    <i ng-if="totalitemsinwishlist==0" class="far fa-heart"></i>
+                                    <span>{{totalitemsinwishlist}}</span>
+                                 </a>
+                              </li> -->
+                              <li ng-if="statusCookie == 'Active'">
+                                 <a href="mywishlist" style="padding-right: 22px;color:#fff;">
+                                    <i class="far fa-heart"></i>
+                                    <span>{{totalitemsinwishlist}}</span>
+                                 </a>
+                              </li>
+                              <li>
+                                 <a href="mycart"><img src="themes/img/icons/cart.png" alt="cart-img">
+                                    <span>{{totalitemsincart}}</span>
+                                 </a>
+                                 <!-- Cart Box Start -->
+                                 <!-- <ul class="ht-dropdown cart-box-width"> -->
+                                    <!-- Single Cart Box Start -->
+                                   <!--  <li class="single-cart-box">
+                                       <div class="cart-img">
+                                          <a href="#"><img src="themes/img/products/p1.jpg" alt="cart-image"></a>
+                                          <span class="pro-quantity">1X</span>
+                                       </div>
+                                       <div class="cart-content">
+                                          <h6><a href="product-details.html">Printed Summer Red </a></h6>
+                                          <span class="cart-price">27.45</span>
+                                          <span>Size: S</span>
+                                          <span>Color: Yellow</span>
+                                       </div>
+                                       <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                                    </li> -->
+                                    <!-- Single Cart Box End -->
+                                    <!-- Single Cart Box Start -->
+                                    <!-- <li class="single-cart-box">
+                                       <div class="cart-img">
+                                          <a href="#"><img src="themes/img/products/p2.jpg" alt="cart-image"></a>
+                                          <span class="pro-quantity">1X</span>
+                                       </div>
+                                       <div class="cart-content">
+                                          <h6><a href="product-details.html">Printed Round Neck</a></h6>
+                                          <span class="cart-price">45.00</span>
+                                          <span>Size: XL</span>
+                                          <span>Color: Green</span>
+                                       </div>
+                                       <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                                    </li> -->
+                                    <!-- Single Cart Box End -->
+                                    <!-- Cart Footer Inner Start -->
+                                    <!-- <li class="cart-footer">
+                                       <ul class="price-content">
+                                          <li>Subtotal <span>$57.95</span></li>
+                                          <li>Shipping <span>Free</span></li>
+                                          <li>Taxes <span>$0.00</span></li>
+                                          <li>Total <span>$64.95</span></li>
+                                       </ul>
+                                       <div class="cart-actions text-center">
+                                          <a class="cart-checkout" href="checkout.html">Checkout</a>
+                                       </div>
+                                    </li> -->
+                                    <!-- Cart Footer Inner End -->
+                                 <!-- </ul> -->
+                                 <!-- Cart Box End -->
+                              </li>
+                           </ul>
+                        </div>
+                        <!-- Cart & Search Area End -->
+                     </div>
+                  </div>
+                  <!-- Header Menu & Cart Area End Here -->
+               </div>
+               <!-- Mobile Menu Start -->
+               <div class="mobile-menu d-block d-lg-none">
+                  <nav>
+                     <ul>
+                        <li>
+                           <a href="#">home</a>
+                           <!-- Home Version Dropdown Start -->
+                           <ul>
+                              <li><a href="index.html">Home Version 1</a></li>
+                              <li><a href="home-2.html">Home Version 2</a></li>
+                              <li><a href="home-3.html">Home Version 3</a></li>
+                              <li><a href="home-4.html">Home Version 4</a></li>
+                           </ul>
+                           <!-- Home Version Dropdown End -->
+                        </li>
+                        <li>
+                           <a href="#">men</a>
+                           <!-- Men Accessories Dropdown Start -->
+                           <ul class="submobile-mega-dropdown">
+                              <li>
+                                 <a href="#">watches</a>
+                                 <!-- Watches Dropdown Start -->
+                                 <ul>
+                                    <li><a href="shop.html">Military Watches </a></li>
+                                    <li><a href="shop.html">Smart watches </a></li>
+                                    <li><a href="shop.html">Sport Watches </a></li>
+                                    <li><a href="shop.html">Pocket Watches </a></li>
+                                 </ul>
+                                 <!-- Watches Dropdown End -->
+                              </li>
+                              <li>
+                                 <a href="#">shoes for Men’s</a>
+                                 <!-- Shoes Dropdown Start -->
+                                 <ul>
+                                    <li><a href="shop.html">Men's Boots</a></li>
+                                    <li><a href="shop.html">Men's Slippers</a></li>
+                                    <li><a href="shop.html">Athletic Shoes</a></li>
+                                    <li><a href="shop.html">Casual Shoes</a></li>
+                                 </ul>
+                                 <!-- Shoes Dropdown End -->
+                              </li>
+                              <li>
+                                 <a href="#">Men's Bags</a>
+                                 <!-- Bags Dropdown Start -->
+                                 <ul>
+                                    <li><a href="shop.html">Backpacks</a></li>
+                                    <li><a href="shop.html">bags waterproof </a></li>
+                                    <li><a href="shop.html">bags laptop </a></li>
+                                    <li><a href="shop.html">bags hand </a></li>
+                                 </ul>
+                                 <!-- Bags Dropdown End -->
+                              </li>
+                           </ul>
+                           <!-- Men Accessories Dropdown End -->
+                        </li>
+                        <li>
+                           <a href="#">women</a>
+                           <!-- Women Accessories Dropdown Start -->
+                           <ul class="submobile-mega-dropdown">
+                              <!-- Dress Dropdown Start -->
+                              <li>
+                                 <a href="#">Dress</a>
+                                 <ul>
+                                    <li><a href="shop.html">cold-shoulder dresses</a></li>
+                                    <li><a href="shop.html">a-line dresses</a></li>
+                                    <li><a href="shop.html">jacket dresses</a></li>
+                                    <li><a href="shop.html">lace dresses</a></li>
+                                 </ul>
+                              </li>
+                              <!-- Dress Dropdown End -->
+                              <!-- shoes Dropdown Start -->
+                              <li>
+                                 <a href="#">shoes</a>
+                                 <ul>
+                                    <li><a href="shop.html">sandals</a></li>
+                                    <li><a href="shop.html">canvas shoes</a></li>
+                                    <li><a href="shop.html">sneakers</a></li>
+                                    <li><a href="shop.html">boots</a></li>
+                                 </ul>
+                              </li>
+                              <!-- shoes Dropdown End -->
+                              <!-- Bags Dropdown Start -->
+                              <li>
+                                 <a href="#">satchels & tote bags</a>
+                                 <ul>
+                                    <li><a href="shop.html">evening bags</a></li>
+                                    <li><a href="shop.html">wallets & accessories</a></li>
+                                    <li><a href="shop.html">crossbody bags</a></li>
+                                 </ul>
+                              </li>
+                              <!-- Bags Dropdown End -->
+                              <!-- swimwear Dropdown Start -->
+                              <li>
+                                 <a href="#">swimwear</a>
+                                 <ul>
+                                    <li><a href="shop.html">outerwear</a></li>
+                                    <li><a href="shop.html">lingerie</a></li>
+                                    <li><a href="shop.html">plus size</a></li>
+                                 </ul>
+                              </li>
+                              <!-- swimwear Dropdown End -->
+                           </ul>
+                           <!-- Women Accessories Dropdown Start -->
+                        </li>
+                        <li>
+                           <a href="#">shop</a>
+                           <!-- Mobile Menu Dropdown Start -->
+                           <ul>
+                              <li><a href="shop.html">Shop</a></li>
+                              <li><a href="product-details.html">product details</a></li>
+                              <li><a href="compare.html">compare</a></li>
+                              <li><a href="cart.html">cart</a></li>
+                              <li><a href="checkout.html">checkout</a></li>
+                              <li><a href="wishlist.html">wishlist</a></li>
+                           </ul>
+                           <!-- Mobile Menu Dropdown End -->
+                        </li>
+                        <li>
+                           <a href="#">Blog</a>
+                           <!-- Mobile Menu Dropdown Start -->
+                           <ul>
+                              <li><a href="blog.html">3 column</a></li>
+                              <li><a href="blog-3-column-fullwidth.html">3 column full width</a></li>
+                              <li><a href="blog-4-column-fullwidth.html">4 column full width</a></li>
+                              <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
+                              <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
+                              <li><a href="blog-fullwidth-left-sidebar.html">Full Width Left Sidebar</a></li>
+                              <li><a href="blog-fullwidth-right-sidebar.html">Full Width Right Sidebar</a></li>
+                              <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                              <li><a href="blog-details.html">Blog Details Right Sidebar</a></li>
+                              <li><a href="blog-details-fullwidth.html">Blog Details Full Width</a></li>
+                           </ul>
+                           <!-- Mobile Menu Dropdown End -->
+                        </li>
+                        <li>
+                           <a href="#">pages</a>
+                           <!-- Mobile Menu Dropdown Start -->
+                           <ul>
+                              <li><a href="about.html">about us</a></li>
+                              <li><a href="account.html">My account</a></li>
+                              <li>
+                                 <!-- <a href="register.html">register</a> -->
+                                 <a href="register" ng-if="statusCookie != 'Active'"><span class="btn btn-mini btn-primary">Sign In / Register </span> </a>
+                              </li>
+                              <li>
+                                 <!-- <a href="login.html">Login</a> -->
+                                 <a href="login" ><span>Login</span> </a>
+                              </li>
+                              <li><a href="404.html">404</a></li>
+                              <li><a href="forgot-password.html">forgot password</a></li>
+                           </ul>
+                           <!-- Mobile Menu Dropdown End -->
+                        </li>
+                        <li><a href="contact.html">contact us</a></li>
+                     </ul>
+                  </nav>
+               </div>
+               <!-- Mobile Menu End -->
+            </div>
+         </div>
+         <!-- Container End -->
+      </div>
+      <!-- Header Bottom End Here -->
+   </header>
+   <!-- Main Header Area End Here -->
+   <!-- -------------------------login-window Start---------------   -->
+   <div class="modal fade" id="login-window">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+         <div class="modal-content">
+            <form ng-submit="logctrl.login()" name="loginForm">
+               <!-- Modal Header -->
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+               </div>
+               <!-- Modal body -->
+               <div class="modal-body">
+                  <div class="login-form">
+                     <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-7">
+                           <input type="email" ng-model="logctrl.user.userName"
+                              name="email" id="uid" class="span3"
+                              placeholder="Enter your Email" required />
+                           <div class="has-error" ng-show="loginForm.$dirty">
+                              <span ng-show="loginForm.email.$error.required">This
+                              is a required field</span> <span
+                                 ng-show="loginForm.email.$invalid">This field is
+                              invalid </span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-7">
+                           <input type="password" ng-model="logctrl.user.password"
+                              name="password" id="pwd" class="span3"
+                              placeholder="Enter your Password" required />
+                              <span toggle="#pwd" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                           <div class="has-error" ng-show="loginForm.$dirty">
+                              <span ng-show="loginForm.password.$error.required">This
+                              is a required field</span>
+                           </div>
+                              <!-- <button class="btn show-btn" type="button">
+                                 <span toggle="#pwd" class="fa fa-eye toggle-password">Show</span>
+                              </button> -->
+                        </div>
+                     </div>
+                     <div class="login-details text-center mb-25">
+                        <a href="forgot-password.html">Forgot your password?</a>
+                        <button type="submit" class="login-btn" ng-disabled="loginForm.$invalid">Sign in
+                        </button>
+                     </div>
+                     <div class="login-footer text-center">
+                        <p>No account?<a href="register" class="fa fa-user"ng-click="closeLoginWindow()">Create one here</a></p>
+                     </div>
+                     <!-- <div class="login-footer text-center">
+                        <p>No account?<a style="cursor:pointer" ng-click="closeLoginWindow()">Create one here</a></p>
+                        </div> -->
+                  </div>
+               </div>
+            </form>
+            <!-- Modal footer -->
+         </div>
+      </div>
+   </div>
+   <!-- -------------------------login-window End---------------   -->
+   <!-- -------------------------Search-window starts---------------   -->
+   <!-- <div layout="column" ng-cloak="" class="autocompletedemoCustomTemplate" ng-app="MyApp">
+      <md-content layout-padding="" layout="column">
+         <form ng-submit="$event.preventDefault()">
+            <p>Use <code>˂md-autocomplete˃</code> with custom templates to show styled autocomplete results.</p>
+            <md-autocomplete id="custom-template" 
+               ng-disabled="logctrl.isDisabled" 
+               md-no-cache="logctrl.noCache" 
+               md-selected-item="logctrl.selectedItem" 
+               md-search-text-change="logctrl.searchTextChange(logctrl.searchText)" md-search-text="logctrl.searchText" 
+               md-selected-item-change="logctrl.selectedItemChange(item)" 
+               md-items="item in logctrl.querySearch(logctrl.searchText)" md-item-text="item.name" 
+               md-min-length="2" 
+               input-aria-label="Current Repository" 
+               placeholder="Pick an item" 
+               md-menu-class="autocomplete-custom-template" 
+               md-menu-container-class="custom-container">
+               <md-item-template>
+                  <span class="item-title">
+                     <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                     <span> {{item.name}} </span>
+                  </span>
+                  <span class="item-metadata">
+                  <span>
+                  <strong>{{item.watchers}}</strong> watchers
+                  </span>
+                  <span>
+                  <strong>{{item.forks}}</strong> forks
+                  </span>
+                  </span>
+               </md-item-template>
+            </md-autocomplete>
+         </form>
+      </md-content>
+   </div> -->
+   <!-- -------------------------Search-window End---------------   -->
+   <!--
+      Copyright 2018 Google LLC. All Rights Reserved. 
+      Use of this source code is governed by an MIT-style license that can be found
+      in the LICENSE file at http://material.angularjs.org/HEAD/license.
+      -->
+</div>
+
+
+
+
+<script type="text/javascript">
+   $(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>
+<style type="text/css">
+   
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+   $(".toggle-password").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>

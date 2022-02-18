@@ -1,0 +1,795 @@
+<div ng-controller="CartController as cartcntrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+<div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+<div class="container-fluid">
+   <!-- <div class="breadcrumb-area">
+      <div class="container">
+         <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a href="{{contextpath}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="account.html">Account</a></li>
+            <li class="breadcrumb-item active">SHOPPING CART</li>
+         </ol>
+      </div>
+   </div> -->
+
+   <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Shopping Cart</li>
+                </ol>
+            </div>
+
+
+     <div class="all_page_middle_div all_page_header">
+     <h3 class="all_page_header_h3"> MY CART </h3>
+     <hr>
+     </div>
+
+     <div style="margin-top:30px;padding:0px 20px">
+           <marquee>
+              <b style="color:red;font-size:20px">Below 200 Ruppes we can't deliver</b>
+           </marquee>  
+     </div>
+
+   <!-- <h3>
+      SHOPPING CART <a href="{{contextpath}}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a>
+   </h3> -->
+   <div class="all_page_middle_div">
+      <span ng-hide="isCheck" id="fail-alert" style="color:red" ng-if="crtMsg">{{crtMsg}} </span>
+   </div>
+   <!-- <div class="table-responsive" ng-if="cartdata.length!=0">
+      <table class="table table-bordered table-responsive"> -->
+         <div class="table-responsive all_page_middle_div" ng-if="cartdata.length!=0">
+      <!-- <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th style="text-align: center;">Select</th>
+               <th style="text-align: center;">Index</th>
+               <th style="text-align: center;">Product</th>
+               <th style="text-align: center;">Availability</th>
+               <th style="text-align: center;">Quantity/Update</th>
+               <th style="text-align: center;">Price</th>
+               <th style="text-align: center;">Discount</th>
+               <th style="text-align: center;">Tax</th>
+               <th style="text-align: center;">Total</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr ng-repeat="rp in cartdata" id="tr_{{rp.id}}">
+               <td style="text-align: center;">
+                  <div ng-if="itemAvailabilityData[rp.id] =='Available'">
+                     <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}"> 
+                  </div>
+                  <div ng-if="itemAvailabilityData[rp.id] !='Available'">
+                     <input type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" 
+                       id="selecteditem_checkbox_{{rp.id}}" disabled> 
+                  </div>
+               </td>
+               <td style="text-align: center;">{{$index+1}} </td>
+               <td style="text-align: center;"><a href="" ng-click="viewItems(rp.id)">{{rp.name}}</a></td>
+               <td style="text-align: center;">{{itemAvailabilityData[rp.id]}}</td>
+               <td style="text-align: center;">
+                  <div class="input-append">
+                     <input class="span1" style="max-width:34px;text-align:center;" id="itmqnty_{{rp.id}}" size="16" type="text" min="1" value="{{itemQuantitydata[rp.id]}}" ng-change="change_itemqty(rp.id)" ng-model="itemQuantitydata[rp.id]"/>
+                     <button class="btn" type="button" ng-click="delete_itmqnty(rp.id)"><i class="icon-minus">-</i></button>
+                     <button class="btn" type="button" ng-click="add_itmqnty(rp.id)"><i class="icon-plus">+</i></button>
+                     <button class="btn btn-danger" type="button" ng-click="remove_itm(rp.id)"><i class="icon-remove icon-white">x</i></button>          
+                  </div>
+               </td>
+               <td style="text-align: center;">{{rp.price}}</td>
+               <td style="text-align: center;">
+                  <span ng-if="rp.isDiscount!= 0">{{rp.discount}} %</span>
+                  <span ng-if="rp.isDiscount == 0">0.0 %</span>
+               </td>
+               <td style="text-align: center;">{{rp.saleTaxPercentage}} %</td>
+               
+               <td style="text-align: center;">{{itemPricedata[rp.id]}}</td>
+            </tr>
+            
+         </tbody>
+      </table> -->
+
+
+   <table role="table" class="carttable">
+         <thead role="rowgroup">
+               <tr role="row">
+               <th role="columnheader" style="font-family: 'Poppins', sans-serif;font-size:15px;font-weight:600"> <input style="cursor: pointer;margin-right:10px" type="checkbox" id="isAllSelected" ng-click="toggleAll()" ng-model="isAllSelected" ng-checked="false"> <!-- {{checked_count}} --> Select </th>
+               <!-- <th role="columnheader">Index</th> -->
+               <th role="columnheader">Image</th>
+               <th role="columnheader">Product</th>
+               <th role="columnheader">Availability</th>
+               <th role="columnheader">Mrp</th>
+               <th role="columnheader">Quantity</th>
+               <!-- <th role="columnheader">Discount</th>
+               <th role="columnheader">Tax</th> -->
+               <th role="columnheader">Total</th>
+               <th role="columnheader"></th>
+               </tr>
+         </thead>
+         <tbody role="rowgroup">
+               <tr role="row" ng-repeat="rp in cartdata" id="tr_{{rp.id}}">
+                     <td role="cell" class="new_whistlisttable_td"> 
+                          <div ng-if="itemAvailabilityData[rp.id] =='Available'">
+                                <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" class="child child1" ng-click="toggleSingle()" ng-checked="false"> 
+                          </div>
+                          <div ng-if="itemAvailabilityData[rp.id] !='Available'">
+                                <input type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" title="Out Of Stock" disabled> 
+                          </div>
+                     </td>
+                     <!-- <td role="cell" class="new_whistlisttable_td"> {{$index+1}} </td> -->
+                     <td role="cell" class="new_whistlisttable_td" ng-if="rp.groupId !=133"> <img src="/yewmed/themes/img/yewmed_new_pics/product3/{{rp.groupId}}.jpg" style="height:48px;width:53px"> </td>
+                     <td role="cell" class="new_whistlisttable_td" ng-if="rp.groupId ==133"> <img src="/yewmed/themes/img/yewmed_new_pics/productwise3/{{rp.id}}.jpg" style="height:48px;width:53px"> </td>
+                     <td role="cell" class="new_whistlisttable_td"><a href="" ng-click="viewItems(rp.id)" style="color:#424242">{{rp.name}}</a></td>
+                     <td role="cell" class="new_whistlisttable_td" ng-if="itemAvailabilityData[rp.id] !='Available'"><b style="color:red">{{itemAvailabilityData[rp.id]}}</b></td>
+                     <td role="cell" class="new_whistlisttable_td" ng-if="itemAvailabilityData[rp.id] =='Available'">{{itemAvailabilityData[rp.id]}}</td>
+                     <td role="cell" class="new_whistlisttable_td"  style="white-space: nowrap;"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{rp.price | number:2}} </td>
+                     <td role="cell" class="new_whistlisttable_td cart_table_quantity_for_tab">
+                        <div class="input-append" style="position: relative;left: 15px;">
+                                 <input class="span1" style="max-width:34px;text-align:center;height:41px;border:1px solid #424242" id="itmqnty_{{rp.id}}" size="16" type="text" min="1" max="3" value="{{itemQuantitydata[rp.id]}}" ng-change="change_itemqty(rp.id)" ng-model="itemQuantitydata[rp.id]"/>
+
+                                 <!-- <button class="btn" type="button" ng-click="delete_itmqnty(rp.id)"> --><i ng-click="add_itmqnty(rp.id)" style="top: -9px;left:-3px;" class="fa fa-angle-up cart_page_itemqty"></i><!-- </button> -->
+                                 <!-- <button class="btn" type="button" ng-click="add_itmqnty(rp.id)"> --><i ng-click="delete_itmqnty(rp.id)" style="top: 11px;left:-31px;border-top: 0px;" class="fa fa-angle-down cart_page_itemqty"></i><!-- </button> -->
+                                 <!-- <button class="btn btn-danger" type="button" ng-click="remove_itm(rp.id)"><i class="icon-remove icon-white">x</i></button>   -->        
+                         </div> 
+                     </td>
+                     
+                     <!-- <td role="cell" class="new_whistlisttable_td">
+                        <span ng-if="rp.isDiscount!= 0">{{rp.discount}} %</span>
+                         <span ng-if="rp.isDiscount == 0">0.0 %</span>
+                     </td>
+                     <td role="cell" class="new_whistlisttable_td"> {{rp.saleTaxPercentage}} % </td> -->
+                     <!-- <td style="text-align: center;">{{itemPricedata[$index]}}</td> -->
+                     <!-- <td role="cell" class="new_whistlisttable_td"> {{itemPricedata[rp.id]}} </td>  -->
+                     <td role="cell" class="new_whistlisttable_td new_carttable_td_price" style="white-space: nowrap;"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{rp.price*itemQuantitydata[rp.id] | number:2}} </td>
+                     
+                     <td style="padding:0px 15px"> <i class="fa fa-trash-o cart_page_itemdlt" aria-hidden="true" ng-click="remove_itm(rp.id)"> </i> </td>
+               </tr>
+               <!-- <tr>
+                              <td colspan="7" style="text-align:right">Total Discount: </td>
+                              <td id="cart_item_tot_discount" style="text-align: center;">{{totaldiscountamt}} </td>
+                              </tr>
+                              <tr>
+                              <td colspan="7" style="text-align:right">Total Tax:   </td>
+                              <td id="cart_item_tot_tax" style="text-align: center;">{{totaltaxamt}} </td>
+                              </tr>
+                              <tr>
+                              <td colspan="7" style="text-align:right"><strong>TOTAL</strong></td>
+                              <td class="label label-important" style="display:block;text-align: center;"> <strong><span id="cart_tot_amt_to_pay" >{{totalamt}}</span></strong></td>
+                              </tr> -->
+         </tbody>
+   </table>
+   </div>
+
+
+   <div ng-if="cartdata.length==0" style="text-align:center;" id="emptymsg"><img width="27%" height="30%" src="/yewmed/themes/images/cart_is_empty.png" title="" alt=""/></div>
+
+
+<!-- ...............................For Mobile view........................................ -->
+
+
+   <div class="carttable_for_mb" style="margin-top:30px;padding: 0px 15px 0px 15px;">
+
+    <div ng-repeat="rp in cartdata" id="tr_{{rp.id}}" class="tables_for_mb">
+    <p style="text-align:center"> <span style="float:left"> <i class="fa fa-trash-o cart_page_itemdlt" aria-hidden="true" ng-click="remove_itm(rp.id)"> </i> </span> <img src="/yewmed/themes/img/yewmed_new_pics/product1/{{rp.groupId}}.jpg" style="height: 100px;width: 100px;margin-top:35px" ng-if="rp.groupId !=133">  <img src="/yewmed/themes/img/yewmed_new_pics/productwise3/{{rp.id}}.jpg" style="height: 100px;width: 100px;margin-top:35px" ng-if="rp.groupId ==133">  </p>
+    <div style="width:100%;display:flex;margin-top:25px">
+          <div style="width:50%;font-family: 'Poppins', sans-serif;font-weight:600"> Select </div>
+          <div style="width:50%;text-align:right" ng-if="itemAvailabilityData[rp.id] =='Available'"> 
+            <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" class="child child2" ng-click="toggleSingle()" ng-checked="false">
+          </div>
+          <div style="width:50%;text-align:right" ng-if="itemAvailabilityData[rp.id] !='Available'"> 
+            <input type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" title="Out Of Stock" disabled>
+          </div>
+
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Product Name </div>
+          <div class="mobile_tableformat_2nd_div">  {{rp.name}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Price </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{rp.price | number:2}} </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Availability </div>
+          <div class="mobile_tableformat_2nd_div" style="color: red" ng-if="itemAvailabilityData[rp.id]!='Available'"> <b> {{itemAvailabilityData[rp.id]}} </b> </div>
+          <div class="mobile_tableformat_2nd_div" ng-if="itemAvailabilityData[rp.id]=='Available'"> {{itemAvailabilityData[rp.id]}}  </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Quantity </div>
+          <div class="mobile_tableformat_2nd_div"> <p > <!-- <i ng-click="add_itmqnty(rp.id)" class="fa fa-plus"></i> --> <input type="button" ng-click="delete_itmqnty(rp.id)" value="-" class="plus" style="width: 30px;border: 1px solid #00000069;position:relative;left:10px;background:white;color:#929292"> <input class="span1" style="text-align:center;width:30px;border: 1px solid #00000069;position:relative;left:5px;color:#929292" id="itmqnty_{{rp.id}}" size="15" type="text" min="1" value="{{itemQuantitydata[rp.id]}}" ng-change="change_itemqty(rp.id)" ng-model="itemQuantitydata[rp.id]"/>  <input type="button" ng-click="add_itmqnty(rp.id)" value="+" class="plus" style="width: 30px;border: 1px solid #00000069;background:white;color:#929292"> </p> 
+       </div>
+     </div>
+
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Total </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{rp.price*itemQuantitydata[rp.id] | number:2}} </div>
+     </div>
+
+     <br>
+     <hr>
+   </div>
+
+  </div> 
+
+
+<!-- ...............................For Mobile view end........................................ -->
+
+
+   <div class="cart_below_table row main-header" ng-if="cartdata.length>0" style="margin-top:60px">
+      <div class="col-md-6">  </div>
+      <div class="col-md-6 col-sm-12"> <p style="font-family: 'Poppins', sans-serif;font-size:22px;color:#303030;font-weight:600"> CART TOTALS </p> 
+         <table style="width:100%;margin-top:18px">
+            <tr class="cartpage_cal_table_tr"> 
+               <td class="cartpage_cal_table_1td"> SUB-TOTAL: </td>
+               <td class="cartpage_cal_table_2td"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" class="cartpage_cal_table_img"> <span id="sub_total"> 0.00 </span> </td>
+            </tr>
+            <tr class="cartpage_cal_table_tr"> 
+               <td class="cartpage_cal_table_1td"> TOTAL DISCOUNT(<span style="font-size:14px">if any</span>): </td>
+               <td class="cartpage_cal_table_2td"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" class="cartpage_cal_table_img"> <span id="total_discount"> 0.00 </span> </td>
+            </tr>
+            <tr class="cartpage_cal_table_tr"> 
+               <td class="cartpage_cal_table_1td"> TOTAL TAX<!-- (<span style="font-size:14px">12%</span>) -->: </td>
+               <td class="cartpage_cal_table_2td"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" class="cartpage_cal_table_img"> <span id="total_tax"> 0.00 </span> </td>
+            </tr>
+            <!-- <tr class="cartpage_cal_table_tr"> 
+                <td class="cartpage_cal_table_1td"> TOTAL AMOUNT: </td>
+                <td class="cartpage_cal_table_2td"> <img src="themes/img/yewmed_new_pics/product/rupees_icon3.png" class="cartpage_cal_table_img"> <span id="total_amount"> 0.00 </span> </td>
+            </tr> -->
+            <tr class="cartpage_cal_table_tr"> 
+                <td class="cartpage_cal_table_1td"> TOTAL AMOUNT(<span style="font-size:14px">Rounded Off</span>): </td>
+                <td class="cartpage_cal_table_2td"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" class="cartpage_cal_table_img"> <span id="total_payableamt"> 0.00 </span> </td>
+            </tr>
+         </table>
+      </div>
+   </div>
+
+
+   <!-- <table class="table table-bordered" ng-if="statusCookie != 'Deactive' && cartdata.length !=0">
+      <tbody>
+         <tr>
+            <td>
+               <div class="control-group">
+                  <label class="controls" style="margin-top:10px"><strong>Shipping Address:</strong> 
+                  {{selectedaddress.streetAddress}},{{selectedaddress.country.name}},{{selectedaddress.state.name}},{{selectedaddress.city.name}},{{selectedaddress.pincode}}
+                  </label>
+                  <span class="cart_change_span">
+                  <a class="btn btn-small cart_change_a" data-toggle="modal" data-target="#addressmodal"> <b> Change </b> </a>
+                  <a class="btn btn-small cart_change_a" data-toggle="modal" data-target="#addressaddmodal"> <b> Add </b> </a>
+                  <a class="btn btn-small cart_change_a" data-toggle="modal" data-target="#addresseditmodal" style="margin-right:0px"> <b> Edit </b> </a> </span>
+               </div>
+            </td>
+         </tr>
+      </tbody>
+   </table> -->
+    <div class="modal fade" id="addressmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content" style="height:700px;overflow:scroll">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title"> <u> SELECT ADDRESS </u> </h4>
+               <button type="button" class="close" data-dismiss="modal">×</button>
+            </div> <br>
+            <div class="modal-body">
+               <div ng-repeat="data in addressData">
+                  <div class="well">
+                     <h5 style="text-align:left;font-size:18px;font-weight:600"> <u> Address {{$index+1}} ({{data.type}}) </u> </h5>
+                     <div class="control-group" style="margin-top:15px">
+                        <label class="control-label">{{data.streetAddress}}</label>
+                        <label class="control-label">{{data.country.name}},{{data.state.name}},{{data.city.name}}</label>
+                        <label class="control-label">{{data.pincode}}</label>
+                        <label class="control-label">{{data.landmark}}</label>
+                        <label class="control-label">{{data.contactPhone}}</label>
+                        <label class="control-label">{{data.invoiceMail}}
+                        </label>
+                     </div>
+                     <div class="controls" style="text-align:left">
+                        <button type="button" class="btn block cart_selectaddress_btn" ng-click="checkShippingPosibility(data.id,data.latitude,data.longitude);"> Select Address </button>
+                     </div>
+                  </div> <hr style="border-top:2px solid white"> 
+               </div>
+            </div>
+            <div class="modal-footer"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+         </div>
+         </div>
+         
+      </div>
+   </div>
+</div>
+
+
+
+  <!--  .................... for direct purchse button click........................ -->
+
+   <div class="modal fade" id="direct_purchse_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+      <div class="modal-dialog modal-lg">
+         <!-- Modal content-->
+         <div class="modal-content" style="">
+            <!-- <div class="modal-header">
+            </div> <br> -->
+            <div class="modal-body" style="padding-top:30px">
+              <h5 style="color:#292929;font-family:'Poppins', sans-serif;font-size:25px;font-weight:600"> The following items are currently unavailable </h5>
+              <div style="margin-top:20px">
+                <div style="padding:10px 30px">
+                  <table style="width:100%">
+                    <tr>
+                       <th role="columnheader">INDEX</th>
+                       <th role="columnheader">PRODUCT</th>
+                       <th role="columnheader">QUANTITY</th>
+                       <th role="columnheader">MRP</th>
+                   </tr>
+                   <tr ng-repeat="item in show_unavaiable_item">
+                       <td> {{$index+1}} </td>
+                       <td> {{item.name}} </td>
+                       <td> {{item.quantity}} </td>
+                       <td> {{item.price*item.quantity|number:2}} </td>
+                   </tr>
+                  </table>
+                  <!-- <p style="font-size:16px;font-family: sans-serif;"><b>{{item}}</b></p> -->
+                </div> 
+              </div>
+               <p style="font-size:22px;margin-top:18px;font-family:sans-serif;font-weight:500;letter-spacing:.25px"> Do you want to proceed to buy remaining items ? </p>    
+            </div>
+            <div class="modal-footer" style="padding-bottom:30px;margin-top:10px"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_go_to_cart(1)">OK</button>  
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="direct_go_to_cart(2)">CANCEL</button>
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+  <!-- .................... for direct purchse button click end........................ -->
+
+
+  <!--  .................... for 200 rupess funda start ........................ -->
+
+   <div class="modal fade" id="purchase_200rs_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+      <div class="modal-dialog modal-sm">
+         <!-- Modal content-->
+         <div class="modal-content" style="">
+            <!-- <div class="modal-header">
+            </div> <br> -->
+            <div class="modal-body" style="padding-top:30px">
+              <h5 style="color:red;font-family:'Poppins', sans-serif;font-size:20px;font-weight:600"> We can't deliver medicine below 2oo rupees purchase </h5>  
+            </div>
+            <div class="modal-footer" style="padding-bottom:30px;margin-top:10px"> 
+            <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal" ng-click="hide_200rs_modal">OK</button>  
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+  <!-- .................... for 200 rupess funda end ........................ -->
+
+
+
+ <div class="modal fade" id="addressaddmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+   <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+            <h4 class="modal-title"> <u> ADD ADDRESS </u> </h4> 
+         </div> <br>
+         <form class="form-horizontal"  ng-submit="addAddress()" name="addressAddForm">
+            <div class="modal-body">
+               <div class="well">
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                       <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label>
+                     </div>
+                     <!--  <div class="controls"> -->
+                     <div class="col-md-8">   
+                        <textarea ng-model="newaddress.streetAddress" name="streetAddress" rows="5" style="width:100%" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.streetAddress.$invalid && addressAddForm.streetAddress.$touched">
+                        <span ng-show="addressAddForm.streetAddress.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div> 
+                     <!-- </div> -->
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                        <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                        </label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select id="countryId_add" name="countryId" ng-change="getStates(1)"  ng-model="newaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries" style="width:100%">
+                           <!-- <option value="" disabled>Select Country</option>
+                              <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option> -->
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.countryId.$invalid && addressAddForm.countryId.$touched">
+                        <span ng-show="addressAddForm.countryId.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                        <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select name="stateId" id="stateId_add" ng-change="getCities(1)" ng-model="newaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states" style="width:100%">
+                           <!-- <option value="" disabled>Select-State</option>
+                              <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option> -->
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.stateId.$invalid && addressAddForm.stateId.$touched">
+                        <span ng-show="addressAddForm.stateId.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                        <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                     </div>   
+                     <div class="controls col-md-8">
+                        <select ng-model="newaddress.cityId" name="city" id="city_add" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                           <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.city.$invalid && addressAddForm.city.$touched">
+                        <span ng-show="addressAddForm.city.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                        <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <input type="text" ng-model="newaddress.pincode" maxlength="6" name="pincode" placeholder="Zip / Postal Code"  required class="span3 addaddressmodal_input"> 
+                        <div class="has-error" ng-show="addressAddForm.pincode.$invalid">
+                           <span class="error_message" ng-show="addressAddForm.pincode.$error.required && addressAddForm.pincode.$touched">Zip is required</span>
+                        </div>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                          <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <input type="text" ng-model="newaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3 addaddressmodal_input"> 
+                        <div class="has-error" ng-show="addressAddForm.landmark.$invalid">
+                           <span class="error_message" ng-show="addressAddForm.landmark.$error.required && addressAddForm.landmark.$touched">Landmark is required</span>
+                        </div>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                          <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                     </div>     
+                     <div class="controls col-md-8">
+                        <select class=""  ng-model="newaddress.type" name="type" class="form-control" ng-required="true" class="span3 addaddressmodal_input">
+                           <option value="" disabled>Select</option>
+                           <option value="Home">Home</option>
+                           <option value="Work">Work</option>
+                           <option value="Others">Others</option>
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.type.$invalid && addressAddForm.type.$touched">
+                        <span ng-show="addressAddForm.type.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" ng-disabled="addressAddForm.$invalid" disabled="disabled" class="btn btn-default btn-sm"> <b> Add </b> </button>
+               <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal"> <b> Close </b> </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+
+ <div class="modal fade" id="addresseditmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+         <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+            <h4 class="modal-title"> <u> EDIT ADDRESS </u> </h4>
+         </div> <br>
+         <form class="form-horizontal"  ng-submit="updateAddress()" name="addressEditForm">
+            <input type="text" ng-model="selectedaddress.id" style="display:none;">
+            <div class="modal-body">
+               <div class="well">
+                  <div class="control-group row">
+                     <div class="col-md-12">
+                     <label>
+                     <input type="checkbox" ng-checked="selectedaddress.isDefault==1" ng-click="makeDefault(selectedaddress.id)">
+                     Default
+                     </label>
+                     </div>                   
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                         <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label>
+                     </div>
+                     <!--  <div class="controls"> -->
+                     <div class="col-md-8">   
+                        <textarea ng-model="selectedaddress.streetAddress" name="streetAddress" rows="5" style="width:100%" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.streetAddress.$invalid && addressEditForm.streetAddress.$touched">
+                        <span ng-show="addressEditForm.streetAddress.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                     <!-- </div> -->
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                        <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                        </label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select id="countryId" name="countryId" ng-change="getStates(2)"  ng-model="selectedaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.countryId.$invalid && addressEditForm.countryId.$touched">
+                        <span ng-show="addressEditForm.countryId.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                          <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select name="stateId" id="stateId" ng-change="getCities(2)" ng-model="selectedaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.stateId.$invalid && addressEditForm.stateId.$touched">
+                        <span ng-show="addressEditForm.stateId.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                          <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select ng-model="selectedaddress.cityId" name="city" id="city" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                           <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.city.$invalid && addressEditForm.city.$touched">
+                        <span ng-show="addressEditForm.city.$error.required" class="error_message">This is a required field</span>
+                        </span>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                           <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <input type="text" ng-model="selectedaddress.pincode" maxlength="6" name="pincode" placeholder="Zip / Postal Code"  required class="span3 addaddressmodal_input"> 
+                        <div class="has-error" ng-show="addressEditForm.pincode.$invalid">
+                           <span style="color:red" ng-show="addressEditForm.pincode.$error.required && addressEditForm.pincode.$touched">Zip is required</span>
+                        </div>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                           <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <input type="text" ng-model="selectedaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3 addaddressmodal_input"> 
+                        <div class="has-error" ng-show="addressEditForm.landmark.$invalid">
+                           <span style="color:red" ng-show="addressEditForm.landmark.$error.required && addressEditForm.landmark.$touched">Landmark is required</span>
+                        </div>
+                     </div>
+                  </div> <br>
+                  <div class="control-group row">
+                     <div class="col-md-4">
+                           <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                     </div>
+                     <div class="controls col-md-8">
+                        <select class=""  ng-model="selectedaddress.type" name="type" class="form-control" ng-required="true" class="span3 addaddressmodal_input">
+                           <option value="" disabled>Select</option>
+                           <option value="Home">Home</option>
+                           <option value="Work">Work</option>
+                           <option value="Others">Others</option>
+                        </select>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.type.$invalid && addressEditForm.type.$touched">
+                        <span ng-show="addressEditForm.type.$error.required"
+                           style="color: red">This is a required field</span>
+                        </span>
+                     </div>
+                  </div>
+                  <div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" ng-disabled="addressEditForm.$invalid" disabled="disabled" class="btn btn-default btn-sm">Update</button>
+               <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<div class="modal fade effect" id="scratchcardmodal" tabindex="-1" role="dialog" 
+    aria-labelledby="myModalLabel" aria-hidden="true" style="border:none;box-shadow: 0 0 0 0 !important;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+           <div class="modal-body">
+                <div id="js--sc--container"></div>
+            </div>
+          </div>
+      </div>
+   </div>
+<!-- </div> -->
+<!-- <div ng-if="statusCookie != 'Deactive' && cartdata.length !=0"> 
+   <uib-accordion close-others="oneAtATime">
+      <div uib-accordion-group class="panel-default" is-open="status.isCustomHeaderOpen" template-url="">
+      <uib-accordion-heading>
+         Change Shipping Address <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+      </uib-accordion-heading>
+      <div ng-repeat="data in addressData">
+      <div class="well">
+   <h5>Address {{$index+1}} ({{data.type}})</h5>
+          <div class="control-group" ">
+   <label class="control-label">{{data.streetAddress}}</label>
+      <label class="control-label">{{data.country.name}},{{data.state.name}},{{data.city}}</label>
+    <label class="control-label">{{data.pincode}}</label>
+       <label class="control-label">{{data.landmark}}</label>
+       <label class="control-label">{{data.contactPhone}}</label>
+                        <label class="control-label">{{data.invoiceMail}}
+                        </label>
+                 </div>
+                   <div class="controls">
+                        <button type="button" class="btn block" ng-click="cartcntrl.checkShippingPosibility(data.id,data.latitude,data.longitude);close($index)">Select Address</button>
+                 </div>
+            </div>
+         </div>
+       </div>
+   </uib-accordion>
+   </div>  -->
+<!--  <div class="panel panel-primary">
+   <div class="panel-heading">
+      <h3 class="panel-title">Select Shipping Address</h3>
+      <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+   </div>
+   <div class="panel-body">
+      <div ng-repeat="data in addressData">
+                  <div class="well">
+               <h5>Address {{$index+1}} ({{data.type}})</h5>
+                         <div class="control-group" ">
+                        <label class="control-label">{{data.streetAddress}}</label>
+                        <label class="control-label">{{data.countryId}},{{data.stateId}},{{data.city}}</label>
+                         <label class="control-label">{{data.pincode}}</label>
+                         <label class="control-label">{{data.landmark}}</label>
+                         <label class="control-label">{{data.contactPhone}}</label>
+                                <label class="control-label">{{data.invoiceMail}}
+                                </label>
+                         </div>
+                           <div class="controls">
+                                <button type="button" class="btn block">Select Address</button>
+                         </div>
+                    </div>
+                 </div>
+                </div>
+   </div>  -->
+   <!-- <br> -->
+  <div class="container-fluid">
+  <div class="all_page_middle_div" style="margin-top:60px">  
+    <a  class="btn btn-large pull-right cart_new_button" ng-if="cartdata.length!=0" ng-click="goToCheckout()">PROCEED TO CHECKOUT</a>
+    <a href="{{contextpath}}" class="btn btn-large cart_new_button" ng-if="cartdata.length!=0"> CONTINUE SHOPPING </a>
+    
+  </div>
+  </div>
+
+   <!-- <div style="margin-top: 200px;">
+   </div> -->
+
+<!-- =======================Start addressEditmodal========================== -->
+   <div class="modal fade" id="product-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" style="margin-top:50px">
+         <!-- Modal content-->
+         <div class="modal-content" style="padding:37px 0px;background:white">
+            <!-- <div class="modal-header"> -->
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <!-- <h4 class="modal-title">Edit Address</h4> -->
+           <!--  </div> -->
+            <p class="modal-title" style="color:#5b5b5b;text-transform:uppercase;font-size:20px;font-family: 'Poppins', sans-serif;">  PRODUCT DETAIL  </p>
+
+            <br>
+            <form class="form-horizontal">
+               <div class="modal-body">
+                  <div class="well">
+                     <div class="control-group">
+
+
+                        <div class="col-sm-12">
+                            <!-- <ul class="main-thumb-desc nav tabs-area" role="tablist">
+                                <li><a class="active" data-toggle="tab">Description</a></li>
+                                <li><a data-toggle="tab" href="#review">Reviews 1</a></li>
+                            </ul> -->
+                            <!-- Product Thumbnail Tab Content Start -->
+                            <div class="tab-content thumb-content">
+                                <div id="dtail" class="tab-pane fade show active">
+                                                   
+                                <!-- <h4>Product Information</h4> -->
+                                <table class="table table-bordered">
+                                    <tbody ng-repeat="rp in cartdata" ng-if="rp.id == selected_itemid_for_show">
+                                        <!-- <tr>
+                                            <th colspan="2" style="text-align:center">Product Details</th>
+                                        </tr> -->
+                                        <tr ng-if="rp.name != NULL">
+                                            <td class="cart_popuptable_obj" style="font-family: 'Poppins', sans-serif;font-weight: 600;text-align:left">Name:</td>
+                                            <td style="color: #000000ad;text-align:right"><span id="searched_item_size">{{rp.name}}</span></td>
+                                        </tr>
+                                        <tr ng-if="rp.brand != NULL">
+                                            <td class="cart_popuptable_obj" style="font-family: 'Poppins', sans-serif;font-weight: 600;text-align:left">Brand:</td>
+                                            <td style="color: #000000ad;text-align:right">{{rp.brand}}<span id="searched_item_brand"></span></td>
+                                        </tr>
+                                        <tr ng-if="rp.group != NULL">
+                                            <td class="cart_popuptable_obj" style="font-family: 'Poppins', sans-serif;font-weight: 600;text-align:left">Type:</td>
+                                            <td style="color: #000000ad;text-align:right"><span id="searched_item_type">{{rp.group}}</span></td>
+                                        </tr>
+                                        <tr ng-if="rp.schedule != NULL">
+                                            <td class="cart_popuptable_obj" style="font-family: 'Poppins', sans-serif;font-weight: 600;text-align:left">Schedule:</td>
+                                            <td style="color: #000000ad;text-align:right"><span id="searched_item_schedule">{{rp.schedule}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_popuptable_obj" style="font-family: 'Poppins', sans-serif;font-weight: 600;text-align:left">Prescription Required ?</td>
+                                            <td style="color: #000000ad;text-align:right">
+                                                <span id="searched_item_prescription_status" ng-if="rp.scheduleId!=1 && rp.scheduleId!=13 && rp.scheduleId!=7 && rp.scheduleId!=8 && rp.scheduleId!=10">No</span>
+                                                <span id="searched_item_prescription_status" ng-if="rp.scheduleId==1 || rp.scheduleId==13 || rp.scheduleId==7 || rp.scheduleId==8 || rp.scheduleId==10">Yes</span>
+                                            </td>
+                                        </tr>
+                                         <tr ng-if="rp.content != NULL">
+                                            <td class="cart_popuptable_obj">Composition:</td>
+                                            <td><span id="searched_item_composition1">{{rp.content}}</span></td>
+                                        </tr>
+                                  </tbody>
+                                </table>
+                               </div>
+                            </div>
+                            <!-- Product Thumbnail Tab Content End -->
+                        </div>
+
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <!-- <div class="modal-footer" style="border-top:0px"> -->
+                     <!-- <button type="submit" class="btn btn-default btn-sm">Update</button> -->
+                     <!-- <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button> -->
+                     <div style="margin-top:20px"> 
+            <button type="button" class="alertify-button alertify-button-cancel" style="font-size:16px;font-weight:400" data-dismiss="modal">Close</button>
+         </div>
+                  <!-- </div> -->
+            </form>
+            </div>
+         </div>
+      </div>
+<!-- ==========================End addressEditmodal========================== -->
+</div>
+</div>
+
+
+<script>
+   $( document ).ready(function() {
+      $("#carouselBlk").hide();
+   });
+   
+</script>

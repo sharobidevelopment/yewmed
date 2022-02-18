@@ -1,0 +1,102 @@
+<!-- <p style="margin-top:100px"> <b>  Aniket Daw </b> </p> -->
+
+<div ng-controller="HomeController as ctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+     <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+               .col-an-2 {
+                width:20%;
+                padding: 5px
+              }
+
+              @media only screen and (max-width: 1200px) {
+                .col-an-2 {
+                  width:25%;
+                  padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 991px) {
+                .col-an-2 {
+                  width:33.33%;
+                  padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 675px) {
+                .col-an-2 {
+                  width:50%;
+                  padding: 5px
+                }
+              }
+
+              @media only screen and (max-width: 510px) {
+                .col-an-2 {
+                  width:100%;
+                  padding: 5px
+                }
+              }
+          </style>
+     </div>     
+
+
+    <div class="container-fluid">
+        
+       <!--  ................................................................. -->
+        <div class="all_page_middle_div">
+            <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                <li class="breadcrumb-item active" style="cursor:default">Top Selling Products</li>
+            </ol>
+        </div>
+
+        <div class="all_page_middle_div all_page_header" style="margin-top:40px">
+            <h3 class="all_page_header_h3"> Top Selling Product
+               <span style="font-size:16px;color:#929292;font-family: 'Josefin Sans', sans-serif;margin-left:20px;font-weight:400;text-transform: initial;"> 1 - {{ctrl.topSellingProducts.length}} of {{ctrl.topSellingProducts.length}} products </span>
+            </h3>
+            <hr>
+        </div>    
+        
+    <div class="span9">
+        <div id="myTabContent" class="tab-content">
+                   <div ng-if="ctrl.topSellingProducts.length ==0" style="text-align:center"><img src="themes/img/nodata.jpeg" 
+                                style="max-width: 100%;" /></div>
+                   <div ng-if="ctrl.topSellingProducts.length >0" class="all_page_middle_div"> 
+                    <div  class="row" id="listView1" infinite-scroll='loadMore()' infinite-scroll-distance='2' infinite-scroll-disabled="scrollStatus">
+                    <div ng-repeat="rp in ctrl.topSellingProducts" class="col-an-2">
+
+                        <div class="groups_product_div">
+                            <p style="text-align:center;padding:40px 0px 30px 0px;cursor:pointer" ng-click="ctrl.viewItems(rp.id,rp.groupId,rp.group,rp.category,rp.categoryId)"> <img src="/yewmed/themes/img/yewmed_new_pics/product2/{{rp.groupId}}.jpg"> </p>
+                            <div class="groups_product_div_div" ng-click="ctrl.viewItems(rp.id,rp.groupId,rp.group,rp.category,rp.categoryId)" style="cursor:pointer">
+                            <p class="groups_product_name"> {{rp.name}} </p>
+                            <p style="font-size:14px;margin-top:-3px;color:#424242"> contains {{rp.conversion}} qty in a pack </p>
+                            </div>
+                            <div class="row" style="margin-left:-15px;margin-right:-15px">
+                                <div class="col-md-6 col-sm-6 col_xs_6" style="font-size:10px;color:#585858"> 
+                                    <p style="font-size:12px;color:#424242">  MRP </p> 
+                                    <p style="margin-top:-4px"><img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-4px"> <span style="font-size:18px;color:#424242"> {{rp.price | number:2}} </span> </p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col_xs_6" style="text-align:right"> 
+                                      <i class="fa fa-heart-o groups_addtocart_button_i" ng-click="ctrl.addItemsInWishList(rp.id)"></i> 
+
+                                     
+                                   </div>
+                        </div>
+                       </div>
+                    </div>
+                    
+                </div>
+                <br class="clr">
+            
+        </div>
+    </div>
+</div>
+
+
+        <!-- .......................................................................... -->
+
+            </div>
+        </div> 

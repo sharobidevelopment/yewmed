@@ -1,0 +1,889 @@
+<div ng-controller="CheckOutController as checkoutcntrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+   <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+              .loader {
+                border: 12px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 12px solid #f26222;
+                width: 90px;
+                height: 90px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+                display:inline-block;margin-top:-195px;left:45%;position:absolute;
+              }
+
+              /* Safari */
+              @-webkit-keyframes spin {
+                0% { -webkit-transform: rotate(0deg); }
+                100% { -webkit-transform: rotate(360deg); }
+              }
+
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              .checkout_delivery_mode{
+                font-size:22px;color:#292929;margin-left:15px
+              }
+              @media only screen and (max-width: 639px){
+                .loader{
+                     width: 90px;
+                     height: 90px;
+                     margin-top:-220px;left:40%;border: 8px solid #f3f3f3;
+                     border-top: 8px solid #f26222;
+                }
+                .checkout_delivery_mode {
+                     font-size:20px
+                }
+              }
+           </style>
+        </div>
+
+
+  <div class="wrapper body-bg">
+   <!-- <div class="breadcrumb-area">
+      <div class="container">
+         <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a href="{{contextpath}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="account.html">SHOPPING CART</a></li>
+            <li class="breadcrumb-item active">CHECK OUT</li>
+         </ol>
+      </div>
+   </div> -->
+
+
+            <div class="all_page_middle_div">
+              <div class="container-fluid">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Product Details</li>
+                </ol>
+              </div>
+            </div>
+
+
+           <div class="all_page_middle_div all_page_header" style="margin-top:40px">
+             <div class="container-fluid">
+             <h3> CHECKOUT
+             </h3>
+             <hr>
+           </div>
+          </div>
+
+
+          <div class="all_page_middle_div" style="margin-top:30px">
+            <div class="container-fluid">
+             <h3 ng-if="statusCookie == 'Active'" class="checkout_page_h3" style="cursor:default;"> Step 1: Checkout Options </h3>
+             <h3 ng-if="statusCookie != 'Active'" class="checkout_page_h3" style="cursor:default;"> Step 1: Checkout Options <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+             <div class="row" ng-if="statusCookie != 'Active'" style="border:1px solid #e0e0e0;margin-top:0px;padding:25px 0px">
+                 <div class="col-md-6"> 
+                     <h2 class="checkout_page_h2"> New Customer </h2>
+                      
+                      <form ng-submit="checkoutcntrl.userSubmit()" name="registerForm">
+              
+                          <p style="margin-top:30px;font-size:18px;text-align:left;color:black"> Name <sub style="font-size:20px;color:red"> * </sub> </p>
+
+                           <p class="checkout_page_input_p">
+                           <input type="text" ng-model="checkoutcntrl.register.fname" name="fname" id="regis_fname" class="span3" placeholder="Type your name" ng-pattern-restrict="^$|^[A-Za-z]+" id="reg_name" required /> </p>
+                           <div class="has-error" ng-show="registerForm.fname.$invalid">
+
+                                 <span style="color:#cc4749" ng-show="registerForm.fname.$error.required && registerForm.fname.$touched"> Name is required</span>
+                              </div>
+                         <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Username <sub style="font-size:20px;color:red"> * </sub> </p>
+                           <p class="checkout_page_input_p">
+                           <input type="text" ng-model="checkoutcntrl.register.userName" name="userName" id="regis_userName" class="span3" placeholder="Type your phone no or email id" ng-change="checkUserid()" required /> </p>
+                           <div class="has-error" ng-show="registerForm.userName.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.userName.$error.required && registerForm.userName.$touched"> Username is required</span>
+                           </div>
+                           <span id="username_error_check1" style="color:#cc4749">   </span>
+
+
+
+
+                          <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Password <sub style="font-size:20px;color:red"> * </sub> 
+                          </p>
+                           <p class="checkout_page_input_p">
+                           <input type="password" ng-model="checkoutcntrl.register.password" name="password" id="regis_password" required class="span3" placeholder="Enter Password" ng-attr-type="{{ showPassword1 ? 'text':'password'}}"></p>
+                            <span style="cursor:pointer;float:right;margin-top:-28px;padding-right:75px" ng-click="toggleShowPassword1()" ng-class="{'fa fa-eye': showPassword1,'fa fa-eye-slash': !showPassword1}"></span>
+                            <div class="has-error" ng-show="registerForm.password.$invalid" style="margin-top:0px"> 
+                                 <span style="color:#cc4749" ng-show="registerForm.password.$error.required && registerForm.password.$touched">Password is required</span>
+                            </div>
+
+
+
+                            <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Pincode <sub style="font-size:20px;color:red"> * </sub> </p>
+                            <p class="checkout_page_input_p">
+                            <input type="text" ng-model="checkoutcntrl.register.addresses[0].pincode" name="pincode" id="regis_pincode" placeholder="Enter your pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="6" ng-minlength="6" ng-maxlength="6" required class="span3"> 
+                            </p>
+                            <div class="has-error" ng-show="registerForm.pincode.$invalid">
+                                 <span style="color:#cc4749" ng-show="registerForm.pincode.$error.required && registerForm.pincode.$touched">Pincode is required</span>
+                                 <span style="color:#cc4749" ng-show="((registerForm.pincode.$error.minlength || registerForm.pincode.$error.maxlength) && registerForm.pincode.$dirty) "> Zipcode is invalid </span>
+                              </div>
+
+
+                            <p style="margin-top:20px;font-size:18px;width:90%"> <input type="checkbox" ng-model="checked_term" style="width:auto"> <span> By registering and submitting your data you are agreeing to our <a href="policy" target="_blank" class="checkout_page_a"> Privacy Policy </a>. </span> </p>
+
+
+                              <div ng-if="msg" style="color:red"> <span> {{msg}} </span> </div> <br>
+                     <div class="login-details">
+                        <button type="submit" class="checkout_page_btn" id="register_button_id" ng-disabled="registerForm.$invalid || !checked_term">Register
+                        </button>
+
+                     </div>
+            </form>
+
+                 </div>
+                 <div class="col-md-6">
+
+                      <h2 class="checkout_page_h2"> Returning Customer </h2>
+                       <form ng-submit="checkoutcntrl.login()" name="loginForm">
+     
+                          <p style="margin-top:30px;font-size:18px;text-align:left;color:black"> Username <sub style="font-size:20px;color:red"> * </sub> </p>
+
+                           <p class="checkout_page_input_p">
+                           <input type="text" ng-model="checkoutcntrl.user.userName"
+                              name="username" id="login_uid" class="span3" placeholder="Type your username" required /> </p>
+                           <div class="has-error" ng-show="loginForm.$invalid">
+                              <span ng-show="loginForm.username.$error.required && loginForm.username.$touched" style="color:rgb(204, 71, 73);"> Username is required </span> 
+                           </div>
+
+
+                          <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Password <sub style="font-size:20px;color:red"> * </sub> </p>
+                          <p class="checkout_page_input_p">
+                           <input type="password" ng-model="checkoutcntrl.user.password"
+                              name="password" id="login_pwd" class="span3" placeholder="Type your password" ng-attr-type="{{ showPassword ? 'text':'password'}}" required /> </p>
+                           <span style="cursor:pointer;float:right;margin-top:-30px;padding-right:77px" ng-click="toggleShowPassword()" ng-class="{'fa fa-eye': showPassword,'fa fa-eye-slash': !showPassword}"></span>
+                           <div class="has-error login_password" ng-show="loginForm.$invalid">
+                              <span ng-show="loginForm.password.$error.required && loginForm.password.$touched" style="color:rgb(204, 71, 73);"> Password is required </span>
+                           </div>
+
+                              <div ng-if="msg" style="color:red"> <span> {{msg}} </span> </div> <br>
+                     <div>
+                       <p style="font-size:18px;width:90%"> <a class="checkout_page_a" href="" ng-click="resetpswrdWindow()">Forgot your password?</a> </p>
+                        <button type="submit" style="margin-top:20px" class="checkout_page_btn" ng-disabled="loginForm.$invalid">Login
+                        </button>
+
+                     </div>
+            </form>
+
+                  </div>
+             </div>
+
+
+
+             <!-- .....................................for address................................. -->
+
+
+             
+             <h3 ng-if="statusCookie != 'Active'" class="checkout_page_h3" style="cursor:default;"> Step 2:  Address Details <i class="fa fa-angle-down" aria-hidden="true"></i>  </h3>
+             <h3 ng-if="statusCookie == 'Active'" class="checkout_page_h3" id="toggle_address_h3"> Step 2:  Address Details  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+             <form ng-submit="updateAddress()" name="addressForm" ng-if="statusCookie == 'Active'" id="checkout_address" class="show_checkout_div">
+
+              <div style="border:1px solid #e0e0e0;margin-top:0px;padding:25px 0px">
+
+                <h2 class="checkout_page_h2" style="padding-left:15px"> Your Address </h2>
+
+             <div class="row">
+
+              <div class="col-md-6">
+                 <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Full Name <sub style="font-size:20px;color:red"> * </sub> </p>
+                 <p class="checkout_page_input_p">
+                  <!-- ng-model="logctrl.user.password" -->
+                    <input type="text" ng-model="selectedaddress.receiverName" name="streetAddress" id="adress_line"  placeholder="Enter your Name" ng-change="updt_add_chng()" required /> 
+                 </p>
+                 <div ng-show="addressForm.receiverName.$invalid && addressForm.receiverName.$touched">
+                    <span ng-show="addressForm.receiverName.$error.required"
+                              style="color: #cc4749">Street Adress is required </span>
+                 </div>
+                </div>
+
+              <div class="col-md-6">
+                 <p class="checkout_page_input_p" style="display:none">
+                      <input type="text" ng-model="selectedaddress.id" name="pincode" id="adress_id" class="span3" placeholder="Type Pincode" /> 
+                 </p>
+
+                 <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Address <sub style="font-size:20px;color:red"> * </sub> </p>
+                 <p class="checkout_page_input_p">
+                  <!-- ng-model="logctrl.user.password" -->
+                    <input type="text" ng-model="selectedaddress.streetAddress" name="streetAddress" id="adress_line"  placeholder="Type your Address" ng-change="updt_add_chng()" required /> 
+                 </p>
+                 <div ng-show="addressForm.streetAddress.$invalid && addressForm.streetAddress.$touched">
+                    <span ng-show="addressForm.streetAddress.$error.required"
+                              style="color: #cc4749">Street Adress is required </span>
+                 </div>
+                 </div>
+
+                </div>
+
+
+                  <div class="row">
+                  <div class="col-md-6">
+                     <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Country <sub style="font-size:20px;color:red"> * </sub> </p>
+                  <p class="checkout_page_input_p" style="padding:7px 11px 5px 11px">
+                      <select id="adress_country" name="countryId" ng-change="getStates()"  ng-model="selectedaddress.countryId" ng-required="true" ng-options="country.id as country.name for country in countries">
+                          <!-- <option value="" disabled>Select Country</option>
+                          <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option> -->
+                      </select> </p>
+                  <div ng-show="addressForm.countryId.$invalid && addressForm.countryId.$touched">
+                              <span ng-show="addressForm.countryId.$error.required"
+                                 style="color: #cc4749">Coutry is required </span>
+                   </div> 
+                  </div>   
+
+                  <div class="col-md-6">  
+                  <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> State/ Region <sub style="font-size:20px;color:red"> * </sub> </p>
+                  <p class="checkout_page_input_p" style="padding:7px 11px 5px 11px;">
+                    <select name="stateId" id="adress_state" ng-change="getCities(2)" ng-model="selectedaddress.stateId" ng-required="true" ng-options="state.id as state.name for state in states">
+                      <!-- <option value="" disabled>Select State</option>
+                      <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option> -->
+                    </select> </p>
+                   <div ng-show="addressForm.stateId.$invalid && addressForm.stateId.$touched">
+                              <span ng-show="addressForm.stateId.$error.required"
+                                 style="color: #cc4749">State is required </span>
+                   </div>   
+                   </div>
+
+                    </div>   
+
+                  <div class="row">
+                   
+                   <div class="col-md-6">
+                      <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> City <sub style="font-size:20px;color:red"> * </sub> </p>
+                      <p class="checkout_page_input_p" style="padding:7px 11px 5px 11px;">
+                      <select ng-model="selectedaddress.cityId" ng-change="updt_add_chng()" name="cityId" id="adress_city" ng-required="true" ng-options="city.id as city.name for city in cities">
+                                 <!-- <option value="" disabled>Select City</option>
+                                 <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                              </select>
+                      </p>
+                      <div ng-show="addressForm.cityId.$invalid && addressForm.cityId.$touched">
+                              <span ng-show="addressForm.cityId.$error.required"
+                                 style="color: #cc4749">City is required </span>
+                       </div> 
+                    </div>
+
+                  <div class="col-md-6">   
+                    <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Pincode <sub style="font-size:20px;color:red"> * </sub> </p>
+                    <p class="checkout_page_input_p">
+                        <input type="text" ng-model="selectedaddress.pincode" name="pincode" id="adress_pincode" class="span3" placeholder="Type Pincode" readonly /> 
+                    </p>                        
+                  </div>
+              
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                  <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Phone No <sub style="font-size:20px;color:red"> * </sub> </p>
+                  <p class="checkout_page_input_p">
+                      <input type="text" ng-model="selectedaddress.contactPhone"
+                              name="phoneno" id="adress_phoneno" class="span3" ng-change="updt_add_chng()" ng-minlength="10" ng-maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Type your Phone no" required /> 
+                  </p>
+                  <div ng-show="addressForm.phoneno.$invalid && addressForm.phoneno.$touched">
+                              <span ng-show="addressForm.phoneno.$error.required"
+                                 style="color: #cc4749">Phone no is required </span>
+                              <span style="color:#cc4749" ng-show="((addressForm.phoneno.$error.minlength || addressForm.phoneno.$error.maxlength) && addressForm.phoneno.$dirty) "> Contact number is invalid </span>   
+                  </div>
+                                                        
+              </div>
+
+                 <div class="col-md-6">
+                      <p style="margin-top:22px;font-size:18px;text-align:left;color:black"> Landmark  </p>
+                      <p class="checkout_page_input_p">
+                      <input type="text" ng-model="selectedaddress.landmark" ng-change="updt_add_chng()" name="landmark" placeholder="Landmark" class="span3">
+                    </p>
+                 </div>
+            </div>
+
+              <button type="submit" style="margin-top:20px;margin-left:15px" class="checkout_page_btn" ng-disabled="addressForm.$invalid">CONTINUE
+              </button>
+
+             </div> 
+           </form>
+
+
+           <!-- ..............................Prescription Part.............................. -->
+
+           <h3 class="checkout_page_h3" id="nottoggle_prescription_h3"> Step 3: Upload Your Prescription  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+           <h3 class="checkout_page_h3" id="toggle_prescription_h3"> Step 3: Upload Your Prescription  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+           <div class="row show_checkout_div" style="border:1px solid #e0e0e0;margin-top:0px;padding:25px 15px" id="toggle_prescription_div">
+                 <div style="width:100%">
+                  <h2 class="checkout_page_h2"> Add Prescription </h2>
+                 <p style="font-size:18px;margin-top:10px"> Some medicines in your cart require a prescription. Please upload a valid prescription to place an order. </p> </div>
+                  <div>
+                 <form>
+                 <!-- <label class="control-label"><strong>PRESCRIPTION: </strong> </label> -->
+                  <div class="control-group">
+                      <div class="controls" style="text-align:left; ">
+                              <!-- <img src="themes/img/yewmed_new_pics/product/upload_prescription_icon.png">
+                              <input type="file" name="myFile" id="file1" class="filestyle" file-model = "myFile"> -->
+                              <label class="btn btn-default" onchange="show_file_name()" style="-webkit-box-shadow: 0px 9px 36px -9px rgba(189,189,189,1);
+-moz-box-shadow: 0px 9px 36px -9px rgba(189,189,189,1);
+box-shadow: 0px 9px 36px -9px rgba(189,189,189,1);margin-top:20px;padding:20px 15px">
+                                <img src="themes/img/yewmed_new_pics/product/upload_prescription_icon.png"> 
+                                  <p style="margin-top:15px;font-size:14px;color:#f26222"> ADD NEW </p>
+                                  <input type="file" name="myFile" id="file2" accept=".jpg,.png,.gif,.pdf" class="filestyle" file-model = "myFile" hidden>
+                            </label>  <span style="margin-left:10px" id="show_file2"> </span>
+                            <div style="width:100%;margin-top:13px">
+                            <button type="button" class="checkout_page_btn" ng-click="uploadPrescription();">CONTINUE</button> </div>
+                           
+                            <!-- <span style="color:green"> {{filemsg}} </span> -->
+                          </div>
+                   </div>
+               </form>
+             </div>
+           </div>
+
+            <div style="text-align:center" id="loader">
+                                  <div class="loader"></div>
+                            </div>
+
+
+
+
+           <!-- ...................................payment mode part.................................... -->
+              <h3 class="checkout_page_h3" id="nottoggle_payment_h3"> Step 3: Payment Mode  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+           <h3 class="checkout_page_h3" id="toggle_payment_h3"> Step 3: Payment Mode  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+
+
+            <div class="row show_checkout_div" style="border:1px solid #e0e0e0;margin-top:0px;padding:25px 15px" id="toggle_payment_div">
+                 <div style="width:100%">
+                  <h2 class="checkout_page_h2"> Payment Option </h2>
+                  </div>
+                  <div>
+                 <form>
+                  <div class="control-group">
+<!--                       <div class="controls" style="text-align:left;" ng-repeat="paymode in paymentmode" ng-if="paymode.paymentMode == 'COD' ">
+                            <input id="rbPaymentMode_{{paymode.id}}" type="radio" 
+                                    ng-model="$parent.SelectedPaymentMode"
+                                    value="{{paymode.id}}" name="rdopaymentmode" ng-click='checkOfferSelected(paymode.paymentMode)' style="margin-top:30px" /> 
+                             <img src="themes/img/yewmed_new_pics/product/payment_mode_icon.png" style="margin-left:15px"> <span class="checkout_delivery_mode"> Cash on Delivery 
+                                    </span>
+                             <p style="font-size:16px;margin-left:85px;margin-top:-7px"> Pay via Cash at the time of delivery </p>
+                      </div> -->
+                       <div class="controls" style="text-align:left;" ng-repeat="paymode in paymentmode">
+                            <input id="rbPaymentMode_{{paymode.id}}" type="radio" 
+                                    ng-model="$parent.SelectedPaymentMode"
+                                    value="{{paymode.id}}" name="rdopaymentmode" ng-click='checkOfferSelected(paymode.paymentMode)' style="margin-top:30px" /> <!--  ng-checked="(paymode.paymentMode == 'COD')" -->
+                             <!-- <span style="font-weight: bold;">
+                              {{paymode.paymentMode}}
+                             </span> -->
+                             <!-- {{paymode.paymentMode}} -->
+                             <img src="themes/img/yewmed_new_pics/product/payment_mode_icon.png" style="margin-left:15px" ng-if="paymode.paymentMode == 'COD' "> <span class="checkout_delivery_mode" ng-if="paymode.paymentMode == 'COD' "> Cash on Delivery 
+                                    </span>
+                             <p style="font-size:16px;margin-left:85px;margin-top:-7px" ng-if="paymode.paymentMode == 'COD' "> Pay via Cash at the time of delivery </p>
+                             <img src="themes/img/yewmed_new_pics/product/paytm.jpg" style="margin-left:15px" ng-if="paymode.paymentMode == 'Online' "> <span class="checkout_delivery_mode" ng-if="paymode.paymentMode == 'Online' "> Online 
+                                    </span>
+                             <p style="font-size:16px;margin-left:85px;margin-top:-7px" ng-if="paymode.paymentMode == 'Online' "> Pay via Paytm </p>
+                      </div>
+                   </div>
+                   <div style="width:100%;margin-top:13px">
+                            <button type="button" class="checkout_page_btn" ng-click="get_payment_mode();">CONTINUE</button> </div>
+               </form>
+             </div>
+           </div>
+
+
+
+           <!-- ..........................................final part.................................... -->             
+
+
+            
+           <h3 class="checkout_page_h3" id="nottoggle_final_h3"> Step 3: Order Review  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+           <h3 class="checkout_page_h3" id="toggle_final_h3"> Step 3: Order Review  <i class="fa fa-angle-down" aria-hidden="true"></i></h3>
+
+
+
+
+	<!-- <h3>  CHECK OUT <a href="{{contextpath}}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+	<hr class="soft"/> -->
+	 <!-- <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Index</th>
+                  <th style="text-align: center;">Product</th>
+                  <th style="text-align: center;">Availability</th>
+                  <th style="text-align: center;">Quantity</th>
+				          <th style="text-align: center;">Price</th>
+                  <th style="text-align: center;">Discount%</th>
+                  <th style="text-align: center;">Discount Amt</th>
+                  <th style="text-align: center;">Tax%</th>
+                  <th style="text-align: center;">Tax Amt</th>
+                  <th style="text-align: center;">Total</th>
+                  <th style="display:none;">CartId</th>
+                  <th style="display:none;">TaxId</th>
+                  <th style="display:none;">TaxTypeId</th>
+                  <th style="display:none;">ItemGross</th>
+                  
+				</tr>
+              </thead>
+              <tbody>
+              	 <tr ng-repeat="rp in cartdata" id="tr_{{rp.id}}">
+              	  <td style="text-align: center;">{{$index+1}} </td>
+                  <td style="text-align: center;">{{rp.name}} </td>
+                  <td style="text-align: center;">{{itemAvailabilityData[rp.id]}}</td>
+				  <td style="text-align: center;">
+					<div class="input-append">
+                        <input class="span1" style="max-width:34px;text-align:center;" id="itmqnty_{{rp.id}}" size="16" type="text" value="{{itemQuantitydata[rp.id]}}" disabled/>
+										
+					</div>
+				  </td>
+                  <td style="text-align: center;" id="itmsalerate_{{rp.id}}">{{rp.price}}</td>
+                  <td style="text-align: center;">
+                      <span ng-if="rp.isDiscount!= 0 || membershipdiscount" id="itmdiscper_{{rp.id}}">{{rp.discount}}</span>
+                      <span ng-if="rp.isDiscount == 0 && !membershipdiscount" id="itmdiscper_{{rp.id}}">0.00</span>
+                  </td>
+                  <td style="text-align: center;">
+                      <span ng-if="rp.isDiscount!= 0 || membershipdiscount" id="itmdiscamt_{{rp.id}}">
+                      {{itemDiscountAmtData[rp.id]}}</span>
+                      <span ng-if="rp.isDiscount == 0 && !membershipdiscount" id="itmdiscamt_{{rp.id}}">0.00</span>
+                  </td>
+
+                  <td style="text-align: center;" id="itmtaxper_{{rp.id}}">{{rp.saleTaxPercentage}}
+                  </td>
+                  <td style="text-align: center;" id="itmtaxamt_{{rp.id}}">{{itemTaxAmtData[rp.id]}} </td>
+                  <td style="text-align: center;" id="itmprice_{{rp.id}}">{{itemPricedata[rp.id]}}</td>
+                 
+                  <td style="display:none;" id="itmcartid_{{rp.id}}">{{cartIdData[rp.id]}}</td>
+                  <td style="display:none;" id="itmtaxid_{{rp.id}}">{{itemtaxIdData[rp.id]}}</td>
+                  <td style="display:none;" id="itmtaxtypeid_{{rp.id}}">{{itemtaxTypeIdData[rp.id]}}</td>
+                  <td style="display:none;" id="itmgrossprice_{{rp.id}}">{{itemBaseAmtData[rp.id] * itemQuantitydata[rp.id]}}</td>
+
+
+                </tr>
+				        <tr>
+                  <td colspan="9" style="text-align:right">Gross Amount:  </td>
+                  <td id="cart_item_gross_amt" style="text-align: center;">{{grossamt}} </td>
+                </tr>
+			           <tr>
+                  <td colspan="9" style="text-align:right">Total Discount:	</td>
+                  <td id="cart_item_tot_discount" style="text-align: center;">{{totaldiscountamt}} </td>
+                </tr>
+                 <tr>
+                  <td colspan="9" style="text-align:right">Total Tax:	</td>
+                  <td id="cart_item_tot_tax" style="text-align: center;">{{totaltaxamt}} </td>
+                </tr>
+                 <tr ng-if="shippingchargeflag">
+                  <td colspan="9" style="text-align:right">Shipping Charge:
+                   <span ng-if="membership_shipping_discount_flag">({{membershippingdiscount}} % Discount)</span>
+                   </td>
+                  <td id="cart_item_shipping_charge" style="text-align: center;">{{shipingchargeamt}} </td>
+                </tr>
+				        <tr>
+                  <td colspan="9" style="text-align:right"><strong>TOTAL</strong></td>
+                  <td class="label label-important" style="display:block;text-align: center;"> <strong><span id="cart_tot_amt_to_pay" >{{roundedtotalamt}}</span></strong></td>
+                  <td class="label label-important" style="display:none;text-align: center;"> <strong><span id="cart_roundoff_amt" >{{roundoffamt}}</span></strong></td>
+                </tr> 
+				</tbody>
+     </table> -->
+		
+<div class="row show_checkout_div"  style="border:1px solid #e0e0e0;margin-top:0px;padding:25px 15px" id="toggle_final_div">
+
+  <div style="width:100%">
+                  <h2 class="checkout_page_h2"> Confirm Order </h2>
+                  </div>
+
+<div class="col-md-12" style="margin-top:25px;padding:0px">
+<table role="table" class="new_checkouttable" style="margin-top:0px">
+      <thead role="rowgroup">
+          <tr role="row">
+                <th role="columnheader" style="display:none;">Index</th>
+                <th role="columnheader">Product name</th>
+                <th role="columnheader" style="display:none">Availability</th>
+                <th role="columnheader">Price</th>
+                <th role="columnheader">Quantity</th>
+                <th role="columnheader">Total </th>
+                <th role="columnheader" style="display:none">Discount%</th>
+                <th role="columnheader" style="display:none;">Discount Amt</th>
+                <th role="columnheader" style="display:none;">Tax%</th>
+                <th role="columnheader" style="display:none;">Tax Amt</th>
+                <th role="columnheader" style="display:none;">Gross Amt</th>
+                <th role="columnheader" style="display:none">Total</th>
+                <th style="display:none;">CartId</th>
+                <th style="display:none;">TaxId</th>
+                <th style="display:none;">TaxTypeId</th>
+                <th style="display:none;">ItemGross</th>
+          </tr>
+      </thead>
+      <tbody role="rowgroup">
+          <tr role="row" ng-repeat="rp in cartdata" id="tr_{{rp.id}}">
+                <td role="cell" style="display:none;"> {{$index+1}} </td>
+                <td role="cell"> {{rp.name}} </td>
+                <td role="cell" style="display:none"> {{itemAvailabilityData[rp.id]}} </td>
+                <td role="cell"> <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> <span id="itmsalerate_{{rp.id}}"> {{rp.price | number:2}} </span> </td>
+                 <td role="cell"> 
+                    <div class="input-append">
+                            <input class="span1" style="max-width:34px;text-align:center;background:transparent;border:0px" id="itmqnty_{{rp.id}}" size="16" type="text" value="{{itemQuantitydata[rp.id]}}" disabled/>
+                    </div> 
+                </td>
+                <td role="cell" > <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{rp.price * itemQuantitydata[rp.id] | number:2}} </td>
+                <td role="cell" style="display:none"> 
+                      <span ng-if="rp.isDiscount!= 0 || membershipdiscount" id="itmdiscper_{{rp.id}}">{{rp.discount}}</span>
+                      <span ng-if="rp.isDiscount == 0 && !membershipdiscount" id="itmdiscper_{{rp.id}}">0.00</span> 
+                  </td>
+                <td role="cell" style="display:none;"> 
+                      <span ng-if="rp.isDiscount!= 0 || membershipdiscount" id="itmdiscamt_{{rp.id}}"> {{itemDiscountAmtData[rp.id] | number:2}} </span>
+                      <span ng-if="rp.isDiscount == 0 && !membershipdiscount" id="itmdiscamt_{{rp.id}}">0.00</span> 
+                  </td>
+                <td role="cell" id="itmtaxper_{{rp.id}}" style="display:none;"> {{rp.saleTaxPercentage}} </td>
+                <td role="cell" id="itmtaxamt_{{rp.id}}" style="display:none;"> {{itemTaxAmtData[rp.id] | number:2}} </td>
+                <!--  <td style="text-align: center;">{{itemPricedata[$index]}}</td> -->
+                <td role="cell" id="itmprice_{{rp.id}}" style="display:none"> {{itemPricedata[rp.id]}} </td>
+                <td role="cell" style="display:none;"> {{rp.price * itemQuantitydata[rp.id] - itemDiscountAmtData[rp.id] | number:2}} </td>
+
+                <td style="display:none;" id="itmcartid_{{rp.id}}">{{cartIdData[rp.id]}}</td>
+                <td style="display:none;" id="itmtaxid_{{rp.id}}">{{itemtaxIdData[rp.id]}}</td>
+                <td style="display:none;" id="itmtaxtypeid_{{rp.id}}">{{itemtaxTypeIdData[rp.id]}}</td>
+                <td style="display:none;" id="itmgrossprice_{{rp.id}}">{{itemBaseAmtData[rp.id] * itemQuantitydata[rp.id]}}</td>
+          </tr>
+          <!-- <tr role="row">
+            <td role="cell"> 1 </td>
+            <td role="cell"> DUMMY ITEM CAP </td>
+            <td role="cell"> Available </td>
+            <td role="cell"> <input class="span1" style="max-width:34px;text-align:center" value="1" disabled/> </td>
+            <td role="cell"> 35 </td>
+            <td role="cell"> 0 </td>
+            <td role="cell"> 0.00 </td>
+            <td role="cell"> 12 </td>
+            <td role="cell"> 4.20 </td>
+            <td role="cell"> 39.20 </td>
+          </tr> -->
+          <tr role="row" style="display:none">
+              <td role="" colspan="3" class="new_checkouttable_th"> Gross Amount: </td>
+              <td role="cell" class="new_checkouttable_th_prices" id="cart_item_gross_amt"> {{grossamt}} </td>
+          </tr>
+          <tr role="row">
+              <!-- <td role="" colspan="3" class="new_checkouttable_th"> Total Gross Amount: </td> -->
+              <td role="" colspan="3" class="new_checkouttable_th"> SUB TOTAL : </td>
+              <td role="cell" class="new_checkouttable_th_prices"> <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{total_show_amount | number:2}} </td>
+          </tr>
+          <tr role="row">
+              <td role="" colspan="3" class="new_checkouttable_th"> TOTAL DISCOUNT<span>(if any)</span>: </td>
+              <td role="cell" class="new_checkouttable_th_prices"> <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"><span> {{totaldiscountamt | number:2}} </span> <span style="display:none"> <input type="text" value="{{totaldiscountamt}}" id="cart_item_tot_discount">  </span>  </td>
+          </tr> 
+          <tr role="row">
+              <td role="" colspan="3" class="new_checkouttable_th"> TOTAL TAX: </td>
+              <td role="cell" class="new_checkouttable_th_prices"><img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> <span> {{totaltaxamt | number:2}} </span> <span style="display:none"> <input type="text" value="{{totaltaxamt}}" id="cart_item_tot_tax">  </span> </td>
+          </tr>
+          <tr role="row" ng-if="shippingchargeflag" style="display:none">
+              <td role="" colspan="3" class="new_checkouttable_th"> Shipping Charge: 
+                      <span ng-if="membership_shipping_discount_flag">({{membershippingdiscount}} % Discount)</span>
+              </td>
+              <td role="cell" class="new_checkouttable_th_prices" id="cart_item_shipping_charge"> {{shipingchargeamt}} </td>
+          </tr>
+          <tr role="row" ng-if="shippingchargeflag" style="display:none">
+              <td role="" colspan="3" class="new_checkouttable_th"> Round Off: </td>
+              <td role="cell" class="new_checkouttable_th_prices"> {{grossamt - totaldiscountamt + (grossamt - totaldiscountamt) *12/100 | number:2}} </td>
+          </tr>
+          <tr role="row">
+              <!-- <td role="" colspan="3" class="new_checkouttable_th"> NET AMOUNT: </td> -->
+              <td role="" colspan="3" class="new_checkouttable_th"> TOTAL AMOUNT<span>(Rounded Off)</span>: </td>
+              <td role="cell" class="new_checkouttable_th_prices"> <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> <span> {{roundedtotalamt | number:2}} </span> <span style="display:none"> <input type="text" value="{{roundedtotalamt}}" id="cart_tot_amt_to_pay">  </span> </td>
+              <td role="cell" class="new_checkouttable_th_prices" style="font-weight:700;display:none"> <span id="cart_roundoff_amt"> {{roundoffamt}} </span> </td>
+          </tr>       
+      </tbody>
+</table>
+
+
+  <div class="new_whistlisttable_for_mb" style="margin-top:30px">
+    <div ng-repeat="rp in cartdata" id="tr_{{rp.id}}">
+
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Product Name </div>
+          <div class="mobile_tableformat_2nd_div">  {{rp.name}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Price </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{rp.price | number:2}} </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Quantity </div>
+          <div class="mobile_tableformat_2nd_div"> {{itemQuantitydata[rp.id]}} </div>
+     </div>
+     <br>
+
+     <hr>
+   </div>
+
+    <div style="width:100%;display:flex;margin-top:30px">
+          <div class="mobile_tableformat_1st_div"> SUB TOTAL </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{grossamt - totaldiscountamt | number:2}} </div>
+     </div>
+     <hr>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> TOTAL DISCOUNT<span>(if any)</span> </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{totaldiscountamt | number:2}} </div>
+     </div>
+     <hr>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> TOTAL TAX </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{totaltaxamt | number:2}} </div>
+     </div>
+     <hr>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> TOTAL AMOUNT<span>(Rounded Off)</span> </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{roundedtotalamt | number:2}} </div>
+     </div>
+     <hr>
+
+
+  </div> 
+
+
+		
+  <table class="table table-bordered table-responsive" style="display:none;">
+   <tbody>
+      <tr>
+         <td>
+            <form class="form-horizontal">
+               <div class="control-group">
+                  <label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
+                  <div class="controls">
+                     <input type="text" class="input-medium" placeholder="CODE">
+                     <button type="submit" class="btn"> ADD </button>
+                  </div>
+               </div>
+            </form>
+         </td>
+      </tr>
+   </tbody>
+  </table>
+      <!-- <table class="table table-bordered table-responsive">
+      <tbody>
+         <tr>
+           <td> 
+              <form class="form-horizontal">
+                 <label class="control-label"><strong>PRESCRIPTION: </strong> </label>
+                  <div class="control-group">
+                      <div class="controls" style="text-align:left; ">
+                              <input type="file" name="myFile" id="file1" class="filestyle" file-model = "myFile">
+                            <button type="button" class="btn block checkout_upload" ng-click="uploadPrescription();">UPLOAD</button>
+                            {{filemsg}}
+                          </div>
+                   </div>
+               </form>
+            </td>
+          </tr>
+       </tbody>
+      </table>  -->
+
+
+      <!--  ...........payment mode part.......... -->
+
+
+       <!-- <table class="table table-bordered table-responsive">
+      <tbody>
+         <tr>
+           <td> 
+              <form class="form-horizontal">
+                 <label class="control-label"><strong>PAYMENT MODE: </strong> </label>
+                  <div class="control-group">
+                      <div class="controls" style="text-align:left;" ng-repeat="paymode in paymentmode">
+                            <input id="rbPaymentMode_{{paymode.id}}" type="radio" 
+                                    ng-model="$parent.SelectedPaymentMode"
+                                    value="{{paymode.id}}" name="rdopaymentmode" ng-click='checkOfferSelected(paymode.paymentMode)'
+                                    /> 
+                             <span style="font-weight: bold;">
+                              {{paymode.paymentMode}}
+                             </span>
+                      </div>
+                   </div>
+               </form>
+            </td>
+          </tr>
+       </tbody>
+      </table>   -->
+
+
+    <!-- ........................ Offers Part........................... -->
+
+
+      
+      <!-- <table class="table table-bordered table-responsive" 
+              ng-if="activememberfeatures!=''">
+      <tbody>
+         <tr>
+           <td> 
+              <form class="form-horizontal">
+                 <label class="control-label"><strong>OFFERS: </strong> 
+                 </label>
+                  <div class="control-group">
+                      <div class="controls" style="text-align:left;" 
+                            ng-repeat=" featuredata in activememberfeatures" 
+                             ng-if="featuredata.activityId!=10 && 
+                                    (grossamt>=featuredata.minAmount &&  
+                                    grossamt<=featuredata.maxAmount)" >
+                               <input id="rboffer_{{featuredata.id}}"
+                                      type="radio" ng-model="memberOffer"
+                                      value="{{featuredata}}"
+                                      name="rdoMembershipOffer" 
+                                      class="rdoMembershipOffers"
+                                      ng-click='setOfferValue(memberOffer,$event,featuredata.id)'/>
+                                
+                                <span style="font-weight: bold;" >{{featuredata.feature.name}} {{featuredata.planAmount}} %
+                                </span>
+                       </div>
+                       
+                   </div>
+               </form>
+            </td>
+          </tr>
+       </tbody>
+      </table>   -->
+    </div>
+
+       
+       <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top:20px">
+        <!-- <a href="{{contextpath}}" class="btn btn-large new_carts_button "><i class="icon-arrow-left"></i> Continue Shopping </a> -->
+        <p style="font-size:18px;margin-top:9px"> Forgot an Item? <a href="mycart" style="color:#f26222;font-weight:600"> Edit Your Cart </a> </p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top:20px;text-align:right">
+        <!-- <a href="#" class="btn btn-large pull-right new_carts_button " ng-click="checkoutverification()">Checkout <i class="icon-arrow-right"></i></a> -->
+        <button type="submit" class="checkout_page_btn checkout_page_btn_placeordr" ng-click="checkoutverification()">PLACE ORDER
+        </button>
+      </div>
+
+      </div> 
+
+       </div>
+       
+       </div> 
+
+    <!-- Modal part -->
+    <div class="modal fade" id="uploadprescriptionmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title">Upload Prescription</h4>
+            </div>
+            <div class="modal-body">
+               <div class="well">
+                     <div class="control-group">
+                         Select a file: <input type="file" name="myFile" id="file1" class="filestyle" file-model = "myFile">
+                     </div>
+                  </div>
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn block" ng-click="uploadPrescription();">UPLOAD</button>
+               <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+   <!-- <div style="margin-top: 100px;">
+   </div> -->
+  
+</div>
+ 
+    
+
+
+	</div>
+
+
+
+  <!-- Modal -->
+ <!--  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Save changes</button>
+    </div>
+</div> -->
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="succ-modal" style="margin-top:100px;">
+          <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="padding:70px 0px">
+                 <!--  <div class="modal-header" style="background:#6c757d4f"> -->
+                     <h4 style="text-align:center" id="modal_tick"> <i class="fa fa-check" aria-hidden="true" style="padding:20px;border-radius:50%;background:#0fc20f;color:white"></i> </h4>
+                     <h4 class="alertify-message" id="myModalLabel1" style="padding-bottom:0px;width:auto;color:#0fc20f;font-size:35px;text-align:center;font-family: 'Poppins', sans-serif;font-weight:700;margin-top:10px">  Thank You</h4>
+                     <h4 class="alertify-message" id="myModalLabel2" style="padding-bottom:0px;width:auto;color:red;font-size:35px;text-align:center;font-family: 'Poppins', sans-serif;font-weight:700;margin-top:10px">  Error</h4>
+                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:-17px;margin-top:-17px">
+                         <span aria-hidden="true">&times;</span></button> -->
+                        
+                   <!-- </div> -->
+                   <div class="modal-body"  style="text-align:center;margin-top:10px">
+                       <span id="succMsgText" style="font-size:20px"> Your order has been successfully submitted </span>
+                  </div>
+                  <!-- <div style="margin-top:20px"> -->
+                  <!--   <button type="button" class="btn btn-success btn-sm" id="modal-btn-no" data-dismiss="modal">Close</button> -->
+                    <!-- <button type="button" class="alertify-button  alertify-button-cancel" id="modal-btn-no" data-dismiss="modal" style="font-weight:400;font-size:16px">  Ok  </button> -->
+                  <!-- </div> -->
+                </div>
+              </div>
+            </div>
+  
+
+
+
+	<script>
+    $( document ).ready(function() {
+    	$("#carouselBlk").hide();
+      $("#toggle_final_h3").hide();
+      $("#toggle_final_div").hide();
+      $("#toggle_prescription_h3").hide();
+      $("#toggle_prescription_div").hide();
+      $("#toggle_payment_h3").hide();
+      $("#toggle_payment_div").hide();
+
+      $("#toggle_address_h3").click(function(){
+      $(".show_checkout_div").hide();
+      $("#checkout_address").show();
+     });
+
+
+      $("#toggle_prescription_h3").click(function(){
+      $(".show_checkout_div").hide();        
+      $("#toggle_prescription_div").show();
+    }); 
+
+
+      $("#toggle_payment_h3").click(function(){
+      $(".show_checkout_div").hide();
+      $("#toggle_payment_div").show();
+     });
+      
+      $("#toggle_final_h3").click(function(){
+      $(".show_checkout_div").hide();        
+      $("#toggle_final_div").show();
+    });
+
+    
+    });
+    /*$('#file1').filestyle({
+        'placeholder' : 'Please Select File'
+      });*/
+
+   function show_file_name() {
+        var show_file2 = $("#file2").val();
+        var s= show_file2.replace(/\\/g, '/');
+        s= s.substring(s.lastIndexOf('/')+ 1);
+        var show_file3 = show_file2? s.replace(/[?#].+$/, ''): s.split('.')[0];
+        $("#show_file2").text(show_file3);
+
+      }
+
+
+   // function updt_add_chng() {
+   //        alert("changed");
+   //    }   
+
+
+  </script>
+	

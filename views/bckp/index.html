@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<!--  <base href="/"> -->
+<meta charset="ISO-8859-1">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="">
+ <meta name="author" content="">
+ <title>YewMed</title>
+
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+ 
+<!-- Bootstrap style --> 
+    <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/> 
+
+    <!-- -------------------------for alert------------------- -->
+	<link rel="stylesheet" href="themes/alertify.core.css" /><!-- 
+	<link rel="stylesheet" href="themes/alertify.bootstrap.css"/> -->
+	<link rel="stylesheet" href="themes/alertify.default.css" id="toggleCSS" />
+	<script src="themes/jquery-1.9.1.js"></script>
+	<script src="themes/alertify.min.js"></script>
+    <!-- -------------------for alert---------------------- -->
+    <!-- --------------------for invoice---------------------- -->
+    <link href="themes/bootshop/invoice/css/style.css" rel="stylesheet" media="screen"/>
+    <!-- --------------for invoice----------------------- -->
+ 	
+ 	<!-- ----------------------for pdf--------------------------- -->
+    <link href="themes/bootshop/pdf/css/style.css" rel="stylesheet"/>
+ 	<!-- -----------------/for pdf--------------------------- -->
+    <!-- ------------------for features--------------------------- -->
+    <link href="themes/bootshop/features/angular-material.min.css" rel="stylesheet"/>
+ 	<!-- ----------------/for features------------------------- -->
+
+
+    <link rel="stylesheet" href="themes/css/membershipplan.css" />
+
+
+ <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
+<!-- Bootstrap style responsive -->	
+	<link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet"/> 
+	<!-- <link href="themes/bootshop/invoice/bootstrap.min.css" rel="stylesheet"/> -->
+
+	
+	<!-- <link href="bootstrap/css/bootstrap-grid.css" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Google-code-prettify -->	
+	<link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
+	
+  <link href="themes/css/jquery-ui.css" rel="Stylesheet"></link> <!-- For beautification of auto complete display -->
+	
+	<!-- for alert box -->
+	<link href="themes/css/alert.css" rel="stylesheet"/>
+    <link href="themes/css/theme.css" rel="stylesheet"/>
+    <link href="themes/css/loader.css" rel="stylesheet"/>
+    
+<!-- fav and touch icons -->
+    <link rel="shortcut icon" href="static/themes/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="themes/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="themes/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="themes/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="themes/images/ico/apple-touch-icon-57-precomposed.png">
+	
+	<style type="text/css" id="enject"></style>
+
+	<!-- for scratchcard  -->
+	<link href="bootstrap/css/scratchcard.css" rel="stylesheet"/>
+	<script src="bootstrap/js/scratchcard.js"></script>
+
+   <style>
+	.styl{
+		cursor: pointer;
+	 }
+    .ui-autocomplete {
+    	position: absolute;
+	    overflow-y: scroll;
+	    overflow: auto;
+	    max-height: 350px; 
+	    width: 250px; 
+	   /* word-break: break-all;*/
+	   /* position: absolute; */
+	    cursor: pointer;
+	    /*overflow-y:auto !important;
+        overflow-x: hidden;
+        padding-right: 5px;*/
+     }
+
+     /*.ui-autocomplete span.hl_results {
+        background-color: #ffff66;
+      }*/
+      /*.ui-autocomplete-loading { 
+         background: white url('') right center no-repeat !important;
+      }*/
+      
+    /*ui-autocomplete {
+        color: red !important;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        overflow-y: scroll; 
+	    max-height: 350px; 
+	    width: 250px; 
+	   
+    }*/
+/*.ui-corner-all {
+    -moz-border-radius: 2;
+    -webkit-border-radius: 2;
+    border-radius: 2;
+}
+.ui-menu {
+    border: 1px solid lightgray;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+.ui-menu .ui-menu-item a {
+    color: #777;
+}*/
+/*.ui-menu .ui-menu-item:hover {
+    display: block;
+    text-decoration: none;
+    color: #3D3D3D;
+    cursor: pointer;
+    background-color: lightgray;
+    background-image: none;
+    border: 1px solid lightgray;
+}*/
+/*.ui-widget-content .ui-state-hover, .ui-widget-content .ui-state-focus {
+    border: 1px solid lightgray;
+    background-image: none;
+    background-color: lightgray;
+    font-weight: bold;
+    color: #3D3D3D;
+}*/
+.modal.fade{
+	top:-100%;
+}
+.effect{
+	background-color: rgba(201, 76, 76, 0);
+}
+.blinking{
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{color: #f64141;}
+    49%{color: #000;}
+    50%{color: #000;}
+    99%{color: #000;}
+    100%{color: #f64141;}
+}
+</style>
+</head>
+<body ng-app="myApp">
+ <input type="text" id="selecteditemid" style="display:none">
+<!-- Header Start====================================================================== -->
+<div id="header" ng-include="'views/header.html'"></div>
+<!-- Header End======================================================================== -->
+<!-- carousel part start=============================================================== -->
+<div id="carouselBlk" style="display:none;">
+	<div id="myCarousel" class="carousel slide">
+		<div class="carousel-inner">
+		  <div class="item active">
+		  <div class="container">
+			<a href="register"><img style="width:100%" src="themes/images/carousel/1.png" alt="special offers"/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				</div>
+		  </div>
+		  </div>
+		  <div class="item">
+		  <div class="container">
+			<a href="register"><img style="width:100%" src="themes/images/carousel/2.png" alt=""/></a>
+				<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				</div>
+		  </div>
+		  </div>
+		  <div class="item">
+		  <div class="container">
+			<a href="register"><img src="themes/images/carousel/3.png" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				</div>
+			
+		  </div>
+		  </div>
+		   <div class="item">
+		   <div class="container">
+			<a href="register"><img src="themes/images/carousel/4.png" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				</div>
+		   
+		  </div>
+		  </div>
+		   <div class="item">
+		   <div class="container">
+			<a href="register"><img src="themes/images/carousel/5.png" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+			</div>
+		  </div>
+		  </div>
+		   <div class="item">
+		   <div class="container">
+			<a href="register"><img src="themes/images/carousel/6.png" alt=""/></a>
+			<div class="carousel-caption">
+				  <h4>Second Thumbnail label</h4>
+				  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+				</div>
+		  </div>
+		  </div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	  </div> 
+</div>
+<!-- carousel part end=============================================================== -->
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	<div ng-include="'views/sidebar.html'"  id="sidebar" class="span3"></div>
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+	 <ng-view>
+
+	</ng-view> 
+</div>
+</div></div>
+</div>
+
+<div class="loaderback" id="loader" style="display:none;">
+	<div class="lcontainer">
+		<div class="dash uno"></div>
+		<div class="dash dos"></div>
+		<div class="dash tres"></div>
+		<div class="dash cuatro"></div>
+	</div>
+</div>
+
+<!-- footer Start================================================== -->
+<div  id="footerSection" ng-include="'views/footer.html'"></div>
+<!-- footer end=============================================== -->
+
+
+<script type="text/javascript">
+
+	var serverurl = "http://192.168.1.156:8087";
+	//var serverurl = "http://localhost:8081/ecom";
+	//var serverurl = "http://192.168.1.124:8123/ecomm";
+</script>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+	<!--  <script src="themes/js/jquery.js" type="text/javascript"></script>  -->
+	<script src ="themes/js/jquery-1.10.2.js"></script>
+    <script src ="themes/js/jquery-ui.js"></script>
+	<script src="themes/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="themes/js/google-code-prettify/prettify.js"></script>
+	<script src="themes/js/jquery.lightbox-0.5.js"></script>
+	 
+    <!-- For side menu bar activity  -->
+    <script src="themes/js/sidebar.js"></script>
+    <!-- For alert box  -->
+    <script src="themes/js/alert.js"></script>
+
+
+    <!-- For angular js library -->
+    <script src="js/angular.min.js"></script> 
+    <!-- -------------------------for features----------------------- -->
+    <script type="text/javascript" src="themes/bootshop/features/angular-material.min.js"></script>
+    <script type="text/javascript" src="themes/bootshop/features/angular-aria.min.js"></script>
+    <script type="text/javascript" src="themes/bootshop/features/angular-messages.min.js"></script>
+    <script type="text/javascript" src="themes/bootshop/features/angular-animate.min.js"></script>
+    <!-- -------------------------for features--------------------------------- -->
+    <script src="bootstrap/js/ui-bootstrap.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap-filestyle.min.js"></script>  
+    <script src="js/angular-route.js"></script> 
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.js"></script>
+    <script src="js/angular-cookies.js"></script>
+    <script src="js/angular-idle.js"></script>    
+    <script src="js/angular-touch.js"></script> 
+    <!-- <script src="js/angular-animate.js"></script>  -->
+    <script src="js/ng-infinite-scroll.min.js"></script> 
+
+    <!-- -------------------------for pdf--------------------------------- -->
+    <script type="text/javascript" src="themes/bootshop/pdf/html2canvas.min.js"></script>
+    <script type="text/javascript" src="themes/bootshop/pdf/pdfmake.min.js"></script>
+    <!-- -------------------------for pdf--------------------------------- -->
+    
+      <!-- For use angular js in project -->
+     <script src="app.js"></script> 
+      <!--Operation For Login  -->
+     <script src="AngularController/Login_Controller.js"></script> 
+     <script src="AngularService/Login_Service.js"></script> 
+      <!--Operation For User  -->
+     <script src="AngularController/User_Controller.js"></script> 
+     <script src="AngularService/User_Service.js"></script>
+      <!--Operation For Products_Controller  -->
+     <script src="AngularController/Products_Controller.js"></script>
+      <!--Operation For Orders_Controller  -->
+     <script src="AngularController/Orders_Controller.js"></script>
+        <!--Operation For Invoice_Controller  -->
+     <script src="AngularController/Invoice_Controller.js"></script>
+     <!--Operation For Item Details  -->
+     <script src="AngularController/Test_Controller.js"></script>
+     <!--Operation For Test_Controller  -->
+     <script src="AngularController/HomeController.js"></script>
+     <script src="AngularController/ProductDetail_Controller.js"></script>
+     <script src="AngularService/ProductDetail_Service.js"></script>
+     <script src="AngularController/Left_Menu_Controller.js"></script>
+     <script src="AngularController/Profile_Controller.js"></script>
+     <script src="AngularController/CartController.js"></script>
+     <script src="AngularService/Cart_Service.js"></script>
+     <script src="AngularController/CheckOut_Controller.js"></script>
+     <script src="AngularService/Checkout_Service.js"></script>
+     <script src="AngularService/Common_Service.js"></script>
+     <script src="AngularController/MembershipPlan_Controller.js"></script>
+     <script src="AngularService/MembershipPlan_Service.js"></script>
+     <script src="AngularController/WishList_Controller.js"></script>
+     
+<script>
+/*$( document ).ready(function() {
+	localStorage.setItem('contextpathname' ,'/yewmed');
+});*/
+//var baseurl="http://192.168.1.156:8087/";
+</script>
+</body>
+</html>

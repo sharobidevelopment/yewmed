@@ -1,0 +1,181 @@
+<style type="text/css">
+  /*.nav-custom {
+    position: relative;
+  }*/
+  .nav-custom h4 a {
+    color:#fff;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 7px;
+  }
+  .nav-custom h4 a {
+    text-decoration: none;
+  }
+  .nav-custom h4 {
+    position: absolute;
+    top: 10px;
+    border: 1px solid;
+    text-decoration: none;
+    color: #fff;
+    background: #006dcc;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#08c),to(#04c));
+    border-radius: 5px;
+  }
+  .nav-custom h4:hover {
+    cursor: pointer;
+    text-decoration: none;
+    background-image: none;
+    background: #006dcc;
+  }
+  .nav-custom.pre1  h4 {
+      right: 70px;
+  }
+  .nav-custom.view1 h4 {
+      right: 10px;
+  }
+uib-accordion .nav,uib-accordion i {
+  margin-bottom: 0 !important;
+}
+</style>
+<div ng-app="myApp">
+ <div class="generic-container" id="register" ng-controller="OrdersController as ctrl">
+ <ul class="breadcrumb">
+    <li><a href="/yewmed/">Home</a> <span class="divider">/</span></li>
+    <li class="active">Orders:</li>
+    </ul>
+
+ <div class="checkbox" style="display:none">
+    <label>
+      <input type="checkbox" ng-model="oneAtATime">
+      Open only one at a time
+    </label>
+  </div>
+<uib-accordion close-others="oneAtATime">
+<div infinite-scroll='moreOrders()' infinite-scroll-distance='2' infinite-scroll-disabled="scrollStatus">
+<div class="well" ng-repeat="u in ctrl.orders" style="position: relative;">
+    <div>
+      <span style="margin-right: 50px"><i style="margin-right: 5px"></i>{{$index+1}}.</span>
+      <span style="margin-right: 50px"><i style="margin-right: 5px">invNo:</i>{{u.invNo}}</span>
+      <span style="margin-right: 50px;width:10px;"><i style="margin-right: 5px">TotalAmt:</i>{{u.netAmount}}</span>
+     
+               <button style="margin-right: 100px;float: right;"  ng-if="u.isCanceled != 1"
+                  ng-click="invoiceCall(u)">invoice</button> 
+               <button style="margin-right: 100px;float: right;" ng-click="orderCancel(u.id)"ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+               </button>
+               <span style="margin-right: 100px;float: right;" ng-if="u.isCanceled == 1">
+               <i style="margin-right: 5px; color: red">Canceled</i>
+               </span>
+               <span style="margin-right: 100px;float: right;" 
+                  ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+               <i style="margin-right: 5px; color: green">Accepted</i>
+               </span>
+    </div>
+    <!-- <div class="control-group" >
+               <div class="controls">
+                <div id="success-alertOrderCancel">{{msgOrderCancel}}</div>
+              </div>
+    </div> -->
+  
+            <ul class="nav nav-tabs nav-stacked nav-custom pre1" style="clear: both;"
+               ng-if="u.prescriptions!=''">
+        <li uib-accordion-group class="panel-default" heading="Files">
+        
+                  <table class="table table-hover table-bordered">
+                     <br>
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Index</th>
+                  <th style="text-align: center;">Dr. Name</th>
+                  <th style="text-align: center;">Download/View</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr ng-repeat="p in u.prescriptions" id="tr_{{rp.id}}">
+                  <td style="text-align: center;">{{$index+1}}</td>
+                  <td style="text-align: center;">{{p.doctorName}}</td>
+                  <td style="text-align: center;"><a style="cursor: pointer;" ng-click="prescriptionsDownload(p.id,p.userFilename)">{{p.userFilename}}</a></td>
+                </tr>
+               </tbody>
+            </table>
+          </li>
+      </ul>
+      <ul class="nav nav-tabs nav-stacked nav-custom view1" style="clear: both;">
+        <li uib-accordion-group class="panel-default" heading="Details">
+         
+                  <table class="table table-hover table-bordered">
+                     <br>
+              <thead>
+                <tr>
+                  <th style="text-align: center;">Index</th>
+                  <th style="text-align: center;">Name</th>
+                  <th style="text-align: center;">Quantity/Update</th>
+                  <th style="text-align: center;">Price</th>
+                  <th style="text-align: center;">Discount</th>
+                  <th style="text-align: center;">Tax</th>
+                  <th style="text-align: center;">TotalAmt</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <tr ng-repeat="order in u.orderDetails" id="tr_{{rp.id}}">
+                  <td style="text-align: center;">{{$index+1}}</td>
+                  <td style="text-align: center;"><a style="cursor: pointer;" ng-click="viewItems(order.id)">{{order.itemName}}</a></td>
+                <td style="text-align: center;">{{order.packQty}}</td>
+                  <td style="text-align: center;">{{order.grossAmount}}</td>
+                  <td style="text-align: center;">
+                      <span ng-if="rp.isDiscount!= 0">{{order.disc}} ({{order.discPer}} %)</span>
+                      
+                              <span ng-if="rp.isDiscount == 0">0.0 %</span>
+                           </td>
+                  <td style="text-align: center;">{{order.taxAmount}} ({{order.taxPercentage}}%)</td>
+                  <td style="text-align: center;">{{order.netAmount}}</td>
+                </tr>
+                <tr>
+                  <td colspan="6" style="text-align:right">Total Discount:  </td>
+                  <td id="cart_item_tot_discount" style="text-align: center;">{{u.discAmount}} </td>
+                </tr>
+                 <tr>
+                  <td colspan="6" style="text-align:right">Total Tax: </td>
+                  <td id="cart_item_tot_tax" style="text-align: center;">{{u.taxAmount}} </td>
+                </tr>
+                <tr>
+                  <td colspan="6" style="text-align:right"><strong>TOTAL</strong></td>
+             
+                           <td class="label label-important" style="display:block;text-align:center;fontcolor">
+                              <strong><span id="cart_tot_amt_to_pay"><font color="black">{{u.netAmount}}
+                              </font></span></strong>
+                           </td>
+                </tr> 
+               </tbody>
+            </table>
+          </li>
+        </ul>
+    </div>
+  </div>
+</uib-accordion>
+<!-- ======================Conform model start 'for test not used'=============== -->
+<div class="modal fade" id="confirmationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title">Please Confirm!!!</h4>
+            </div>
+            <div class="modal-body">
+               <!-- <input type="text"  id="uid" style="display:none"  ng-model="uid"> -->
+               <div class="well">
+                     <div class="control-group" ">
+                         Do you want to cancel your order???
+                     </div>
+                  </div>
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn block" ng-click="orderCancel();">YES</button>
+               <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">NO</button>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+</div>
+<!-- =========================Conform model end================================ -->

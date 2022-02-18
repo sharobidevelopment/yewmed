@@ -1,0 +1,447 @@
+<div  ng-controller="ProfileController as updtCntrl">
+ <ul class="breadcrumb">
+		<li><a href="/yewmed">Home</a> <span class="divider">/</span></li>
+		<li class="active">Update profile</li>
+    </ul>
+	<h3>Update your profile</h3>	
+	<div class="well">
+	
+	<div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="oneAtATime">
+      Open only one at a time
+    </label>
+  </div>
+  <uib-accordion close-others="oneAtATime">
+  <!-- <div uib-accordion-group class="panel-default" heading="{{n.title}}"ng-repeat="n in names"> -->
+  <!-- =============Change Name Starts====================== -->
+<div uib-accordion-group class="panel-default" heading="Change Name:">
+      <form class="form-horizontal" ng-submit="updateName()" name="updateNameForm">
+          <div class="control-group">
+            <label class="control-label" for="fname">First name <sup style="color: red">*</sup></label>
+              <div class="controls">
+                 <input type="text" ng-model="users.fname" name="fname" id="fname" class="span3" placeholder="First Name" required />
+               <div class="has-error" ng-show="updateNameForm.fname.$invalid">
+                      <span style="color:red" ng-show="updateNameForm.fname.$error.required && updateNameForm.fname.$touched">First name is required</span>
+               </div>
+             </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="lname">Last name <sup>*</sup></label>
+               <div class="controls">
+                 <input type="text" ng-model="users.lname" name="lname" id="lname" class="span3" placeholder="Last name" required />
+                   <div class="has-error" ng-show="updateNameForm.lname.$invalid">
+                       <span style="color:red" ng-show="updateNameForm.lname.$error.required && updateNameForm.lname.$touched">Last name is required</span>
+                   </div>
+               </div>
+          </div>
+          <div class="control-group" >
+               <div class="controls">
+                <div id="success-alertName">{{ msgName }}</div>
+              </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+                   <input  type="submit" ng-disabled="updateNameForm.$invalid" disabled="disabled" class="btn btn-large btn-success" value="edit" />
+            </div>
+            <!-- <div>
+                <button type="button" class="btn btn-default btn-sm" ng-click="updateName()">edit</button>
+            </div> -->
+          </div>  
+     </form>
+  </div>
+<!-- ==============Change Name End======================= -->
+
+    <!-- <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
+      {{group.content}}
+    </div> -->
+<!-- ==========Change Password Stars======================== -->
+<div uib-accordion-group class="panel-default" heading="Change Password:">
+      <form class="form-horizontal" ng-submit="updatePassword()" name="updateForm">
+        <div class="control-group">
+           <label class="control-label" for="oldPassword">Old Password<span style="color: red">*</span></label>
+            <div class="controls">
+                <input type="password" ng-model="users.oldPassword" name="oldPassword" id="oldPassword" placeholder="Old Password" required  class="span3">
+             <div class="has-error" ng-show="updateForm.oldPassword.$invalid">
+               <span style="color:red" ng-show="updateForm.oldPassword.$error.required && updateForm.oldPassword.$touched">Password is required</span>
+             </div>
+           </div>
+       </div>
+       <div class="control-group">
+           <label class="control-label" for="newPassword">New Password<span style="color: red">*</span></label>
+            <div class="controls">
+                <input type="password" ng-model="users.newPassword" name="newPassword" id="newPassword" placeholder="New Password" required  class="span3">
+             <div class="has-error" ng-show="updateForm.newPassword.$invalid">
+               <span style="color:red" ng-show="updateForm.newPassword.$error.required && updateForm.newPassword.$touched">Password is required</span>
+             </div>
+           </div>
+       </div>
+       <div class="control-group">
+           <label class="control-label" for="reTypePassword">Retype Password<span style="color: red">*</span></label>
+            <div class="controls">
+                <input type="password" ng-model="users.reTypePassword" name="newPassword" id="reTypePassword" placeholder="Retype Password " required  class="span3">
+             <div class="has-error" ng-show="updateForm.reTypePassword.$invalid">
+               <span style="color:red" ng-show="updateForm.reTypePassword.$error.required && updateForm.reTypePassword.$touched">Password is required</span>
+             </div>
+           </div>
+       </div>
+          
+          <!-- <div class="control-group" style="color: red">
+               <div class="controls">{{ msg }}</div>
+          </div> -->
+          <div class="control-group" >
+               <div class="controls">
+                <div id="success-alert">{{ msgPassword }}</div>
+              </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+                   <input  type="submit" ng-disabled="updateForm.$invalid" disabled="disabled" class="btn btn-large btn-success" value="edit Password" />
+            </div>
+          </div>  
+     </form>
+  </div>
+<!-- ==================Change Password End=================== -->
+
+<!-- =================Change Number Start==================== -->
+<div uib-accordion-group class="panel-default" heading="Change Number:">
+      <form class="form-horizontal" ng-submit="updatePhone()" name="phoneForm">
+        <div class="control-group">
+           <label class="control-label" for="phone">Contact Number<span style="color: red">*</span></label>
+            <div class="controls">
+                 <input type="text" ng-model="users.phone" name="phone" id="phone" placeholder="Contact Number" required  class="span3">
+             <div class="has-error" ng-show="phoneForm.phone.$invalid">
+                      <span style="color:red" ng-show="phoneForm.phone.$error.required && phoneForm.phone.$touched">Contact Number is required</span>
+             </div>
+          </div>
+    </div>
+    <div class="control-group">
+           <label class="control-label" for="password">Password:<span style="color: red">*</span></label>
+            <div class="controls">
+                 <input type="text" ng-model="users.password" name="password" id="password" placeholder="password" required  class="span3">
+             <div class="has-error" ng-show="phoneForm.password.$invalid">
+                      <span style="color:red" ng-show="phoneForm.password.$error.required && phoneForm.password.$touched">Contact Number is required</span>
+             </div>
+          </div>
+    </div>
+    <div class="control-group" >
+               <div class="controls">
+                <div id="success-alertPhone">{{ msgPhone }}</div>
+              </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input  type="submit" ng-disabled="phoneForm.$invalid" disabled="disabled" class="btn btn-large btn-success" value="edit phone" />
+        </div>
+    </div>  
+     </form>
+  </div>
+<!-- ==================Change Number End========================= -->
+
+  <!-- =============Update Address Starts======================= -->
+<!-- <div uib-accordion-group class="panel-default" heading="Update Address:">
+      <p>Update your address:</p>
+      <div ng-repeat="address in address">{{address}}</div>
+      <button type="button" class="btn btn-default btn-sm" ng-click="addAddress()">Add New Address</button>
+  </div> -->
+<!-- ============Update Address End============================ -->
+<!-- ============Starts AddAddress Model Test=================== -->
+<div uib-accordion-group class="panel-default" heading="Address:">
+      <p>Your address:</p>
+      <!-- <div class="modal fade" id="addressmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+            </div>
+            <div class="modal-body">
+               <div ng-repeat="data in users.addresses | orderBy : 'id'"">
+                  <div class="well">
+                     <h5>Address {{$index+1}} ({{data.type}})</h5>
+                     <div class="control-group" ">
+                        <label class="control-label">{{data.streetAddress}}</label>
+                        <label class="control-label">{{data.country.name}},{{data.state.name}},{{data.city.name}}</label>
+                        <label class="control-label">{{data.pincode}}</label>
+                        <label class="control-label">{{data.landmark}}</label>
+                        <label class="control-label">{{data.contactPhone}}</label>
+                        <label class="control-label">{{data.invoiceMail}}
+                        </label>
+                     </div>
+                     <div class="controls">
+                         <input type="checkbox" ng-checked="data.isDefault==1" ng-click="makeDefault(data.id)">Default
+                         <!-- <a class="btn btn-small" data-toggle="modal" data-target="#addressmodal"> Change</a> -->
+                          <a class="btn btn-small" data-toggle="modal" data-target="#addressaddmodal"> Add</a>
+                          <!-- <a class="btn btn-small" data-toggle="modal" data-target="#addresseditmodal"> Edit</a> -->
+                          <button type="button" class="btn block" ng-click="editAddress(data);">Edit</button>
+                          <button type="button" class="btn block" ng-click="deleteAddress(data.id);">Delete Address</button>
+                     </div>
+                   </div>
+                     <!-- <div class="controls">
+                        <button type="button" class="btn block" ng-click="checkShippingPosibility(data.id,data.latitude,data.longitude);">Select Address</button>
+                     </div> -->
+                  </div>
+                  <a class="btn btn-small" data-toggle="modal" data-target="#addressaddmodal"> Add</a>
+               </div>
+            </div>
+   </div> 
+  </div>
+<!-- ==============Ends AddAddress Model Test Test============== -->
+
+</uib-accordion>
+   </div>
+</div>
+<!-- ====================Start addressAddmodal==================== -->
+<div class="modal fade" id="addressaddmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title">Add Address</h4>
+            </div>
+            <form class="form-horizontal"  ng-submit="addNewAddress()" name="addressAddForm">
+               <div class="modal-body">
+                  <div class="well">
+                    
+                     <div class="control-group">
+                        <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label><span style="color: red">*</span>
+                        <!--  <div class="controls"> -->
+                        <textarea name="streetAddress" id="streetAddress" ng-model="newaddress.streetAddress"  cols="26" rows="5" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressAddForm.streetAddress.$invalid && addressAddForm.streetAddress.$touched"><br>
+                        <span ng-show="addressAddForm.streetAddress.$error.required"
+                           style="color: red">This is a required field</span>
+                        </span>
+                        <!-- </div> -->
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                        </label>
+                        <div class="controls">
+                           <select id="countryId_add" name="countryId" ng-change="getStates(1)"  ng-model="newaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                              <!-- <option value="" disabled>Select Country</option>
+                              <option ng-repeat="country in countries" value="{{country.id}}">{{country.name}}</option> -->
+                           </select>
+                          <!--  <select id="countryId_add" name="countryId" ng-change="getStates()"  ng-model="newaddressa.ddresses[0].countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                           </select> -->
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.countryId.$invalid && addressAddForm.countryId.$touched"><br>
+                           <span ng-show="addressAddForm.countryId.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select name="stateId" id="stateId_{{$index}}" ng-change="getCities(1)" ng-model="newaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                              <!-- <option value="" disabled>Select-State</option>
+                              <option ng-repeat="state in states" value="{{state.id}}">{{state.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.stateId.$invalid && addressAddForm.stateId.$touched"><br>
+                           <span ng-show="addressAddForm.stateId.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select ng-model="newaddress.cityId" name="city" id="city_add" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                              <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.city.$invalid && addressAddForm.city.$touched"><br>
+                           <span ng-show="addressAddForm.city.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <input type="text" ng-model="newaddress.pincode" name="pincode" placeholder="Zip / Postal Code"  required class="span3"> 
+                           <div class="has-error" ng-show="addressAddForm.pincode.$invalid"><br>
+                              <span style="color:red" ng-show="addressAddForm.pincode.$error.required && addressAddForm.pincode.$touched">Zip is required</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <input type="text" ng-model="newaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3"> 
+                           <div class="has-error" ng-show="addressAddForm.landmark.$invalid"><br>
+                              <span style="color:red" ng-show="addressAddForm.landmark.$error.required && addressAddForm.landmark.$touched">Landmark is required</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select class=""  ng-model="newaddress.type" name="type" class="form-control" ng-required="true" class="span3">
+                              <option value="" disabled>Select</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Others">Others</option>
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressAddForm.type.$invalid && addressAddForm.type.$touched"><br>
+                           <span ng-show="addressAddForm.type.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-default btn-sm">Add</button>
+                     <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+            </form>
+            </div>
+         </div>
+      </div>
+<!-- ================End addressAddmodal===================== -->
+<!-- =================Start addressEditmodal================== -->
+   <div class="modal fade" id="addresseditmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title">Edit Address</h4>
+            </div>
+            <form class="form-horizontal"  ng-submit="updateAddress()" name="addressEditForm">
+              <input type="text" ng-model="selectedaddress.id" style="display:none;">
+               <div class="modal-body">
+                  <div class="well">
+                     <div class="control-group">
+                        <label>
+                        <input type="checkbox" ng-checked="selectedaddress.isDefault==1" ng-click="makeDefault(selectedaddress.id)">
+                        Default
+                        </label>                   
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label><span style="color: red">*</span>
+                        <!--  <div class="controls"> -->
+                        <textarea ng-model="selectedaddress.streetAddress" name="streetAddress"  cols="26" rows="5" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.streetAddress.$invalid && addressEditForm.streetAddress.$touched"><br>
+                        <span ng-show="addressEditForm.streetAddress.$error.required"
+                           style="color: red">This is a required field</span>
+                        </span>
+                        <!-- </div> -->
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                        </label>
+                        <div class="controls">
+                           <select id="countryId" name="countryId" ng-change="getStates(2)"  ng-model="selectedaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                              
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.countryId.$invalid && addressEditForm.countryId.$touched"><br>
+                           <span ng-show="addressEditForm.countryId.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select name="stateId" id="stateId_{{$index}}" ng-change="getCities(2)" ng-model="selectedaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                             
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.stateId.$invalid && addressEditForm.stateId.$touched"><br>
+                           <span ng-show="addressEditForm.stateId.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select name="city" id="city" ng-model="selectedaddress.cityId" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                              <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.city.$invalid && addressEditForm.city.$touched"><br>
+                           <span ng-show="addressEditForm.city.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="phone">Phone<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <input type="text" ng-model="selectedaddress.contactPhone" name="phone" placeholder="phone"  required class="span3"> 
+                           <div class="has-error" ng-show="addressEditForm.phone.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.phone.$error.required && addressEditForm.phone.$touched">phone is required</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <input type="text" ng-model="selectedaddress.pincode" name="pincode" placeholder="Zip / Postal Code"  required class="span3"> 
+                           <div class="has-error" ng-show="addressEditForm.pincode.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.pincode.$error.required && addressEditForm.pincode.$touched">Zip is required</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <input type="text" ng-model="selectedaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3"> 
+                           <div class="has-error" ng-show="addressEditForm.landmark.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.landmark.$error.required && addressEditForm.landmark.$touched">Landmark is required</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="control-group">
+                        <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                        <div class="controls">
+                           <select class=""  ng-model="selectedaddress.type" name="type" class="form-control" ng-required="true" class="span3">
+                              <option value="" disabled>Select</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Others">Others</option>
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.type.$invalid && addressEditForm.type.$touched"><br>
+                           <span ng-show="addressEditForm.type.$error.required"
+                              style="color: red">This is a required field</span>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-default btn-sm">Update</button>
+                     <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+            </form>
+            </div>
+         </div>
+      </div>
+</div>
+<!-- =====================End addressEditmodal==================== -->
+
+
+<script>
+    $( document ).ready(function() {
+    	$("#carouselBlk").hide();
+    });
+
+  </script>

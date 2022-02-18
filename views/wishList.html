@@ -1,0 +1,169 @@
+<div ng-controller="WishListController as wishlistcntrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+  <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+
+   <!-- <div class="wrapper body-bg"> -->
+      <!-- <div class="breadcrumb-area">
+         <div class="container">
+            <ol class="breadcrumb breadcrumb-list">
+               <li class="breadcrumb-item"><a href="{{contextpath}}">Home</a></li>
+               <li class="breadcrumb-item"><a href="account.html">Account</a></li>
+               <li class="breadcrumb-item active">WISH LIST</li>
+            </ol>
+         </div>
+      </div> -->
+
+
+      <div class="container-fluid">
+
+        <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">My Whistlist</li>
+                </ol>
+            </div>
+
+
+         <div class="all_page_middle_div all_page_header">
+           <h3 class="all_page_header_h3"> MY WHISTLIST </h3>
+           <hr>
+         </div>    
+
+
+   <!-- <h3>
+      WISH LIST <a href="{{contextpath}}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a>
+   </h3> -->
+   <!-- <hr class="soft"/> -->
+   
+   <!-- <span ng-hide="isCheck" id="fail-alert" style="color:red" ng-if="crtMsg">{{crtMsg}}
+   </span> -->
+   <div class="table-responsive all_page_middle_div" ng-if="wishListData.length!=0">
+      <!-- <table class="table table-bordered">
+         <thead>
+            <tr> 
+               <th style="text-align: center;">Select</th>
+               <th style="text-align: center;">Index</th>
+               <th style="text-align: center;">Product</th>
+               <th style="text-align: center;">Price</th>
+               <th style="text-align: center;">Delete</th>
+               
+            </tr>
+         </thead>
+         <tbody>
+            <tr ng-repeat="rp in wishListData" id="tr_{{rp.id}}">
+               <td style="text-align: center;">
+                 <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox"
+                  value="{{rp.id}}" 
+                  id="selecteditem_checkbox_{{rp.id}}"> 
+               </td>
+               <td style="text-align: center;">{{$index+1}}</td>
+               <td style="text-align: center;"><a href="product">{{rp.name}}</a> </td>
+               <td style="text-align: center;">{{rp.price}}</td>
+               <td style="text-align: center;"><button class="btn btn-danger" type="button" ng-click="remove_itmfromwishlist(rp.id)"><i class="icon-remove icon-white">x</i></button></td>
+            </tr>      
+         </tbody>
+      </table> -->
+
+      <table role="table" class="new_whistlisttable">
+<thead role="rowgroup">
+<tr role="row">
+   <th role="columnheader" style="width:100px"> <input style="cursor: pointer;margin-right:10px" type="checkbox" id="isAllSelected" ng-click="toggleAll()" ng-model="isAllSelected" ng-checked="false"> <!-- {{checked_count}} --> Select </th>
+   <th role="columnheader">Image</th>
+   <th role="columnheader">Product</th>
+   <th role="columnheader">Mrp</th>
+   <th role="columnheader">Delete</th>
+</tr>
+</thead>
+<tbody role="rowgroup">
+<tr role="row" ng-repeat="rp in wishListData" id="tr_{{rp.id}}">
+   <td role="cell" class="new_whistlisttable_td"> 
+      <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" class="child" ng-click="toggleSingle()">
+   <!-- <td role="cell" class="new_whistlisttable_td"> {{$index+1}} </td> -->
+   <!-- <td role="cell"> <a href="product">{{rp.name}}</a> </td> -->
+   <td role="cell" class="new_whistlisttable_td" ng-if="rp.groupId !=133"> <img src="/yewmed/themes/img/yewmed_new_pics/product3/{{rp.groupId}}.jpg" style="height:48px;width:53px"> </td>
+   <td role="cell" class="new_whistlisttable_td" ng-if="rp.groupId ==133"> <img src="/yewmed/themes/img/yewmed_new_pics/productwise3/{{rp.id}}.jpg" style="height:48px;width:53px"> </td>
+   <td role="cell" class="new_whistlisttable_td"><a href="" style="cursor: default;color:#424242!important" ng-click="wishlistcntrl.viewItems(rp.id,rp.groupId,rp.group,rp.category)">{{rp.name}}</a></td>
+   <td role="cell" class="new_whistlisttable_td"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{rp.price | number:2}} </td>
+   <td role="cell" class="new_whistlisttable_td"> <!-- <button class="btn btn-danger" type="button" ng-click="remove_itmfromwishlist(rp.id)"><i class="icon-remove icon-white">x</i></button> -->
+      <i class="fa fa-trash-o cart_page_itemdlt" aria-hidden="true" ng-click="remove_itmfromwishlist(rp.id)"> </i>
+   </td>
+</tr>
+<!-- <tr role="row">
+   <td role="cell"> 
+      <input style="cursor: pointer;" type="checkbox">  </td>
+   <td role="cell"> 2 </td>
+   <td role="cell"> 12 RENE CAP </td>
+   <td role="cell"> 100 </td>
+   <td role="cell"> <button class="btn btn-danger" type="button"><i class="icon-remove icon-white">x</i></button> </td>
+</tr> -->
+</tbody>
+</table>
+
+
+  
+
+
+
+
+   </div>
+   <div ng-if="wishListData.length==0" style="text-align:center;" id="wishlistemptymsg">
+      <!-- <img src="themes/img/empty-cart.png" title="" alt=""> -->
+      <h3 style="margin-top:50px;color:red"> There is no Medicine available in Whistlist </h3>
+   </div>
+
+
+   <div class="new_whistlisttable_for_mb" style="margin-top:30px;padding: 0px 15px 0px 15px;" ng-if="wishListData.length!=0">
+
+    <div ng-repeat="rp in wishListData" id="tr_{{rp.id}}" class="tables_for_mb">
+    <p style="text-align:center"> <span style="float:left"> <i class="fa fa-trash-o cart_page_itemdlt" aria-hidden="true" ng-click="remove_itmfromwishlist(rp.id)"> </i> </span> <img src="/yewmed/themes/img/yewmed_new_pics/product1/{{rp.groupId}}.jpg" style="height: 100px;width: 100px;margin-top:35px" ng-if="rp.groupId !=133"> <img src="/yewmed/themes/img/yewmed_new_pics/productwise3/{{rp.id}}.jpg" style="height: 100px;width: 100px;margin-top:35px" ng-if="rp.groupId ==133">  </p>
+    <div style="width:100%;display:flex;margin-top:25px">
+          <div class="mobile_tableformat_1st_div"> Select </div>
+          <div class="mobile_tableformat_2nd_div"> <input style="cursor: pointer;" type="checkbox" name="selecteditem_checkbox" value="{{rp.id}}" id="selecteditem_checkbox_{{rp.id}}" class="child"> </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Product Name </div>
+          <div class="mobile_tableformat_2nd_div">  {{rp.name}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Price </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{rp.price}} </div>
+     </div> <br>
+     <hr>
+   </div>
+
+  </div> 
+   
+   
+<br>
+
+
+
+ 
+
+  <div class="all_page_middle_div" style="margin-top:60px"> 
+    <a  class="btn btn-large pull-right cart_new_button" ng-if="wishListData.length!=0" ng-click="moveToCart()">
+        MOVE TO CART <i class="icon-arrow-right"></i></a>
+    <a href="{{contextpath}}" class="btn btn-large cart_new_button" ng-if="wishListData.length!=0"><i class="icon-arrow-left"></i> CONTINUE SHOPPING </a>
+  </div>
+ <!-- </div> -->
+  <!-- <div style="margin-top: 200px;">
+   </div> -->
+</div>
+<script>
+   $( document ).ready(function() {
+      $("#carouselBlk").hide();
+   });
+
+   function hide_show() {
+     alert($("#show_file").val());
+   }
+   
+</script>

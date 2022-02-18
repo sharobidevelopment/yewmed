@@ -1,0 +1,665 @@
+<div ng-controller="ProductDetailsController as prouddetailctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+        <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+        <!-- Breadcrumb Area Start Here -->
+        <!-- <div ng-class="{true: 'breadcrumb-area', false: 'breadcrumb-area1'}[statusCookie == 'Active']"> --> <div class="container-fluid">
+            <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{contextpath}}/category/{{cate_name}}-{{cate_id}}" class="everypge_topic_a"> {{cate_name}} </a> </li>
+                    <li class="breadcrumb-item"><a href="{{contextpath}}/groups/{{cate_name}}/{{grp_name}}-{{grp_id}}" class="everypge_topic_a"> {{grp_name}} </a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default;text-transform: lowercase;"> {{product.name}} </li>
+                </ol>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End Here -->
+        <!-- Product Thumbnail Start -->
+        <div class="container-fluid">
+            <div class="all_page_middle_div">
+                <div class="row">
+                    <!-- Main Thumbnail Image Start -->
+                    <div class="col-lg-4 mb-all-40 col-js-5">
+                        <!-- Thumbnail Large Image start -->
+                        <div class="tab-content product_detail_img_div">
+                            <div id="thumb1" class="tab-pane fade show active" ng-if="product.groupId !=133">
+                               <!--  <img src="themes/img/others/{{ product.groupId==7 ? 'cap' : (product.groupId==6 ? 'tablet' : 'tablet') }}.png" alt="product-view" style="width:100%;"> -->
+                                <!-- <img src="themes/img/groups/{{product.groupId}}.png" alt="product-view" style="width:100%;"> -->
+                                <img src="/yewmed/themes/img/yewmed_new_pics/product1/{{product.groupId}}.jpg" alt="product-view" style="width:auto;">
+                            </div>
+                             <div id="thumb1" class="tab-pane fade show active" ng-if="product.groupId ==133">
+                                <img src="/yewmed/themes/img/yewmed_new_pics/productwise1/{{product.id}}.jpg" alt="product-view" style="width:auto;">
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+                    <!-- Main Thumbnail Image End -->
+                    <!-- Thumbnail Description Start -->
+                    <div class="col-lg-5 col-js-7">
+                        <div class="thubnail-desc fix" style="overflow:inherit">
+                            <p class="product-header" style="font-weight:400">
+                                <!-- <span id="searched_item_name">{{product.name}}</span> -->
+                                {{product.name}}
+                            </p>
+                           <!-- <small><span id="searched_item_short_details"></span> 
+                           </small> -->
+                            <!-- <div class="pro-price mt-10" style="margin-top:20px"> -->
+                                <!-- <p class="d-flex align-items-center"> -->
+                                    <p class="product_detail_manufacture_name"> <i> By <b style="font-weight:400;text-transform:uppercase"> {{product.manufacturer}} </b> </i> </p>
+                                    <p> <span style="font-size:15px;"> MRP </span>
+                                   <!--  <span class="prev-price">16.51</span> -->
+                                     <span class="price"> 
+                                     <img src="/yewmed/themes/img/yewmed_new_pics/rupees_sym.png" alt="product-view" style="width:auto;"> </span> <span style="color:#f26222;font-size:26px;position:relative;top:3px;margin-left:6px"> {{product.price | number:2}} </span><span style="font-size:12px;color:#424242;margin-left:-6px"> <i>(inclusive all taxes) </i> </span>
+                                    <!-- <span class="saving-price">-5%</span> -->
+                                </p>
+                                <p class="product_detail_category_type"> Category Type: <span> {{product.group}} </span> </p>
+                                <p style="font-size:13px;margin-top:10px" ng-if="product.schedule=='SCHEDULE H' || product.schedule=='SCHEDULE H1' || product.schedule=='SCHEDULE X'"> <span style="padding:7px 10px;background:#fffae3"> <img src="/yewmed/themes/img/yewmed_new_pics/prescription_upload.png">  <b style="color:#f26222;font-weight:400"> Requires Prescription </b> </span> </p>
+                                <p class="product_detail_composition"> Composition: <span style="word-break: break-all"> {{product.content}}  </span> </p>
+
+                                <p ng-if="statusCookie=='Active'" id="add_to_cart_active" style="color:green;font-weight:700;margin-top:15px;margin-bottom:-5px;font-size:16px">    </p>
+                                <p ng-if="statusCookie=='Active'" id="add_to_cart_not_active" style="color:red;font-weight:700;margin-top:15px;margin-bottom:-5px;font-size:16px">  </p>
+
+                                <p ng-if="statusCookie!='Active'" id="not_active_false_p" style="height:22px"> </p>
+
+                                     <p id="msg_for_avl" style="color:green;font-weight:700;margin-top:15px;margin-bottom:-5px;font-size:16px">
+                                          
+                                    </p>  <!-- {{msg}}   -->
+
+                                   <p id="msg_for_not_avl" style="color:red;font-weight:700;margin-top:15px;margin-bottom:-5px;font-size:16px">
+
+
+
+                                <p class="product_detail_pincode_check"> Use pincode to check delivery info </p>
+                                <form name="myForm" style="margin-top:10px">
+                                   <p> <span>
+                                        <input type="text" placeholder="Enter pincode" class="check_pincode_input" ng-model="customer_zip_code" id="customer_zip_code" required numbers-only min="" max="999999" prevent-typing-greater/>
+                                    </span>
+                                    <span>
+                                       <button type="button" id="checkButton" class="check_pincode_button" ng-click="prouddetailctrl.checkSalabilityByPincode(product.id,product.groupId)"  ng-disabled="myForm.$invalid">Submit</button> 
+                                       <!-- <button ng-click="getLatLngByZipcode(customer_zip_code)"></button> -->
+                                    </span> 
+                                    
+                                    </p> 
+                                   <!--  <p id="msg_for_avl" style="color:green;font-weight:700;margin-top:0px;margin-bottom:0px">
+                                          
+                                    </p> --> <!-- {{msg}}   -->
+
+                                    <!-- <p id="msg_for_not_avl" style="color:red;font-weight:700;margin-top:0px;margin-bottom:0px"> -->
+                                     <!--  {{msg}}   -->
+                                    </p>
+                                  
+                                  </form>
+                                  <p style="margin-top:22px"> <span style="font-size:16px;color:#2c2c2c"> Quantity </span> <span style="margin-left:9px"> 
+                                            <input class="quantity" type="text" min="1" value="1" ng-model="customer_selected_qty" id="customer_selected_qty" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" ng-change="changePrice()" style="border-radius:0px;padding:8px 5px;width:35px">  
+                                          </span> <i ng-click="changePriceUp()" style="top: -9px;left:-5px;border:1px solid #e0e0e0" class="fa fa-angle-up cart_page_itemqty"></i> <i ng-click="changePriceDown()" style="top: 12px;left:-30px;border:1px solid #e0e0e0;border-top: 0px;border-left:0px" class="fa fa-angle-down cart_page_itemqty"></i> <span class="product_detail_cartbtn_left"> <button type="button" class="products_addtocart_button" disabled ng-click="prouddetailctrl.addItems(product.name,product.price,product.id,customer_selected_qty)" id="addToCart"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 510 510" style="position:relative" xml:space="preserve">
+    <path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306
+      c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7
+      c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408
+      c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z"/>
+</svg> <b style="position:relative;top:-1px"> | </b> <b> Add to cart </b> 
+                                       </button> </span> <span id="succes_add_cart">  </span> </p>
+
+      
+
+
+                            <!-- </div> -->
+                            <!-- <p class="pro-desc-details">   </p>
+                            <div class="product-size mtb-10 clearfix" ng-if="product.isDiscount==1">
+                                <label class="productdetails_details_label"> 
+                                    <span class="productdetails_details_span1">  Discount(%).  </span> 
+                                    <span style="margin-left:10px"> {{product.discount}} </span> 
+                                     <span style="margin-left:10px"> <input type="text" value="{{product.discount}}" class="productdetails_details_input" readonly> </span> 
+                                </label>
+                            </div> -->
+                            <!-- <div class="product-size mtb-10 clearfix" ng-if="product.isDiscount==1">
+                                <label class="productdetails_details_label"> 
+                                    <span class="productdetails_details_span1"> Discount Amt. </span> 
+                                    <span style="margin-left:10px"> {{discountamt}} </span> 
+                                    <span style="margin-left:10px"> <input type="text" value="0" class="productdetails_details_input" readonly> </span>
+                                </label>
+                             </div> -->
+                            <!-- <div class="product-size mtb-10 clearfix">
+                                <label class="productdetails_details_label">
+                                    <span class="productdetails_details_span1">Tax(%):</span> 
+                                    <span style="margin-left:10px"> {{product.saleTaxPercentage}}
+                                       <input type="text" value="{{product.saleTaxPercentage}}" readonly class="productdetails_details_input">  
+                                    </span> 
+                                </label>
+                            </div> -->
+                            <!-- <div class="product-size mtb-10 clearfix">
+                                <label class="productdetails_details_label"> 
+                                    <span class="productdetails_details_span1">  Tax Amt.  </span> 
+                                    <span style="margin-left:10px"> {{taxamt}}
+                                        <input type="text" value="{{taxamt}}" readonly class="productdetails_details_input"> 
+                                    </span> 
+                                </label>
+                             </div> -->
+                            <!-- <div class="product-size mtb-10 clearfix">
+                                <label class="productdetails_details_label"> 
+                                    <span class="productdetails_details_span1">  Net Amt.  </span> 
+                                    <span id="selected_product_price" ng-bind="selected_product_price" style="margin-left:10px"> </span>
+                                    <span style="margin-left:10px"> 
+                                        <input id="selected_product_price" ng-value="selected_product_price" readonly class="productdetails_details_input"> 
+                                    </span> 
+                                </label>
+                            </div> -->
+                           <!--  <div class="quatity-stock">
+                               <label class="productdetails_details_label">  Quantity </label>
+                                <ul class="d-flex flex-wrap  align-items-center">
+                                    <li class="box-quantity">
+                                        <form action="#">
+                                            <input class="quantity" type="number" min="1" value="1" ng-model="customer_selected_qty"  id="customer_selected_qty" 
+                                              ng-change="changePrice()">
+                                        </form>
+                                    </li>
+                                    <li style="cursor:auto">
+                                        Total:<span ng-bind="total_price" style="margin-left:10px"></span> 
+                                    </li>
+                                    
+                                    <li class="pro-ref" style="cursor:auto">
+                                        <p><span class="in-stock">
+                                            <i class="fa fa-check"></i> in stock</span>
+                                        </p>
+                                    </li>
+                                </ul> -->
+
+                                <!-- <form name="myForm">
+
+                                <ul class="d-flex flex-wrap  align-items-center" style="margin-top:20px">
+                                    <li>
+                                       Enter ZIP Code:
+                                        <input type="text" class="form-control" placeholder="ZIP Code" ng-model="customer_zip_code" id="customer_zip_code" required numbers-only min="" max="999999" style="width:200px;font-family:-webkit-body;" prevent-typing-greater/>
+                                    </li>
+                                    <li>
+                                        <br/>
+                                       <button type="button" id="checkButton" class="pro-cart" ng-click="prouddetailctrl.checkSalability(product.id)"  ng-disabled="myForm.$invalid">Check</button>  
+                                    </li>
+                                    <li id="msg_for_avl" style="color:green;font-weight:700;margin-top:10px">
+                                          {{msg}}  
+                                    </li> 
+
+                                    <li id="msg_for_not_avl" style="color:red;font-weight:700;margin-top:10px">
+                                      {{msg}}  
+                                    </li> 
+                                  
+                                  </ul>
+                                  </form> -->
+                             <!--      
+                                  <ul>
+                                    <li style="margin-top:20px">
+                                        <button type="button" class="pro-cart" disabled ng-click="prouddetailctrl.addItems(product.id,customer_selected_qty)" id="addToCart"><i class="fa fa-shopping-cart"></i>Add to cart 
+                                       </button>
+                                       <button type="button"  class="pro-cart"  ng-if=" statusCookie == 'Active'"
+                                       ng-click="addItemsInWishList(product.id)" id="addToWishList">Add to Wish List
+                                       <i class=""></i>
+                                       </button>
+                                    </li>
+                                 </ul>
+                            </div> -->
+                         </div>
+                    </div>
+                    <div class="col-lg-3 product_detail_sidebar_show"> 
+                    <!-- {{relatedProducts.length}} - {{product.strength}} -->
+                         <div style="border:1px solid #e0e0e0;padding:22px 15px;height:500px;overflow:scroll;">
+                            <p style="font-size:14px;color:#313131;font-family: 'Poppins', sans-serif;font-weight:500"> VIEW ALTERNATE MEDICINES </p> 
+                            <p style="margin-top:-5px">  <span class="alternate_pro_below_span1" style="width:30%"></span><span class="alternate_pro_below_span2" style="width:70%"></span></p>
+                            <div ng-if="relatedProducts.length<=1" style="text-align:center;color:red;font-size:20px;margin-top:30px"> No Alternate Medicine Found </div>
+                            <div class="row alternate_brand_loop_div" ng-repeat="rp in relatedProducts" ng-if="rp.id != product.id">
+                                <div class="col-md-4" style="padding-left:0px"> <div> <img src="/yewmed/themes/img/yewmed_new_pics/product1/{{rp.groupId}}.jpg" alt="product-view" style="width:100%"> </div> </div>
+                                <div class="col-md-8" style="padding:0px"> <div> 
+                                   <a href="" ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)"> <h4 class="product_dtl_altr_name_h4"> {{rp.name}} </h4> </a>
+                                    <p style="font-size:9px;line-height:12px;margin-top:5px"> By <span style="text-transform: uppercase;"> {{rp.manufacturer}} </span> </p>
+                                    <p style="margin-top:5px"> <span style="position: relative;top: -5px;"> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" class="product_page_alter_price_img"> </span> <span class="product_page_alter_price"> {{rp.price | number:2}} </span> <span class="savings_span" ng-if="product.price>rp.price"> ({{(product.price - rp.price)*100/product.price | number : 0}}% Savings) </span>  <span class="savings_span" ng-if="rp.price>product.price"> ({{(rp.price - product.price)*100/rp.price | number : 0}}% Costlier) </span>  </p>
+                                    <p style="margin-top:5px">  <!-- <span> <button type="button" class="alternate_brand_cart_button"  ng-click="prouddetailctrl.addItems1(rp.name,rp.price,rp.id,1)" id="addToCart"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="10px" height="10px" viewBox="0 0 510 510" style="position:relative;top:2px;margin-left:10px;margin-right:10px;fill:white" xml:space="preserve">
+    <path d="M153,408c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S181.05,408,153,408z M0,0v51h51l91.8,193.8L107.1,306
+      c-2.55,7.65-5.1,17.85-5.1,25.5c0,28.05,22.95,51,51,51h306v-51H163.2c-2.55,0-5.1-2.55-5.1-5.1v-2.551l22.95-43.35h188.7
+      c20.4,0,35.7-10.2,43.35-25.5L504.9,89.25c5.1-5.1,5.1-7.65,5.1-12.75c0-15.3-10.2-25.5-25.5-25.5H107.1L84.15,0H0z M408,408
+      c-28.05,0-51,22.95-51,51s22.95,51,51,51s51-22.95,51-51S436.05,408,408,408z"/>
+</svg> <b> | </b> <b> Add to cart </b> 
+                                       </button> </span>  -->
+                                         <span> <button type="button" class="alternate_brand_cart_button" ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="padding:3px 10px 0px 10px;font-size:11px"> VIEW PRODUCT </button> </span>
+                                       </p>
+                                </div></div>
+                            </div>
+                         </div>
+                    </div>
+                    <!-- Thumbnail Description End -->
+                </div>
+                <!-- Row End -->
+
+                <hr style="margin-top:60px;margin-bottom:40px" ng-if="medicineDescription.length>0">
+
+                <p class="product_description_header" style="font-size:25px" ng-if="medicineDescription.length>0"> Description : </p>
+                <p style="padding:20px 0px;padding-bottom:0px"> <button class="product_description_span" ng-repeat="descript in medicineDescription" id="desc_span_{{descript.id}}" ng-click="show_description_div(descript.id)"> {{descript.contentPartName}} </button> <!-- <span class="product_description_span">Chloramphenicol </span> --> </p>
+
+                <div class="product_description_div" ng-repeat="descript in medicineDescription" id="desc_{{descript.id}}" on-finish-render="ngRepeatFinished1">
+                <p class="product_description_header" ng-if="descript.indication"> Used For : </p>
+                <p class="product_description_p"> {{descript.indication}} </p>
+                <p class="product_description_header" style="margin-top:20px" ng-if="descript.contraIndication"> Not Used For : </p>
+                <p class="product_description_p">  {{descript.contraIndication}} </p>
+                <p class="product_description_header" style="margin-top:20px" ng-if="descript.cautions"> Cautions : </p>
+                <p class="product_description_p"> {{descript.cautions}} </p>
+                <p class="product_description_header" style="margin-top:20px" ng-if="descript.sideEffect"> SideEffect : </p>
+                <p class="product_description_p"> {{descript.sideEffect}} </p>
+              </div>
+
+            </div>
+            <!-- Container End -->
+        </div>
+        <!-- Product Thumbnail End -->
+        <!-- Product Thumbnail Description Start -->
+        <!-- <div class="thumnail-desc white-bg">
+            <div class="container">
+                <div class="thumb-desc-inner">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="main-thumb-desc nav tabs-area" role="tablist">
+                                <li><a class="active" data-toggle="tab">Description</a></li>
+                                
+                            </ul>
+                            
+                            <div class="tab-content thumb-content">
+                                <div id="dtail" class="tab-pane fade show active"> -->
+                                                   
+                                <!-- <h4>Product Information</h4> -->
+                                <!-- <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="2">Product Details</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td><span id="searched_item_size">{{product.name}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brand:</td>
+                                            <td>{{product.brand}}<span id="searched_item_brand"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Type:</td>
+                                            <td><span id="searched_item_type">{{product.group}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Schedule:</td>
+                                            <td><span id="searched_item_schedule">{{product.schedule}}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Prescription Required ?</td>
+                                            <td>
+                                                <span id="searched_item_prescription_status" ng-if="product.scheduleId!=1">No</span>
+                                                <span id="searched_item_prescription_status" ng-if="product.scheduleId==1">Yes</span>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Composition:</td>
+                                            <td><span id="searched_item_composition1">{{product.content}}</span></td>
+                                        </tr>
+                                  </tbody>
+                                </table> -->
+
+                                 <!-- ..............div instead of above table start.................... -->
+
+                                 <!-- <br> <br> -->
+                                 <!-- <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12" style="background:#F7F7F7;border:1px solid #ebebeb;padding:10px 0px;border-bottom:0px;text-align:center">
+                                        <h5> <b> Product Details </b> </h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1">
+                                      <p>  Name: </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2">
+                                      <p> <span id="searched_item_size">{{product.name}}</span> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1">
+                                      <p>  Brand: </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2">
+                                      <p> {{product.brand}}<span id="searched_item_brand"></span> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1">
+                                      <p>  Type: </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2">
+                                      <p> <span id="searched_item_type">{{product.group}}</span> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1">
+                                      <p>  Schedule: </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2">
+                                      <p> <span id="searched_item_schedule">{{product.schedule}}</span> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1">
+                                      <p>  Prescription Required ? </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2">
+                                      <p> <span id="searched_item_prescription_status" ng-if="product.scheduleId!=1">No</span>
+                                          <span id="searched_item_prescription_status" ng-if="product.scheduleId==1">Yes</span> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div1" style="border-bottom:1px solid #ebebeb">
+                                      <p>  Composition: </p>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 productdetails_table_div2" style="border-bottom:1px solid #ebebeb">
+                                      <p> <span id="searched_item_composition1" style="word-break: break-all">{{product.content}}</span> </p>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+                                <!-- ...............................div instead of above table end.......................... -->
+
+                        <!--        </div>
+                            </div>
+                           
+                        </div>
+                    </div><br><br>
+       
+                </div>
+            </div> -->
+
+        <!-- </div> -->
+
+
+        <!-- Product Thumbnail Description End -->
+        <!-- Related Product Start Here-->
+        <div class="container-fluid product_detail_carousel_show" ng-if="relatedProducts.length<=1" style="background:white;padding:0px"> 
+        </div>
+
+
+        <div class="container-fluid product_detail_carousel_show" style="background:white;margin-bottom:50px" ng-if="relatedProducts.length>1">
+          <div class="all_page_middle_div">
+            <!-- <div class="container"> -->
+                 <!-- Section Title Start -->
+                <div class="row" style="margin-bottom:10px;width:100%;margin-top:30px">
+                      <div class="col-md-6 col-sm-6 col_xs_8">
+                    <h2 class="home_page_slider_div_p"> Alternate Medicines </h2>
+                   </div>
+
+                   <div class="col-md-6 col-sm-6 col_xs_4">
+                       <span class="my_next_button" id="home_rela_pro_sli_next"> <i class="fa fa-angle-right" aria-hidden="true"></i> </span> <span class="my_prev_button" id="home_rela_pro_sli_prev" style="margin-right:6px"> <i class="fa fa-angle-left" aria-hidden="true"></i> </span> 
+                   </div>
+                </div>
+
+                <hr style="border-top:1px solid #dddddd">
+                <!-- Section Title End -->
+                <!-- Featured Product Activation Start -->
+                <div class="shop-area mb-all-40">
+                            <!-- Grid  Main Area Start -->
+                            <!-- <div class="tab-content">
+                                <div id="grid-view" class="tab-pane fade show active">
+                                    <div class="row no-gutters border-hover-effect ">
+                                       <div class="col-lg-4 col-md-4 col-sm-6 col-6" ng-repeat="rp in relatedProducts">
+                                            
+                                            <div class="single-aboss-product" ng-click="prouddetailctrl.viewItems(rp.id)">
+                                                <div class="pro-img">
+                                                 
+                                                    <img src="themes/img/groups/{{rp.group | lowercase}}.png" alt="product-view" style="width:80%;">
+                                               
+                                                    <div class="pro-actions">
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="pro-content">
+                                                    <h4><a href="#">{{rp.name}}</a></h4>
+                                                    <p><span class="price">Rs.{{rp.price}}</span></p>
+                                                </div>
+                                            </div>
+                                           
+                                       </div>
+                                      </div>
+                                   
+                                </div> -->
+                                <!-- #grid view End -->
+                             </div>
+
+                             <!-- show product with owl carousel -->
+
+                             <div class="featured-pro-active featured-pro-active2 border-hover-effect owl-carousel">
+                  <!-- Single Product Start -->
+                    <div class="owl-item1 single-aboss-product"
+                          ng-repeat="rp in relatedProducts" on-finish-render="ngRealatedProductCarousel" style="padding:5px" ng-if="rp.id != product.id">
+                        <div class="pro-img container2 home_1st_slider_img_div" style="display:none">
+                            <!-- <a ng-click="ctrl.viewItems(i.id)"><img src="themes/img/others/tablet.png" alt="product-img"></a> -->
+                            <!-- <a ng-click="prouddetailctrl.viewItems(rp.id)" style="cursor:pointer"><img src="themes/img/groups/{{rp.groupId}}.png" alt="product-view"></a> -->
+                            <a ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="cursor:pointer;display:inline-block;"><img src="/yewmed/themes/img/yewmed_new_pics/product/capsule.jpg" alt="product-view" style="width:auto;"></a>
+                            <!-- <span class="sticker-new">new</span> -->
+                           <!--  <div class="pro-actions"> -->
+                              <!-- <a ng-click="openProductWindow(i)" class="quick-view" href="#">quick view</a> -->
+                              <!-- <a class="add-cart" href="cart.html">add to cart</a> -->
+                            <!-- <button class="btn quick-view" type="button"
+                              ng-click="ctrl.addItemsInWishList(i.id)">
+                              <i ng-if="ctrl.checkWishlist(i.id)" class="fas fa-heart"></i>
+                              <i ng-if="!ctrl.checkWishlist(i.id)" class="far fa-heart"></i>
+                            </button> -->
+                            <!-- </div> -->
+                            <div class="overlay">
+                            <div class="text">
+                                  
+                                
+                                <div class="row" style="margin-top:250px">
+                                  <div class="col-md-6" style="text-align:right;padding:3px">
+                                    
+                                
+                                <a href="" ng-click="prouddetailctrl.addItemsInWishList(rp.id)" style="display:inline-block"> <img src="/yewmed/themes/img/yewmed_new_pics/product/whistlist_icon.png"> </a> 
+                              </div>
+                              <div class="col-md-6" style="padding:3px">
+                                
+                                <a href="" ng-click="prouddetailctrl.addItemsInWishList(rp.id)"> <img src="/yewmed/themes/img/yewmed_new_pics/product/cart_icon.png"> </a>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="pro-content" style="padding-left:20px;text-align:left;display:none">
+                           <a ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="cursor:pointer;margin-bottom:0px;padding:0px;margin-top:100px"> <h4 class="home_1st_slider_div_h4"> {{rp.name}} </h4> </a>
+                            <!-- div class="rating">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                            </div> -->
+                            <!-- <span class="prev-price">$30.50</span> -->
+                                <p style="cursor:default;">
+                               <span> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon.png" style="width:auto"> </span> <span class="price2">{{rp.price}}</span> </p>
+                        </div> 
+
+
+
+                         <div class="groups_product_div1" ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="cursor:pointer">    
+                        <p style="text-align:center;padding:40px 0px 30px 0px"> <img src="/yewmed/themes/img/yewmed_new_pics/product2/{{rp.groupId}}.jpg" style="width:auto;display:inline"> </p>
+                            <div>
+                            <p class="groups_product_name" ng-click="prouddetailctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)"> {{rp.name}} </p>
+                            <p style="font-size:14px;margin-top:-3px;color:#424242;text-align:left"> contains {{rp.conversion}} Qty in a pack </p>
+                            </div>
+                            <div class="row" style="margin-left:-15px;margin-right:-15px">
+                              <div class="col-md-6 col-sm-6 col_xs_6" style="font-size:10px;color:#585858"> 
+                                <p style="font-size:12px;color:#424242;text-align:left">  MRP </p> 
+                                <p style="margin-top:-4px;;text-align:left"><img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-4px;width:auto;display:inline-block"> <span style="font-size:18px;color:#424242"> {{rp.price | number:2}} </span> </p>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col_xs_6" style="text-align:right"> 
+                                  <i class="fa fa-heart-o groups_addtocart_button_i" ng-click="prouddetailctrl.addItemsInWishList(rp.id)"></i> 
+                                  <!-- <img src="themes/img/yewmed_new_pics/product/cart_icon1.png" class="groups_addtocart_button_i" ng-click="prouddetailctrl.addItems1(rp.name,rp.price,rp.id,1)" style="margin-top:-1px;width:auto;display:inline-block"> -->   
+                                   </div>
+                            </div>    
+
+
+                      </div>
+
+
+
+                    </div>
+                    <!-- Single Product End -->
+                   </div>
+                <!-- Featured Product Activation End -->
+
+                <!-- show product End with owl carousel -->
+
+                            <!-- Grid Main Area End -->
+                        </div>
+                <!-- Featured Product Activation End -->
+            </div>
+        </div>
+      </div>
+        <!-- Related Product End Here-->
+
+
+
+
+        <div class="container-fluid third_div_fluid home_1st_slider_div" style="background:white;display:none">
+
+               <div style="margin-top:90px;margin-bottom:20px">
+                    <h2 style="text-transform:capitalize;font-family: 'Poppins', sans-serif;font-weight:500;font-size:25px"> related products </span>  </h2>
+                </div>
+                <hr style="border-top:1px solid #dddddd">
+
+                <div class="featured-pro-active border-hover-effect owl-carousel">
+                  <!-- Single Product Start -->
+                    <div class="owl-item1 single-aboss-product"
+                          ng-repeat="i in relatedProducts" on-finish-render="ngRealatedProductCarousel" style="text-align:center;">
+                        <div class="pro-img container2 home_1st_slider_img_div">
+                            <a ng-click="ctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="cursor:pointer;display:inline-block;"><img src="/yewmed/themes/img/yewmed_new_pics/product/capsule.jpg" alt="product-view" style="width:auto;"></a>
+                            
+                            
+                            <div class="overlay">
+                            <div class="text">
+                                  
+                                
+                                <div class="row" style="margin-top:250px">
+                                  <div class="col-md-6" style="text-align:right;padding:3px">
+                                    
+                                
+                                <a href="" ng-click="ctrl.addItemsInWishList(i.id)" style="display:inline-block"> <img src="/yewmed/themes/img/yewmed_new_pics/product/whistlist_icon.png"> </a> 
+                              </div>
+                              <div class="col-md-6" style="padding:3px">
+                                
+                                <a href="" ng-click="ctrl.addItemsInWishList(i.id)"> <img src="/yewmed/themes/img/yewmed_new_pics/product/cart_icon.png"> </a>
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        
+                        <div class="pro-content" style="padding-left:20px;text-align:left;">
+                            <a ng-click="ctrl.viewItems(rp.category,rp.group,rp.metaTag,rp.id)" style="cursor:pointer;margin-bottom:0px;padding:0px;margin-top:100px"> <h4 class="home_1st_slider_div_h4"> {{i.name}} </h4> </a>
+                            
+                            <p style="cursor:default;">
+                               <span> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon.png" style="width:auto"> </span> <span class="price2">{{i.price}}</span> </p> 
+                        </div>
+                    </div>
+                    <!-- Single Product End -->
+                   </div>
+
+      </div>
+
+
+
+
+
+<!-- ========================Quick View Content Start========================== -->
+        <div class="main-product-thumbnail quick-thumb-content">
+            <div class="container">
+                <!-- The Modal -->
+                <div class="modal fade" id="product-window">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Main Thumbnail Image Start -->
+                                    <div class="col-lg-6 col-md-6 mb-all-40">
+                                        <!-- Thumbnail Large Image start -->
+                                        <div class="tab-content">
+                                            <div id="pro-1" class="tab-pane fade show active">
+                                                <a data-fancybox="images" href="/yewmed/themes/img/products/p-3.jpg"><img src="/yewmed/themes/img/products/p-3.jpg" alt="product-view"></a>
+                                            </div>
+                                            <div id="pro-2" class="tab-pane fade">
+                                                <a data-fancybox="images" href="/yewmed/themes/img/products/p5.jpg"><img src="/yewmed/themes/img/products/p5.jpg" alt="product-view"></a>
+                                            </div>
+                                            <div id="pro-3" class="tab-pane fade">
+                                                <a data-fancybox="images" href="/yewmed/themes/img/products/p7.jpg"><img src="/yewmed/themes/img/products/p7.jpg" alt="product-view"></a>
+                                            </div>
+                                            <div id="pro-4" class="tab-pane fade">
+                                                <a data-fancybox="images" href="/yewmed/themes/img/products/p2.jpg"><img src="/yewmed/themes/img/products/p2.jpg" alt="product-view"></a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- Main Thumbnail Image End -->
+                                    <!-- Thumbnail Description Start -->
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="thubnail-desc fix">
+                                            <h3 class="product-header">{{itemName}}</h3>
+                                            <div class="pro-price mt-10">
+                                                <p class="d-flex align-items-center">
+                                                <span class="price">RS.{{itemPrice}}</span>
+                                              </p>
+                                            </div>
+                                            <p class="pro-desc-details">{{itemDetails}}</p>
+                                            <div class="product-size mtb-30 clearfix">
+                                                <label>Shedule</label>
+                                                <label>{{itemSchedule}}</label>
+                                            </div>
+                                            <div class="product-size mtb-30 clearfix">
+                                                <label>Check Availability</label>
+                                                <label><input class="" placeholder="your pin number" name="" type="text"> </label>
+                                            </div>
+                                            <div class="quatity-stock">
+                                               <label>Quantity</label>
+                                                <ul class="d-flex flex-wrap  align-items-center">
+                                                    <li class="box-quantity">
+                                                        <form action="#">
+                                                            <input class="quantity" type="number" min="1" value="1">
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <button class="pro-cart">add to cart</button>
+                                                    </li>
+                                                    <li class="pro-ref">
+                                                        <p><span class="in-stock"><i class="fa fa-check"></i> in stock</span></p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Thumbnail Description End -->
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- ======================== Quick View Content End ===========================-->
+</div>
+
+
+
+		

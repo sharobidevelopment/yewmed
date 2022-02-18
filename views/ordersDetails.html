@@ -1,0 +1,514 @@
+<div ng-app="myApp">
+   <div id="register" ng-controller="OrdersController as ctrl" class="mobile_view_opacity" onclick="off_opacity()">
+
+        <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+              .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+                    z-index: 3;
+                    color: #fff;
+                    cursor: default;
+                    background-color: #f26222;
+                    border-color: #f26222;
+                }
+                .pagination>li>a, .pagination>li>span {
+                    position: relative;
+                    float: left;
+                    padding: 6px 12px;
+                    margin-left: -1px;
+                    line-height: 1.42857143;
+                    color: #f26222;
+                    text-decoration: none;
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                }
+                .pagination li a:hover{
+                    background:#f26222a1;
+                    border-color:#f26222a1
+                }
+                .order_Table tr:nth-child(even){
+                    background:#dee2e6
+                } 
+                td{
+                  color:#424242
+                }
+           </style>
+        </div>
+
+      <!-- <ul class="breadcrumb">
+         <li><a href="/yewmed/">Home</a> <span class="divider">/</span></li>
+         <li class="active">Orders:</li>
+      </ul> -->
+      <div class="container-fluid">
+            <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list all_page_bitcome">
+                    <li class="breadcrumb-item"><a href="{{contextpath1}}" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Orders </li>
+                </ol>
+            </div>
+        </div>
+
+
+      <div class="checkbox" style="display:none">
+         <label>
+         <input type="checkbox" ng-model="oneAtATime">
+         Open only one at a time
+         </label>
+      </div>
+      <div id="accordion" close-others="oneAtATime" class="container-fluid"> 
+         <div infinite-scroll='moreOrders()' infinite-scroll-distance='2' infinite-scroll-disabled="scrollStatus" class="all_page_middle_div">
+
+
+                <!-- new table start -->
+
+                  <!-- {{ctrl.orders.length}} -->
+
+                  <div ng-if="ctrl.orders.length == 0" style="text-align:center;margin-top:110px" class="display nowrap"> 
+                    <span style="text-align:center;padding:50px;border:10px solid black;border: 10px solid #00000038;background:#ebebeb;font-size:23px"> No Order Found </span>
+                  </div>
+
+          <!--         <table id="datb_exm" ng-if="ctrl.orders.length != 0" class="display nowrap" style="width:100%">
+        <thead>
+            <tr style="text-align:left">
+                <th>SL NO</th>
+                <th> DATE </th>
+                <th> INVOICE NO </th>
+                <th> TOTAL AMOUNT </th>
+                <th class="datatable_example_th"> STATUS </th>
+                
+                <th class="datatable_example_th"> DETAILS </th>
+                <th class="datatable_example_th">  </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:white" ng-repeat="u in ctrl.orders" on-finish-render="ngOrderFinished">
+                <td> {{$index+1}}. </td>
+                <td> {{u.invDate.split(' ')[0] | date : "dd-MM-yyyy"}} </td>
+                <td> {{u.invNo}} </td>
+                <td> <img src="themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{u.netAmount}} </td>
+                <td>
+                     <span>
+                     <button class="datatable_custom_btn" ng-click="orderCancel(u.id)"ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color:#f26222">Canceled</i>
+                  </span>
+                  <span 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color:#0871b9">Accepted</i>
+                  </span>
+                </td>
+              
+                    <button class="datatable_custom_btn"  ng-if="u.isCanceled != 1"
+                     ng-click="invoiceCall(u)">Invoice</button> 
+              
+                      <td> <button class="btn btn-link" ng-click="openDetails(u,1);" style="font-size:17px">
+                     Details
+                     </button></td>
+                     <td> <button class="btn btn-link" ng-click="openDetails(u,2);" style="font-size:17px">
+                     Files
+                     </button> </td>
+            </tr>    
+        </tbody>
+    </table> -->
+
+    <div class="new_ordertable_for_mb">
+    <table ng-if="ctrl.orders.length != 0" class="display nowrap order_Table" style="width:100%">
+        <thead>
+            <tr style="text-align:left">
+                <th>SL NO</th>
+                <th> DATE </th>
+                <th> INVOICE NO </th>
+                <th> TOTAL AMOUNT </th>
+                <th> STATUS </th>
+                <!-- <th class="datatable_example_th"> INVOICE </th> -->
+                <th> DETAILS </th>
+                <th>  </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="u in copy_items | orderBy: '-createdDate' |  limitTo:limit" >
+                <td> {{limit *(index_no)+$index+1}}. </td>
+                <td> {{u.createdDate.split(' ')[0] | date : "dd-MM-yyyy"}} </td>
+                <td> {{u.invNo}} </td>
+                <td> <img src="/yewmed/themes/img/yewmed_new_pics/product/checkout_price.png" style="position:relative;top:-2px"> {{u.netAmount | number:2}} </td>
+                <td>
+                     <span>
+                     <button class="datatable_custom_btn" ng-click="orderCancel(u.id)"ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color:#f26222">Canceled</i>
+                  </span>
+                  <span 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color:#0871b9">Accepted</i>
+                  </span>
+                </td>
+                <!-- <td> -->
+                    <!-- <button class="datatable_custom_btn"  ng-if="u.isCanceled != 1"
+                     ng-click="invoiceCall(u)">Invoice</button>  -->
+                     <!-- <button class="datatable_custom_btn"  ng-if="u.isCanceled != 1"
+                     ng-click="invoiceCall_new(u.id)">Invoice</button> 
+                     <button class="datatable_custom_btn" ng-if="u.isCanceled == 1"
+                       ng-disabled="disableBtn=true">Invoice</button>  -->
+               <!--  </td> -->
+                <!-- <td> <button class="btn btn-link" data-toggle="modal" data-target="#collapseOneOrder_{{u.id}}" aria-expanded="true" aria-controls="collapseOne">
+                     Details
+                     </button></td> -->
+                      <td> <button class="btn btn-link" ng-click="openDetails(u,1);" style="font-size:17px">
+                     Details
+                     </button></td>
+                     <td> <button class="btn btn-link" ng-click="openDetails(u,2);" style="font-size:17px">
+                     Files
+                     </button> </td>
+
+            </tr>
+
+           <!--  <tr>
+                <td>22</td>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td> <button> CANCEL </button> </td>
+                <td> <button> INVOICE </button> </td>
+                <td> Details </td>
+                <td> Files </td>
+            </tr> -->
+           
+        </tbody>
+
+    </table>
+
+
+</div>
+
+
+
+     <div class="new_whistlisttable_for_mb" style="margin-top:30px;padding: 0px 15px 0px 15px;" ng-if="ctrl.orders.length != 0">
+
+    <div ng-repeat="u in copy_items | orderBy: '-createdDate' |  limitTo:limit" class="tables_for_mb">
+   
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Invoice No </div>
+          <div class="mobile_tableformat_2nd_div">  {{u.invNo}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> DATE </div>
+          <div class="mobile_tableformat_2nd_div">  {{u.createdDate.split(' ')[0] | date : "dd-MM-yyyy"}} </div>
+     </div>
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Total Amount </div>
+          <div class="mobile_tableformat_2nd_div"> <img src="/yewmed/themes/img/yewmed_new_pics/product/rupees_icon6.png" style="height: 12px;margin-top: -2px;"> {{u.netAmount | number:2}} </div>
+     </div> 
+     <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Status </div>
+          <div class="mobile_tableformat_2nd_div" style="text-transform:capitalize"> <span>
+                     <button ng-click="orderCancel(u.id)" ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color:#f26222;font-size:14px">Canceled</i>
+                  </span>
+                  <span 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color:#0871b9;font-size:14px">Accepted</i>
+                  </span> 
+          </div>
+     </div> 
+     <!-- <div style="width:100%;display:flex;margin-top:10px">
+          <div class="mobile_tableformat_1st_div"> Invoice </div>
+          <div class="mobile_tableformat_2nd_div">  -->
+<!--             <button  ng-if="u.isCanceled != 1" ng-click="invoiceCall(u)">Invoice</button>  -->
+      <!--       <button  ng-if="u.isCanceled != 1" ng-click="invoiceCall_new(u.id)">Invoice</button> 
+            <button  ng-if="u.isCanceled == 1" ng-disabled="disableBtn=true">Invoice</button> </div>        
+     </div>  -->
+     <br>
+     <hr>
+   </div>
+
+  </div> 
+
+
+
+      <div ng-if="ctrl.orders.length != 0" style="text-align:right;margin-top:20px">
+
+    <nav aria-label="Page navigation" align="left" style="display:inline-block">
+                    <ul class="pagination">
+                        <li ng-class="{disabled:!navigators.prev.state}">
+                            <a aria-label="Previous" ng-click="prev()" >
+                              <span aria-hidden="true">«</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="page in pages" ng-class="{active:page.active}" ng-disabled="page.active">
+                            <a  ng-click="setPageActive(page.page)" >{{page.page}}</a>
+                        </li>
+                        <li ng-class="{disabled:!navigators.next.state}">
+                            <a aria-label="Next" ng-click="next()">
+                               <span aria-hidden="true">»</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+              </div>
+
+
+
+   
+  <div class="modal fade" id="collapseOneOrder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+      <div class="modal-dialog modal-lg">
+         <!-- Modal content-->
+         <div class="modal-content" style="background:white;padding:20px;margin-top:50px">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <p class="modal-title" style="color:#5b5b5b;text-transform:uppercase;font-size:20px;font-family: 'Poppins', sans-serif;">  ORDER DETAILS  </p>
+               <!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+            </div> <br>
+            <div class="modal-body">
+               <table class="table table-hover table-bordered order_details" style="width:100%;">
+                        <br>
+                        <thead>
+                           <tr>
+                              <th style="text-align: center;">Index</th>
+                              <th style="text-align: center;">Name</th>
+                              <th style="text-align: center;">Quantity</th>
+                              <th style="text-align: center;">Price</th>
+                              <th style="text-align: center;">Discount</th>
+                              <th style="text-align: center;">Tax</th>
+                              <th style="text-align: center;">Total</th>
+                           </tr> 
+                        </thead>
+                        <tbody>
+                           <tr ng-repeat="order in orderData.orderDetails" id="tr_{{rp.id}}">
+                              <td style="text-align: center;color:#424242">{{$index+1}}</td>
+                              <td style="text-align: center;color:#424242">{{order.itemName}}</td>
+                              <td style="text-align: center;color:#424242">{{order.packQty}}</td>
+                              <td style="text-align: center;color:#424242">{{order.grossAmount|number:2}}</td>
+                              <td style="text-align: center;color:#424242">
+                                 <!-- <span ng-if="rp.isDiscount!= 0"> -->{{order.disc}} <!-- ({{order.discPer}} %) --><!-- </span> -->
+                                 <!-- <span ng-if="rp.isDiscount == 0">0.0 %</span> -->
+                              </td>
+                              <td style="text-align: center;color:#424242">{{order.taxAmount|number:2}} <!-- ({{order.taxPercentage}}%) --></td>
+                              <td style="text-align: center;color:#424242">{{order.netAmount|number:2}}</td>
+                           </tr>
+                           <tr>
+                              <th colspan="6" class="order_details_th_1">Total Discount:  </th>
+                              <td id="cart_item_tot_discount" class="order_details_th">{{orderData.discAmount|number:2}} </td>
+                           </tr>
+                           <tr>
+                              <th colspan="6" class="order_details_th_1">Total Tax: </th>
+                              <td id="cart_item_tot_tax" class="order_details_th">{{orderData.taxAmount |number:2}} </td>
+                           </tr>
+                           <tr>
+                              <th colspan="6" class="order_details_th_1">Total Amount: </th>
+                              <td class="label label-important order_details_th">
+                                 <span id="cart_tot_amt_to_pay">{{orderData.netAmount | number:2}}
+                                 </span>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+            </div>
+            <div style="margin-top:20px"> 
+            <button type="button"  class="alertify-button  alertify-button-cancel" style="font-size:16px;font-weight:400" data-dismiss="modal">Close</button>
+         </div>
+         </div>
+         
+      </div>
+   </div> 
+
+   <div class="modal fade" id="collapsePrescription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+      <div class="modal-dialog modal-lg">
+         <!-- Modal content-->
+         <div class="modal-content" style="background:white;padding:30px 20px;margin-top:50px">
+            <div class="modal-header">
+              <h4 class="modal-title" style="color: #5b5b5b;text-transform: uppercase;font-size: 20px;font-family: 'Poppins', sans-serif;"> PRESCRIPTION DETAILS  </h4>
+               <!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+            </div> <br>
+            <div class="modal-body">
+                 <table class="table table-hover table-bordered prescription_detail">
+                     <br>
+                     <thead>
+                        <tr>
+                           <th style="text-align: center;">Index</th>
+                           <th style="text-align: center;">File. Name</th>
+                           <th style="text-align: center;">Download/View</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr ng-repeat="p in orderData.prescriptions" id="tr_{{rp.id}}">
+                           <td style="text-align: center;">{{$index+1}}</td>
+                           <td style="text-align: center;">{{p.userFilename}}</td>
+                           <td style="text-align: center;"><a style="cursor: pointer;" ng-click="prescriptionsDownload(p.id,p.userFilename)"><button>
+                           Download</button></a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+            </div>
+            <div style="margin-top:20px"> 
+            <button type="button"  class="alertify-button  alertify-button-cancel" style="font-size:16px;font-weight:400" data-dismiss="modal">Close</button>
+         </div>
+         </div>
+         
+      </div>
+   </div>
+
+    <!-- <br> <br> <br> <br> <br> -->
+
+                <!-- new table end -->
+
+
+
+            <div class="well" ng-repeat="u in ctrl.orders" style="position: relative;">
+              <!--  <div style="clear: both;display: block;">
+                  <span style="margin-right: 50px"><i style="margin-right: 5px"></i>{{$index+1}}.</span>
+                  <span style="margin-right: 50px"><i style="margin-right: 5px">invNo:</i>{{u.invNo}}</span>
+                  <span style="margin-right: 50px;width:10px;">
+                     <i style="margin-right: 5px">TotalAmt:</i>{{u.netAmount}}
+                  </span>
+                  
+                  <span style="float: right;">
+                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneOrder_{{u.id}}" aria-expanded="true" aria-controls="collapseOne">
+                     Details
+                     </button>
+                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneFile_{{u.id}}" aria-expanded="true" aria-controls="collapseOne">
+                     Files
+                     </button>
+                  </span>
+
+                  <span style="margin-right: 100px;float: right;">
+                     <button  ng-if="u.isCanceled != 1"
+                     ng-click="invoiceCall(u)">invoice</button> 
+                  </span>
+                  <span style="margin-right: 100px;float: right;">
+                     <button ng-click="orderCancel(u.id)"ng-if="u.isCanceled != 1 && checkItemStatus(u)"> Cancel
+                     </button>
+                  </span>
+                  <span style="margin-right: 100px;float: right;" ng-if="u.isCanceled == 1">
+                     <i style="margin-right: 5px; color: red">Canceled</i>
+                  </span>
+                  <span style="margin-right: 100px;float: right;" 
+                     ng-if="u.isCanceled != 1 && !checkItemStatus(u)">
+                  <i style="margin-right: 5px; color: green">Accepted</i>
+                  </span>
+               </div>
+               <hr> -->
+               <div id="collapseOneOrder_{{u.id}}" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                     <table class="table table-hover table-bordered">
+                        <br>
+                        <thead>
+                           <tr>
+                              <th style="text-align: center;">Index</th>
+                              <th style="text-align: center;">Name</th>
+                              <th style="text-align: center;">Quantity/Update</th>
+                              <th style="text-align: center;">Price</th>
+                              <th style="text-align: center;">Discount</th>
+                              <th style="text-align: center;">Tax</th>
+                              <th style="text-align: center;">TotalAmt</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr ng-repeat="order in u.orderDetails" id="tr_{{rp.id}}">
+                              <td style="text-align: center;">{{$index+1}}</td>
+                              <td style="text-align: center;"><a style="cursor: pointer;" ng-click="viewItems(order.id)">{{order.itemName}}</a></td>
+                              <td style="text-align: center;">{{order.packQty}}</td>
+                              <td style="text-align: center;">{{order.grossAmount}}</td>
+                              <td style="text-align: center;">
+                                 <span ng-if="rp.isDiscount!= 0">{{order.disc}} ({{order.discPer}} %)</span>
+                                 <span ng-if="rp.isDiscount == 0">0.0 %</span>
+                              </td>
+                              <td style="text-align: center;">{{order.taxAmount}} ({{order.taxPercentage}}%)</td>
+                              <td style="text-align: center;">{{order.netAmount}}</td>
+                           </tr>
+                           <tr>
+                              <td colspan="6" style="text-align:right">Total Discount:  </td>
+                              <td id="cart_item_tot_discount" style="text-align: center;">{{u.discAmount}} </td>
+                           </tr>
+                           <tr>
+                              <td colspan="6" style="text-align:right">Total Tax: </td>
+                              <td id="cart_item_tot_tax" style="text-align: center;">{{u.taxAmount}} </td>
+                           </tr>
+                           <tr>
+                              <td colspan="6" style="text-align:right"><strong>TOTAL</strong></td>
+                              <td class="label label-important" style="display:block;text-align:center;fontcolor">
+                                 <strong><span id="cart_tot_amt_to_pay"><font color="black">{{u.netAmount}}
+                                 </font></span></strong>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+               
+               <div id="collapseOneFile_{{u.id}}" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                  <table class="table table-hover table-bordered">
+                     <br>
+                     <thead>
+                        <tr>
+                           <th style="text-align: center;">Index</th>
+                           <th style="text-align: center;">Dr. Name</th>
+                           <th style="text-align: center;">Download/View</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr ng-repeat="p in u.prescriptions" id="tr_{{rp.id}}">
+                           <td style="text-align: center;">{{$index+1}}</td>
+                           <td style="text-align: center;">{{p.doctorName}}</td>
+                           <td style="text-align: center;"><a style="cursor: pointer;" ng-click="prescriptionsDownload(p.id,p.userFilename)">{{p.userFilename}}</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            </div>
+         </div>
+      </div>
+   </div>
+<!-- ==========Conform model start 'for test not used'========= -->
+   <div class="modal fade" id="confirmationmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button> -->
+               <h4 class="modal-title">Please Confirm!!!</h4>
+            </div>
+            <div class="modal-body">
+               <!-- <input type="text"  id="uid" style="display:none"  ng-model="uid"> -->
+               <div class="well">
+                  <div class="control-group">
+                     Do you want to cancel your order???
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">  
+               <button type="button" class="btn block" ng-click="orderCancel();">YES</button>
+               <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">NO</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- <div style="margin-top: 200px;">
+   
+</div> -->
+<!-- ======================Conform model end======================= -->
+
+
+
+<!-- <script>
+       $('#example').ready(function() {
+         var table = $('#example').DataTable( {
+         rowReorder: {
+            selector: 'td:nth-child(2)'
+         },
+         responsive: true
+         } );
+       } );
+      </script> -->

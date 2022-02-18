@@ -1,0 +1,229 @@
+<div  ng-controller="InvoiceController as invCntrl">
+  <div class="wrapper body-bg">
+   <div class="breadcrumb-area">
+      <div class="container">
+         <ol class="breadcrumb breadcrumb-list">
+            <li class="breadcrumb-item"><a href="{{contextpath1}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="ordersDetails">Orders</a></li>
+            <li class="breadcrumb-item active">Invoice</li>
+         </ol>
+      </div>
+   </div>
+   <div class="container">
+   <div class="row">
+      <div class="span5"> 
+         <h3>Download Invoice</h3>
+      </div>
+      <div class="invPdf">
+         <div class="span3"><img src="/yewmed/themes/img/iconfinder_pdf_3745.png" style="cursor: pointer;" ng-click="Export()"/></div>
+      </div>
+   </div>
+</div>
+
+
+      <div class="row" style="margin-top:50px!important;width:820px;margin:auto;" id="tblCustomers">
+         <div style="border:1px solid #ccc">
+          <div class="row" style="padding:5px;background:#F7F7F7;margin:0px">
+              <div class="col-md-9 col-sm-6"> 
+                     <h3 style="font-size:25px"> Invoice </h3>
+                     <p style="font-size:15px"> <b>NO:</b> {{invoice.invNo}} </p>
+                     <p style="font-size:15px"> <b>DATE:</b> {{invoice.invDate.split(' ')[0] | date : "dd-MM-yyyy"}} </p>
+              </div> 
+              <div class="col-md-3 col-sm-6" > 
+                     <h3 style="font-size:25px"> Yewmed </h3>
+                     <p style="font-size:15px"> admin@yewmed.com </p>
+                     <p style="font-size:15px"> 1800 833 1233 </p>
+              </div>
+          </div>
+
+          <!-- .....................part 2.............................. -->
+
+          <div class="row" style="border-top:1px solid #ccc;margin:0px;padding:10px">
+              <div class="col-md-6 col-sm-6" style="border-right:1px solid #ccc;padding-right:2px;padding-left:2px;margin-top:-11px;margin-bottom:-11px"> 
+                   <h3 style="text-align:center;font-size:25px;margin-top:11px">  <u> SELLER DETAILS </u>  </h3>
+                    <div class="row" style="margin-top:10px">
+                     <div class="col-md-3 col-sm-6" > 
+                        <p style="font-size:15px"> <b> Name <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> Sharobi Technologies (India) Pvt Ltd </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Industry <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> YewMed Pharmacy POS Solution </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Address <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> CA:231, Salt Lake, Sector 1 Kolkata </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Phone <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> +91 3340084321 </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Email <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> mainl@sharobi.com </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Tax NO <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> 123456789 </p>
+                     </div>
+                    </div>
+                    <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b> Tax Off. <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> A' Moon </p>
+                     </div>
+                    </div>
+              </div> 
+              <div class="col-md-6 col-sm-6" style="padding-right:2px;padding-left:10px"> 
+                   <h3 style="text-align:center;font-size:25px"> <u> CUSTOMER DETAILS </u> </h3>
+                   <div class="row" style="margin-top:10px">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b>Name <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> {{activeusername}} </p>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b>Address <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> {{shippingAddress.streetAddress}}, {{shippingAddress.city.name}}, {{shippingAddress.state.name}}, {{shippingAddress.pincode}}, {{shippingAddress.country.name}} </p>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b>Phone <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px" ng-if="shippingAddress.contactPhone"> (+91) {{shippingAddress.contactPhone}} </p>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b>Email <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> {{email}} </p>
+                     </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-3 col-sm-6"> 
+                        <p style="font-size:15px"> <b>invNo <span style="float:right"> : </span> </b> </p>
+                     </div>
+                     <div class="col-md-9 col-sm-6"> 
+                        <p style="font-size:15px"> {{invoice.invNo}} </p>
+                     </div>
+                   </div>
+                    
+              </div>
+          </div>
+
+          </div>
+
+          <!-- ............................3rd part....................................... -->
+
+           <div style="padding-bottom:50px">
+
+             <h3 style="text-align:center;font-size:25px;padding:10px"> <u> Services / Products </u> </h3>
+
+  <table style="width:820px">
+    <tr>
+      <th>Index</th>
+      <th>Item / Details</th>
+      <th>Price</th>
+      <th>Qnty</th>
+      <th>Total Amount</th>
+      <th>Discount</th>
+      <th>Tax</th>
+      <th>Gross Amount</th>
+    </tr>
+    <tr ng-repeat="o in invoice.orderDetails">
+      <td> {{$index+1}}<b>.</b> </td>
+      <td> {{o.itemName}} </td>
+      <td> {{o.saleRate | number:2}} </td>
+      <td> {{o.packQty}} </td>
+      <td> {{o.saleRate * o.packQty | number:2}} </td>
+      <td> <span> {{o.disc | number:2}} </span> <span> <!-- (Spcl-{{o.discPer}}%) --> </span> </td>
+      <td> <span> {{o.taxAmount | number:2}} </span> <span> (Spcl-{{o.taxPercentage}}%) </span> </td>
+      <td> {{o.saleRate * o.packQty - o.disc | number:2 }} </td>
+    </tr>
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;"> Total Gross Amount </td>
+      <td> {{invoice.grossAmount - invoice.discAmount | number:2}} </td>
+    </tr>
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;">Total Discount</td>
+      <td> {{invoice.discAmount | number:2}} </td>
+    </tr>
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;">Total Tax Amount</td>
+      <td> {{invoice.taxAmount | number:2}} </td>
+    </tr>
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;"> Round Off </td>
+      <td> {{invoice.grossAmount - invoice.discAmount + invoice.taxAmount | number:2}} </td>
+    </tr>
+    <!-- <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;">Shipping Charge</td>
+      <td> {{invoice.totShippingCharge | number:2}} </td>
+    </tr> -->
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="5"></td>
+      <td colspan="2" style="font-size:19px;text-align:right;padding-right:10px;font-weight: 700;">Total Net Amount</td>
+      <td> {{invoice.netAmount | number:2}} </td>
+    </tr>
+    <tr style="border-top:1px solid #ebebeb">
+      <td colspan="8" style="font-size:19px"><b>Amount in Words: </b> {{convertToWords}} </td>
+    </tr>
+
+  </table>
+
+  <div style="margin-top:10px">
+   <p style="text-align:center;font-size:17px;color:#999"> 
+     Thank you for choosing our services. <br>
+      We hope to see you again soon <br>
+      ~Yewmed~
+   </p>
+  </div>
+
+</div>
+   
+
+         
+
+    </div>
+   </div>
+   <div style="margin-top: 200px;">
+   </div>
+</div>
