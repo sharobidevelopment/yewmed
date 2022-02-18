@@ -1,0 +1,167 @@
+<div ng-controller="ProfileController as logctrl">
+ 
+    <div>
+           <style type="text/css">
+              .header_border_bottom{
+                 border-bottom:1px solid #e5e5e5;
+              }
+           </style>
+        </div>
+
+      <div class="all_page_middle_div">
+                <ol class="breadcrumb breadcrumb-list" style="padding:43px 0px;font-family: 'Poppins', sans-serif;">
+                    <li class="breadcrumb-item"><a href="/yewmed/" class="everypge_topic_a">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">shop</a></li> -->
+                    <li class="breadcrumb-item active" style="cursor:default">Manage Address</li>
+                </ol>
+            </div>
+
+      <div class="all_page_middle_div" style="margin-top:40px">
+             <h3 style="font-family: 'Poppins', sans-serif;font-weight:600;font-size:25px;text-transform:capitalize"> Manage Address
+             </h3>
+             <hr>
+          </div> 
+ aaaaaaaaaaaaaaaaaaa
+
+
+         <form class="form-horizontal"  ng-submit="updateAddress()" name="addressEditForm">
+              <input type="text" ng-model="selectedaddress.id" style="display:none;">
+               <div class="modal-body">
+                  <div class="well">
+                     <div class="control-group row">
+                        <div class="col-md-12">
+                        <label>
+                        <input type="checkbox" ng-checked="selectedaddress.isDefault==1" ng-click="makeDefault(selectedaddress.id)">
+                        Default
+                        </label>                   
+                     </div> </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                        <label class="control-label" for="streetAddress">Street Address<span style="color: red">*</span></label>
+                     </div>
+                        <!--  <div class="controls"> -->
+                     <div class="col-md-8">      
+                        <textarea ng-model="selectedaddress.streetAddress" name="streetAddress"  cols="26" rows="5" style="width:100%" required></textarea>
+                        <!-- for error  -->
+                        <span ng-show="addressEditForm.streetAddress.$invalid && addressEditForm.streetAddress.$touched"><br>
+                        <span ng-show="addressEditForm.streetAddress.$error.required"
+                           style="color: red"> Address is required </span>
+                        </span>
+                        <!-- </div> -->
+                      </div> </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                           <label class="control-label" for="countryId">Country<span style="color: red">*</span>
+                           </label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select id="countryId" name="countryId" ng-change="getStates(2)"  ng-model="selectedaddress.countryId" class="form-control" ng-required="true" class="span3" ng-options="country.id as country.name for country in countries">
+                              
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.countryId.$invalid && addressEditForm.countryId.$touched"><br>
+                           <span ng-show="addressEditForm.countryId.$error.required"
+                              style="color: red"> Country is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                           <label class="control-label" for="stateId">State<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select name="stateId" id="stateId_{{$index}}" ng-change="getCities(2)" ng-model="selectedaddress.stateId" class="form-control" ng-required="true" class="span3" ng-options="state.id as state.name for state in states">
+                             
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.stateId.$invalid && addressEditForm.stateId.$touched"><br>
+                           <span ng-show="addressEditForm.stateId.$error.required"
+                              style="color: red"> State is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="city">City<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select name="city" id="city" ng-model="selectedaddress.cityId" class="form-control" ng-required="true" class="span3" ng-options="city.id as city.name for city in cities">
+                              <!-- <option value="" disabled>Select-City</option>
+                              <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option> -->
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.city.$invalid && addressEditForm.city.$touched"><br>
+                           <span ng-show="addressEditForm.city.$error.required"
+                              style="color: red"> City is required </span>
+                           </span>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="phone">Phone<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="selectedaddress.contactPhone" name="phone" placeholder="phone"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.phone.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.phone.$error.required && addressEditForm.phone.$touched"> Phone Number is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="pincode">Zip / Postal Code<span style="color: red">*</span></label>
+                        </div>    
+                        <div class="controls col-md-8">
+                           <input type="text" maxlength="6" ng-model="selectedaddress.pincode" name="pincode" placeholder="Zip / Postal Code" numbers-only required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.pincode.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.pincode.$error.required && addressEditForm.pincode.$touched"> Zipcode is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="landmark">Landmark<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <input type="text" ng-model="selectedaddress.landmark" name="landmark" placeholder="Landmark"  required class="span3 addaddressmodal_input"> 
+                           <div class="has-error" ng-show="addressEditForm.landmark.$invalid">
+                              <span style="color:red" ng-show="addressEditForm.landmark.$error.required && addressEditForm.landmark.$touched"> Landmark is required </span>
+                           </div>
+                        </div>
+                     </div> <br>
+                     <div class="control-group row">
+                        <div class="col-md-4">
+                            <label class="control-label" for="type">Address Type<span style="color: red">*</span></label>
+                        </div>
+                        <div class="controls col-md-8">
+                           <select class=""  ng-model="selectedaddress.type" name="type" class="form-control" ng-required="true" class="span3 addaddressmodal_input">
+                              <option value="" disabled>Select</option>
+                              <option value="Home">Home</option>
+                              <option value="Work">Work</option>
+                              <option value="Others">Others</option>
+                           </select>
+                           <!-- for error  -->
+                           <span ng-show="addressEditForm.type.$invalid && addressEditForm.type.$touched"><br>
+                           <span ng-show="addressEditForm.type.$error.required"
+                              style="color: red"> Address type is required </span>
+                           </span>
+                        </div>
+                     </div>
+                     <div>
+                     </div>
+                  </div>
+                </div>
+                  <div class="modal-footer">
+                     <button type="submit" class="btn btn-default btn-sm" ng-disabled="addressEditForm.$invalid" disabled="disabled">Update</button>
+                     <button type="button"  class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                  </div>
+            </form>
+
+
+
+
+    </div>
+    
+
+
+
